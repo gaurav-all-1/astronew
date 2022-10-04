@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,12 +10,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.UserProfileRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.error.GenericException;
-import com.nurtivillage.java.nutrivillageApplication.model.Location;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.dao.UserProfileRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.error.GenericException;
+import com.nurtivillage.java.geonixApplication.model.Location;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
 
 @Service
 public class UserProfileService {

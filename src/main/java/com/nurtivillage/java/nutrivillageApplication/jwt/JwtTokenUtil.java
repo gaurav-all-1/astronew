@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.jwt;
+package com.nurtivillage.java.geonixApplication.jwt;
 
 import java.io.Serializable;
 import java.util.Date;

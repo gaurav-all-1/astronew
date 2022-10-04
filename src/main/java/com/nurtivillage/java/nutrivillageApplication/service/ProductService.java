@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -10,15 +10,15 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.amazonaws.services.simplesystemsmanagement.model.GetInventoryRequest;
-import com.nurtivillage.java.nutrivillageApplication.dao.CategoryRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.InventoryRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.ProductRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.VariantRepository;
-import com.nurtivillage.java.nutrivillageApplication.dto.ProductUpdateDto;
-import com.nurtivillage.java.nutrivillageApplication.model.Category;
-import com.nurtivillage.java.nutrivillageApplication.model.Inventory;
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.dao.CategoryRepository;
+import com.nurtivillage.java.geonixApplication.dao.InventoryRepository;
+import com.nurtivillage.java.geonixApplication.dao.ProductRepository;
+import com.nurtivillage.java.geonixApplication.dao.VariantRepository;
+import com.nurtivillage.java.geonixApplication.dto.ProductUpdateDto;
+import com.nurtivillage.java.geonixApplication.model.Category;
+import com.nurtivillage.java.geonixApplication.model.Inventory;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.Variant;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

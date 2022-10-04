@@ -1,12 +1,12 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.ProductImageRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.ProductRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.ProductImage;
+import com.nurtivillage.java.geonixApplication.dao.ProductImageRepository;
+import com.nurtivillage.java.geonixApplication.dao.ProductRepository;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.ProductImage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

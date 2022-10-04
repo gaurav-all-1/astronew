@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.security;
+package com.nurtivillage.java.geonixApplication.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-import com.nurtivillage.java.nutrivillageApplication.jwt.JwtAuthenticationEntryPoint;
-import com.nurtivillage.java.nutrivillageApplication.jwt.JwtRequestFilter;
+import com.nurtivillage.java.geonixApplication.jwt.JwtAuthenticationEntryPoint;
+import com.nurtivillage.java.geonixApplication.jwt.JwtRequestFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         // disable caching
         http.headers().cacheControl();
 
-        http.requiresChannel().anyRequest().requiresSecure().and().cors().and().csrf().disable() // disable csrf for our requests.
+        http.cors().and().csrf().disable() // disable csrf for our requests.
         .authorizeRequests()
         .antMatchers("/").permitAll()
         .antMatchers(HttpMethod.POST,"/user/registration").permitAll()

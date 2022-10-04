@@ -1,6 +1,6 @@
-package com.nurtivillage.java.nutrivillageApplication.dto;
+package com.nurtivillage.java.geonixApplication.dto;
 
-import com.nurtivillage.java.nutrivillageApplication.validation.ValidPassword;
+import com.nurtivillage.java.geonixApplication.validation.ValidPassword;
 
 public class PasswordDto {
 

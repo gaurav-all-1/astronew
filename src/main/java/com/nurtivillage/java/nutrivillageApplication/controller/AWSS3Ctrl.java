@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nurtivillage.java.nutrivillageApplication.service.AWSS3Service;
+import com.nurtivillage.java.geonixApplication.service.AWSS3Service;
 
 @RestController
 @RequestMapping(value= "/s3")

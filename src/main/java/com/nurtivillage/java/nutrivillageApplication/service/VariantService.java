@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.VariantRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.dao.VariantRepository;
+import com.nurtivillage.java.geonixApplication.model.Variant;
 
 @Service
 public class VariantService {

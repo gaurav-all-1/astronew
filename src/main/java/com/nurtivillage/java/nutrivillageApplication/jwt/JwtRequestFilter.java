@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.jwt;
+package com.nurtivillage.java.geonixApplication.jwt;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.nurtivillage.java.nutrivillageApplication.security.JwtUserDetailsService;
+import com.nurtivillage.java.geonixApplication.security.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 

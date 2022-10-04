@@ -1,12 +1,12 @@
-package com.nurtivillage.java.nutrivillageApplication.Request;
+package com.nurtivillage.java.geonixApplication.Request;
 
 import java.util.List;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Cart;
-import com.nurtivillage.java.nutrivillageApplication.model.Inventory;
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.ShippingAddress;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.Cart;
+import com.nurtivillage.java.geonixApplication.model.Inventory;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.ShippingAddress;
+import com.nurtivillage.java.geonixApplication.model.User;
 
 import org.springframework.stereotype.Service;
 

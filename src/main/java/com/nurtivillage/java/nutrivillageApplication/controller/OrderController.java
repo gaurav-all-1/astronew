@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,19 +8,19 @@ import java.util.Optional;
 
 import javax.websocket.server.PathParam;
 
-import com.nurtivillage.java.nutrivillageApplication.RazorPayClientConfig;
-import com.nurtivillage.java.nutrivillageApplication.Request.OrderRequest;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.dto.StatusRequest;
-import com.nurtivillage.java.nutrivillageApplication.model.OrderDetails;
-import com.nurtivillage.java.nutrivillageApplication.model.Payment;
-import com.nurtivillage.java.nutrivillageApplication.model.Status;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserOrder;
-import com.nurtivillage.java.nutrivillageApplication.service.ApiResponseService;
-import com.nurtivillage.java.nutrivillageApplication.service.LoggedInUserService;
-import com.nurtivillage.java.nutrivillageApplication.service.OnlinePaymentService;
-import com.nurtivillage.java.nutrivillageApplication.service.OrderService;
+import com.nurtivillage.java.geonixApplication.RazorPayClientConfig;
+import com.nurtivillage.java.geonixApplication.Request.OrderRequest;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.dto.StatusRequest;
+import com.nurtivillage.java.geonixApplication.model.OrderDetails;
+import com.nurtivillage.java.geonixApplication.model.Payment;
+import com.nurtivillage.java.geonixApplication.model.Status;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserOrder;
+import com.nurtivillage.java.geonixApplication.service.ApiResponseService;
+import com.nurtivillage.java.geonixApplication.service.LoggedInUserService;
+import com.nurtivillage.java.geonixApplication.service.OnlinePaymentService;
+import com.nurtivillage.java.geonixApplication.service.OrderService;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;

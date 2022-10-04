@@ -1,11 +1,11 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.List;
 
 import javax.websocket.server.PathParam;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Review;
-import com.nurtivillage.java.nutrivillageApplication.service.ReviewService;
+import com.nurtivillage.java.geonixApplication.model.Review;
+import com.nurtivillage.java.geonixApplication.service.ReviewService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

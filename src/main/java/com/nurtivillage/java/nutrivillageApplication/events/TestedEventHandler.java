@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.events;
+package com.nurtivillage.java.geonixApplication.events;
 
 import org.apache.catalina.webresources.war.Handler;
 import org.springframework.context.event.EventListener;

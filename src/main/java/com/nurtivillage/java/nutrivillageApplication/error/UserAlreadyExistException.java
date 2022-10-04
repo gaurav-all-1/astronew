@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.error;
+package com.nurtivillage.java.geonixApplication.error;
 
 public final class UserAlreadyExistException extends RuntimeException {
 

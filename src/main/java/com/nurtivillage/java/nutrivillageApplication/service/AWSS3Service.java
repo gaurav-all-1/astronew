@@ -1,10 +1,10 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.io.ByteArrayOutputStream;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Category;
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.model.Category;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
 
 import org.springframework.web.multipart.MultipartFile;
 

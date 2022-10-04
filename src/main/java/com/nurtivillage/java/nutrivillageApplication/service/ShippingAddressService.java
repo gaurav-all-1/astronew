@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.ShippingRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.SearchAddress;
-import com.nurtivillage.java.nutrivillageApplication.model.ShippingAddress;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
+import com.nurtivillage.java.geonixApplication.dao.ShippingRepository;
+import com.nurtivillage.java.geonixApplication.model.SearchAddress;
+import com.nurtivillage.java.geonixApplication.model.ShippingAddress;
+import com.nurtivillage.java.geonixApplication.model.User;
 
 @Service
 @Transactional

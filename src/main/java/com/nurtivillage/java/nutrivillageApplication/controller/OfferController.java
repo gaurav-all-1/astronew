@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 
 import java.util.List;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Offer;
-import com.nurtivillage.java.nutrivillageApplication.service.OfferService;
+import com.nurtivillage.java.geonixApplication.model.Offer;
+import com.nurtivillage.java.geonixApplication.service.OfferService;
 
 @RestController
 @RequestMapping("/offer")

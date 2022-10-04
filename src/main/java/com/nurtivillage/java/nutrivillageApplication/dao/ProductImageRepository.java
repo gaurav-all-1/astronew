@@ -1,6 +1,6 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
-import com.nurtivillage.java.nutrivillageApplication.model.ProductImage;
+import com.nurtivillage.java.geonixApplication.model.ProductImage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

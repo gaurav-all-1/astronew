@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -26,16 +26,16 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserSocialLoginTypeRepository;
-import com.nurtivillage.java.nutrivillageApplication.dto.SocialLoginTokenResponseDto;
-import com.nurtivillage.java.nutrivillageApplication.dto.TokenData;
-import com.nurtivillage.java.nutrivillageApplication.error.GenericException;
-import com.nurtivillage.java.nutrivillageApplication.jwt.JwtTokenUtil;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserSocialLoginType;
-import com.nutrivillage.java.nutrivillageApplication.enums.SocialLoginProviderType;
-import com.nutrivillage.java.nutrivillageApplication.properties.SocialLoginProperties;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserSocialLoginTypeRepository;
+import com.nurtivillage.java.geonixApplication.dto.SocialLoginTokenResponseDto;
+import com.nurtivillage.java.geonixApplication.dto.TokenData;
+import com.nurtivillage.java.geonixApplication.error.GenericException;
+import com.nurtivillage.java.geonixApplication.jwt.JwtTokenUtil;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserSocialLoginType;
+import com.geonix.java.geonixApplication.enums.SocialLoginProviderType;
+import com.geonix.java.geonixApplication.properties.SocialLoginProperties;
 
 
 @Service

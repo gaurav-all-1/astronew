@@ -1,9 +1,9 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
 import java.util.List;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.Review;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.Review;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

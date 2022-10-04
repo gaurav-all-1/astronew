@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,23 +28,23 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nurtivillage.java.nutrivillageApplication.Request.OrderRequest;
-import com.nurtivillage.java.nutrivillageApplication.dao.OrderDetailsRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.OrderRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserProfileRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.dto.StatusRequest;
-import com.nurtivillage.java.nutrivillageApplication.jwt.JwtTokenUtil;
-import com.nurtivillage.java.nutrivillageApplication.model.Cart;
-import com.nurtivillage.java.nutrivillageApplication.model.Inventory;
-import com.nurtivillage.java.nutrivillageApplication.model.Offer;
-import com.nurtivillage.java.nutrivillageApplication.model.OrderDetails;
-import com.nurtivillage.java.nutrivillageApplication.model.ShippingAddress;
-import com.nurtivillage.java.nutrivillageApplication.model.Status;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserOrder;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
-import com.nurtivillage.java.nutrivillageApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.Request.OrderRequest;
+import com.nurtivillage.java.geonixApplication.dao.OrderDetailsRepository;
+import com.nurtivillage.java.geonixApplication.dao.OrderRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserProfileRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.dto.StatusRequest;
+import com.nurtivillage.java.geonixApplication.jwt.JwtTokenUtil;
+import com.nurtivillage.java.geonixApplication.model.Cart;
+import com.nurtivillage.java.geonixApplication.model.Inventory;
+import com.nurtivillage.java.geonixApplication.model.Offer;
+import com.nurtivillage.java.geonixApplication.model.OrderDetails;
+import com.nurtivillage.java.geonixApplication.model.ShippingAddress;
+import com.nurtivillage.java.geonixApplication.model.Status;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserOrder;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.model.Variant;
 
 @Service
 @Transactional
@@ -339,7 +339,7 @@ public class OrderService {
 			
 			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
 			final String subject = "Order placed";
-			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://nutrivillage.in/assets/images/logo_nutri_update.png\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/logo_nutri_update.png\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 					+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 					+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 					+ "<tbody>\r\n"
@@ -484,7 +484,7 @@ public class OrderService {
 			
 			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
 			final String subject = "Order placed";
-			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://nutrivillage.in/assets/images/logo_nutri_update.png\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/logo_nutri_update.png\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 					+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 					+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 					+ "<tbody>\r\n"

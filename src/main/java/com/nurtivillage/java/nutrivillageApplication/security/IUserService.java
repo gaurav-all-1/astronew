@@ -1,18 +1,18 @@
-package com.nurtivillage.java.nutrivillageApplication.security;
+package com.nurtivillage.java.geonixApplication.security;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.nurtivillage.java.nutrivillageApplication.dto.PasswordDto;
-import com.nurtivillage.java.nutrivillageApplication.dto.UserDto;
-import com.nurtivillage.java.nutrivillageApplication.error.UserAlreadyExistException;
-import com.nurtivillage.java.nutrivillageApplication.model.NewLocationToken;
-import com.nurtivillage.java.nutrivillageApplication.model.PasswordResetToken;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
-import com.nurtivillage.java.nutrivillageApplication.model.VerificationToken;
+import com.nurtivillage.java.geonixApplication.dto.PasswordDto;
+import com.nurtivillage.java.geonixApplication.dto.UserDto;
+import com.nurtivillage.java.geonixApplication.error.UserAlreadyExistException;
+import com.nurtivillage.java.geonixApplication.model.NewLocationToken;
+import com.nurtivillage.java.geonixApplication.model.PasswordResetToken;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.model.VerificationToken;
 
 public interface IUserService {
 

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.validation;
+package com.nurtivillage.java.geonixApplication.validation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;

@@ -1,10 +1,10 @@
-package com.nurtivillage.java.nutrivillageApplication.validation;
+package com.nurtivillage.java.geonixApplication.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.nurtivillage.java.nutrivillageApplication.dto.UserDto;
+import com.nurtivillage.java.geonixApplication.dto.UserDto;
 
 public class UserValidator implements Validator {
 

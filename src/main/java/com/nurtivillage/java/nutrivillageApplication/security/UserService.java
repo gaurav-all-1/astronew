@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.security;
+package com.nurtivillage.java.geonixApplication.security;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -25,23 +25,23 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.NewLocationTokenRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.PasswordResetTokenRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.RoleRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserLocationRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.VerificationTokenRepository;
-import com.nurtivillage.java.nutrivillageApplication.dto.PasswordDto;
-import com.nurtivillage.java.nutrivillageApplication.dto.UserDto;
-import com.nurtivillage.java.nutrivillageApplication.error.UserAlreadyExistException;
-import com.nurtivillage.java.nutrivillageApplication.model.NewLocationToken;
-import com.nurtivillage.java.nutrivillageApplication.model.PasswordResetToken;
-import com.nurtivillage.java.nutrivillageApplication.model.Role;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserLocation;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
-import com.nurtivillage.java.nutrivillageApplication.model.VerificationToken;
-import com.nurtivillage.java.nutrivillageApplication.util.GenericResponse;
+import com.nurtivillage.java.geonixApplication.dao.NewLocationTokenRepository;
+import com.nurtivillage.java.geonixApplication.dao.PasswordResetTokenRepository;
+import com.nurtivillage.java.geonixApplication.dao.RoleRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserLocationRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.dao.VerificationTokenRepository;
+import com.nurtivillage.java.geonixApplication.dto.PasswordDto;
+import com.nurtivillage.java.geonixApplication.dto.UserDto;
+import com.nurtivillage.java.geonixApplication.error.UserAlreadyExistException;
+import com.nurtivillage.java.geonixApplication.model.NewLocationToken;
+import com.nurtivillage.java.geonixApplication.model.PasswordResetToken;
+import com.nurtivillage.java.geonixApplication.model.Role;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserLocation;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.model.VerificationToken;
+import com.nurtivillage.java.geonixApplication.util.GenericResponse;
 
 @Service
 @Transactional

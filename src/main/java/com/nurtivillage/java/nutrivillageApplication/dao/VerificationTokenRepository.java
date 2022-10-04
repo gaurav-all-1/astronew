@@ -1,10 +1,10 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
 import java.util.Date;
 import java.util.stream.Stream;
 
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.VerificationToken;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.VerificationToken;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

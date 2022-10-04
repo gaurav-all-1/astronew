@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.dto;
+package com.nurtivillage.java.geonixApplication.dto;
 
 public class SocialLoginTokenResponseDto {
 	   private String access_token;

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nurtivillage.java.nutrivillageApplication.service.EmailService;
-import com.nurtivillage.java.nutrivillageApplication.service.OTPService;
+import com.nurtivillage.java.geonixApplication.service.EmailService;
+import com.nurtivillage.java.geonixApplication.service.OTPService;
 
 
 public class OTPController {

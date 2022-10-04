@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.model;
+package com.nurtivillage.java.geonixApplication.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

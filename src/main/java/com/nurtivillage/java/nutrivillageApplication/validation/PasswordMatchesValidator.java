@@ -1,9 +1,9 @@
-package com.nurtivillage.java.nutrivillageApplication.validation;
+package com.nurtivillage.java.geonixApplication.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.nurtivillage.java.nutrivillageApplication.dto.UserDto;
+import com.nurtivillage.java.geonixApplication.dto.UserDto;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.Map;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.nurtivillage.java.nutrivillageApplication.service.ResponseService;
-import com.nurtivillage.java.nutrivillageApplication.service.SocialOauthService;
+import com.nurtivillage.java.geonixApplication.service.ResponseService;
+import com.nurtivillage.java.geonixApplication.service.SocialOauthService;
 
 @Controller
 @RequestMapping("/provider")

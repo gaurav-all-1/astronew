@@ -1,11 +1,11 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
 import java.util.List;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Category;
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.ProductImage;
-import com.nurtivillage.java.nutrivillageApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.model.Category;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.ProductImage;
+import com.nurtivillage.java.geonixApplication.model.Variant;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

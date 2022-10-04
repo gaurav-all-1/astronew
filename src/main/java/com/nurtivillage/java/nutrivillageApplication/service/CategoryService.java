@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.simpleworkflow.flow.core.TryCatch;
-import com.nurtivillage.java.nutrivillageApplication.dao.CategoryRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.Category;
+import com.nurtivillage.java.geonixApplication.dao.CategoryRepository;
+import com.nurtivillage.java.geonixApplication.model.Category;
 
 @Service
 public class CategoryService {

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.dto;
+package com.nurtivillage.java.geonixApplication.dto;
 
 import javax.persistence.Lob;
 

@@ -8,10 +8,10 @@
 		<version>2.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.nurtivillage.java</groupId>
-	<artifactId>nutriVillageApplication</artifactId>
+	<groupId>com.geonixApplication.java</groupId>
+	<artifactId>geonixApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nutriVillageApplication</name>
+	<name>geonixApplication</name>
 	<description>Nutri village Application</description>
 
 	<properties>

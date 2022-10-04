@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication;
+package com.nurtivillage.java.geonixApplication;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,19 +29,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nurtivillage.java.nutrivillageApplication.dao.RoleRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserProfileRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.Location;
-import com.nurtivillage.java.nutrivillageApplication.model.Role;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
-import com.nurtivillage.java.nutrivillageApplication.validation.Name;
-import com.nutrivillage.java.nutrivillageApplication.properties.SocialLoginProperties;
+import com.nurtivillage.java.geonixApplication.dao.RoleRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserProfileRepository;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.model.Location;
+import com.nurtivillage.java.geonixApplication.model.Role;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.validation.Name;
+import com.geonix.java.geonixApplication.properties.SocialLoginProperties;
 @EnableCaching
 @SpringBootApplication
 @EnableAsync
-public class NutrivillageApplication {
+public class geonixApplication {
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -59,7 +59,7 @@ public class NutrivillageApplication {
 	UserProfileRepository userProfileRepository;
 	
 	public static void main(String[] args) {
-		SpringApplication.run(NutrivillageApplication.class, args);
+		SpringApplication.run(geonixApplication.class, args);
 	}
 	
 

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication;
+package com.nurtivillage.java.geonixApplication;
 
 import javax.annotation.PostConstruct;
 

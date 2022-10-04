@@ -1,6 +1,6 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
 
 import org.springframework.data.repository.CrudRepository;
 

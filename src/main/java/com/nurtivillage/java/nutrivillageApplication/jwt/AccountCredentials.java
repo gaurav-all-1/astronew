@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.jwt;
+package com.nurtivillage.java.geonixApplication.jwt;
 
 public class AccountCredentials {
 

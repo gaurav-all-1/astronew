@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.jwt;
+package com.nurtivillage.java.geonixApplication.jwt;
 
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.util;
+package com.nurtivillage.java.geonixApplication.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,7 +1,7 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
-import com.nurtivillage.java.nutrivillageApplication.model.NewLocationToken;
-import com.nurtivillage.java.nutrivillageApplication.model.UserLocation;
+import com.nurtivillage.java.geonixApplication.model.NewLocationToken;
+import com.nurtivillage.java.geonixApplication.model.UserLocation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

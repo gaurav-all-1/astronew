@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Category;
-import com.nurtivillage.java.nutrivillageApplication.service.CategoryService;
+import com.nurtivillage.java.geonixApplication.model.Category;
+import com.nurtivillage.java.geonixApplication.service.CategoryService;
 
 @RestController
 

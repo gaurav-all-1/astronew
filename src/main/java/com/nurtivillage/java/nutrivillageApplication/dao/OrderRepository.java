@@ -1,10 +1,10 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
 import java.util.List;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Status;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserOrder;
+import com.nurtivillage.java.geonixApplication.model.Status;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserOrder;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

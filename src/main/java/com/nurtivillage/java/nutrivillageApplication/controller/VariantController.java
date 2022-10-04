@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nurtivillage.java.nutrivillageApplication.model.Inventory;
-import com.nurtivillage.java.nutrivillageApplication.model.Variant;
-import com.nurtivillage.java.nutrivillageApplication.service.VariantService;
+import com.nurtivillage.java.geonixApplication.model.Inventory;
+import com.nurtivillage.java.geonixApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.service.VariantService;
 
 @RestController
 public class VariantController {

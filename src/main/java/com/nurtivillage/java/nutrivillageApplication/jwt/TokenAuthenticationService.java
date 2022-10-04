@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.jwt;
+package com.nurtivillage.java.geonixApplication.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.events;
+package com.nurtivillage.java.geonixApplication.events;
 
 import org.springframework.context.ApplicationEvent;
 

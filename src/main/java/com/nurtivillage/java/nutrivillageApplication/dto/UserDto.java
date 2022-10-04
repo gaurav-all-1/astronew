@@ -1,11 +1,11 @@
-package com.nurtivillage.java.nutrivillageApplication.dto;
+package com.nurtivillage.java.geonixApplication.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.nurtivillage.java.nutrivillageApplication.validation.PasswordMatches;
-import com.nurtivillage.java.nutrivillageApplication.validation.ValidEmail;
-import com.nurtivillage.java.nutrivillageApplication.validation.ValidPassword;
+import com.nurtivillage.java.geonixApplication.validation.PasswordMatches;
+import com.nurtivillage.java.geonixApplication.validation.ValidEmail;
+import com.nurtivillage.java.geonixApplication.validation.ValidPassword;
 
 @PasswordMatches
 public class UserDto {

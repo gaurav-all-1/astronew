@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.security;
+package com.nurtivillage.java.geonixApplication.security;
 
 import java.util.Calendar;
 
@@ -7,8 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.PasswordResetTokenRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.PasswordResetToken;
+import com.nurtivillage.java.geonixApplication.dao.PasswordResetTokenRepository;
+import com.nurtivillage.java.geonixApplication.model.PasswordResetToken;
 
 @Service
 @Transactional

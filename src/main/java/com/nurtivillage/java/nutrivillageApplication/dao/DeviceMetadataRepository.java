@@ -1,8 +1,8 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
 import java.util.List;
 
-import com.nurtivillage.java.nutrivillageApplication.model.DeviceMetadata;
+import com.nurtivillage.java.geonixApplication.model.DeviceMetadata;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication;
+package com.nurtivillage.java.geonixApplication;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

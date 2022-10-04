@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.validation;
+package com.nurtivillage.java.geonixApplication.validation;
 
 import java.util.Arrays;
 

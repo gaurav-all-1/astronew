@@ -1,17 +1,17 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.UserRepository;
-import com.nurtivillage.java.nutrivillageApplication.dto.CartResponseDto;
-import com.nurtivillage.java.nutrivillageApplication.model.Cart;
-import com.nurtivillage.java.nutrivillageApplication.model.Inventory;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.service.ApiResponseService;
-import com.nurtivillage.java.nutrivillageApplication.service.CartService;
-import com.nurtivillage.java.nutrivillageApplication.service.InventoryService;
-import com.nurtivillage.java.nutrivillageApplication.service.LoggedInUserService;
+import com.nurtivillage.java.geonixApplication.dao.UserRepository;
+import com.nurtivillage.java.geonixApplication.dto.CartResponseDto;
+import com.nurtivillage.java.geonixApplication.model.Cart;
+import com.nurtivillage.java.geonixApplication.model.Inventory;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.service.ApiResponseService;
+import com.nurtivillage.java.geonixApplication.service.CartService;
+import com.nurtivillage.java.geonixApplication.service.InventoryService;
+import com.nurtivillage.java.geonixApplication.service.LoggedInUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

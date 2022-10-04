@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.dto;
+package com.nurtivillage.java.geonixApplication.dto;
 
 public class StatusRequest {
     private Long id;

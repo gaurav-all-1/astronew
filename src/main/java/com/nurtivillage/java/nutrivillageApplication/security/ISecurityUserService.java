@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.security;
+package com.nurtivillage.java.geonixApplication.security;
 
 public interface ISecurityUserService {
 

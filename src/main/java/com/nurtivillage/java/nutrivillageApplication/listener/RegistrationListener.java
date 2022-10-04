@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.listener;
+package com.nurtivillage.java.geonixApplication.listener;
 
 import java.util.UUID;
 
@@ -10,9 +10,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.registration.OnRegistrationCompleteEvent;
-import com.nurtivillage.java.nutrivillageApplication.security.IUserService;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.registration.OnRegistrationCompleteEvent;
+import com.nurtivillage.java.geonixApplication.security.IUserService;
 
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {

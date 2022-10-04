@@ -1,8 +1,8 @@
-package com.nurtivillage.java.nutrivillageApplication.registration;
+package com.nurtivillage.java.geonixApplication.registration;
 
 import java.util.Locale;
 
-import com.nurtivillage.java.nutrivillageApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.User;
 
 import org.springframework.context.ApplicationEvent;
 

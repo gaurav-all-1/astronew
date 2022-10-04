@@ -1,4 +1,4 @@
-package com.nutrivillage.java.nutrivillageApplication.enums;
+package com.geonix.java.geonixApplication.enums;
 
 public enum SocialLoginProviderType {
 	   GMAIL("Gmail");

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nurtivillage.java.nutrivillageApplication.model.SearchAddress;
-import com.nurtivillage.java.nutrivillageApplication.model.ShippingAddress;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.service.ShippingAddressService;
+import com.nurtivillage.java.geonixApplication.model.SearchAddress;
+import com.nurtivillage.java.geonixApplication.model.ShippingAddress;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.service.ShippingAddressService;
 
 @RestController
 public class ShippingController {

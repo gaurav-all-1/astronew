@@ -1,4 +1,4 @@
-package com.nutrivillage.java.nutrivillageApplication.properties;
+package com.geonix.java.geonixApplication.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;

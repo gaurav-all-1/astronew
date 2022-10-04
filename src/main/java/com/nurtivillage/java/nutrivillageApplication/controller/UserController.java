@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.nurtivillage.java.nutrivillageApplication.service.*;
+import com.nurtivillage.java.geonixApplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -53,14 +53,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nurtivillage.java.nutrivillageApplication.jwt.AccountCredentials;
-import com.nurtivillage.java.nutrivillageApplication.jwt.JwtTokenUtil;
-import com.nurtivillage.java.nutrivillageApplication.model.Location;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.UserProfile;
-import com.nurtivillage.java.nutrivillageApplication.security.IUserService;
-import com.nurtivillage.java.nutrivillageApplication.security.JwtUserDetailsService;
-import com.nurtivillage.java.nutrivillageApplication.util.GenericResponse;
+import com.nurtivillage.java.geonixApplication.jwt.AccountCredentials;
+import com.nurtivillage.java.geonixApplication.jwt.JwtTokenUtil;
+import com.nurtivillage.java.geonixApplication.model.Location;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.UserProfile;
+import com.nurtivillage.java.geonixApplication.security.IUserService;
+import com.nurtivillage.java.geonixApplication.security.JwtUserDetailsService;
+import com.nurtivillage.java.geonixApplication.util.GenericResponse;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 36000)

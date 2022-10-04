@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import java.util.Date;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.nurtivillage.java.nutrivillageApplication.dao.OfferRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.Offer;
+import com.nurtivillage.java.geonixApplication.dao.OfferRepository;
+import com.nurtivillage.java.geonixApplication.model.Offer;
 
 @Service
 public class OfferService {

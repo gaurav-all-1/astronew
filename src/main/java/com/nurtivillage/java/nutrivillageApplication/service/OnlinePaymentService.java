@@ -1,10 +1,10 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
-import com.nurtivillage.java.nutrivillageApplication.RazorPayClientConfig;
-import com.nurtivillage.java.nutrivillageApplication.dao.OrderRepository;
-import com.nurtivillage.java.nutrivillageApplication.dao.PaymentRepository;
-import com.nurtivillage.java.nutrivillageApplication.model.Payment;
-import com.nurtivillage.java.nutrivillageApplication.model.UserOrder;
-import com.nurtivillage.java.nutrivillageApplication.model.Signature;
+package com.nurtivillage.java.geonixApplication.service;
+import com.nurtivillage.java.geonixApplication.RazorPayClientConfig;
+import com.nurtivillage.java.geonixApplication.dao.OrderRepository;
+import com.nurtivillage.java.geonixApplication.dao.PaymentRepository;
+import com.nurtivillage.java.geonixApplication.model.Payment;
+import com.nurtivillage.java.geonixApplication.model.UserOrder;
+import com.nurtivillage.java.geonixApplication.model.Signature;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;

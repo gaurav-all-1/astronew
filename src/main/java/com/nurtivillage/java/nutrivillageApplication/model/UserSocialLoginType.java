@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.model;
+package com.nurtivillage.java.geonixApplication.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.nutrivillage.java.nutrivillageApplication.enums.SocialLoginProviderType;
+import com.geonix.java.geonixApplication.enums.SocialLoginProviderType;
 
 @Entity
 public class UserSocialLoginType {

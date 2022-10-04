@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
@@ -29,15 +29,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nurtivillage.java.nutrivillageApplication.dto.PasswordDto;
-import com.nurtivillage.java.nutrivillageApplication.dto.UserDto;
-import com.nurtivillage.java.nutrivillageApplication.error.InvalidOldPasswordException;
-import com.nurtivillage.java.nutrivillageApplication.model.User;
-import com.nurtivillage.java.nutrivillageApplication.model.VerificationToken;
-import com.nurtivillage.java.nutrivillageApplication.registration.OnRegistrationCompleteEvent;
-import com.nurtivillage.java.nutrivillageApplication.security.ISecurityUserService;
-import com.nurtivillage.java.nutrivillageApplication.security.IUserService;
-import com.nurtivillage.java.nutrivillageApplication.util.GenericResponse;
+import com.nurtivillage.java.geonixApplication.dto.PasswordDto;
+import com.nurtivillage.java.geonixApplication.dto.UserDto;
+import com.nurtivillage.java.geonixApplication.error.InvalidOldPasswordException;
+import com.nurtivillage.java.geonixApplication.model.User;
+import com.nurtivillage.java.geonixApplication.model.VerificationToken;
+import com.nurtivillage.java.geonixApplication.registration.OnRegistrationCompleteEvent;
+import com.nurtivillage.java.geonixApplication.security.ISecurityUserService;
+import com.nurtivillage.java.geonixApplication.security.IUserService;
+import com.nurtivillage.java.geonixApplication.util.GenericResponse;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 36000)

@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.events;
+package com.nurtivillage.java.geonixApplication.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;

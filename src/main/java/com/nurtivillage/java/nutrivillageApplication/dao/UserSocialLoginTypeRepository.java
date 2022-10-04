@@ -1,8 +1,8 @@
-package com.nurtivillage.java.nutrivillageApplication.dao;
+package com.nurtivillage.java.geonixApplication.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nurtivillage.java.nutrivillageApplication.model.UserSocialLoginType;
+import com.nurtivillage.java.geonixApplication.model.UserSocialLoginType;
 
 
 

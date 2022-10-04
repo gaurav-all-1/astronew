@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.controller;
+package com.nurtivillage.java.geonixApplication.controller;
 
 import java.io.File;
 import java.util.Arrays;
@@ -9,21 +9,21 @@ import java.util.Optional;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
-import com.nurtivillage.java.nutrivillageApplication.dto.ProductInsert;
-import com.nurtivillage.java.nutrivillageApplication.dto.ProductUpdateDto;
-import com.nurtivillage.java.nutrivillageApplication.events.TestedEventPublisher;
-import com.nurtivillage.java.nutrivillageApplication.model.Inventory;
-import com.nurtivillage.java.nutrivillageApplication.model.Product;
-import com.nurtivillage.java.nutrivillageApplication.model.ProductImage;
-import com.nurtivillage.java.nutrivillageApplication.model.Review;
-import com.nurtivillage.java.nutrivillageApplication.model.Variant;
-import com.nurtivillage.java.nutrivillageApplication.service.AWSS3Service;
-import com.nurtivillage.java.nutrivillageApplication.service.ApiResponseService;
-import com.nurtivillage.java.nutrivillageApplication.service.InventoryService;
-import com.nurtivillage.java.nutrivillageApplication.service.ProductImageService;
-import com.nurtivillage.java.nutrivillageApplication.service.ProductService;
-import com.nurtivillage.java.nutrivillageApplication.service.ReviewService;
-import com.nurtivillage.java.nutrivillageApplication.service.VariantService;
+import com.nurtivillage.java.geonixApplication.dto.ProductInsert;
+import com.nurtivillage.java.geonixApplication.dto.ProductUpdateDto;
+import com.nurtivillage.java.geonixApplication.events.TestedEventPublisher;
+import com.nurtivillage.java.geonixApplication.model.Inventory;
+import com.nurtivillage.java.geonixApplication.model.Product;
+import com.nurtivillage.java.geonixApplication.model.ProductImage;
+import com.nurtivillage.java.geonixApplication.model.Review;
+import com.nurtivillage.java.geonixApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.service.AWSS3Service;
+import com.nurtivillage.java.geonixApplication.service.ApiResponseService;
+import com.nurtivillage.java.geonixApplication.service.InventoryService;
+import com.nurtivillage.java.geonixApplication.service.ProductImageService;
+import com.nurtivillage.java.geonixApplication.service.ProductService;
+import com.nurtivillage.java.geonixApplication.service.ReviewService;
+import com.nurtivillage.java.geonixApplication.service.VariantService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

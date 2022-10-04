@@ -1,4 +1,4 @@
-package com.nurtivillage.java.nutrivillageApplication.service;
+package com.nurtivillage.java.geonixApplication.service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
