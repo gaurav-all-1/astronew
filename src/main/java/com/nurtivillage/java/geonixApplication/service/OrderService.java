@@ -92,7 +92,7 @@ public class OrderService {
 		return orderCreate;
 	}
 
-	@Async
+//	@Async
 	public void createOrderDetails(List<Cart> cartItems, UserOrder order) {// (List<Product>
 																							// product,UserOrder
 																							// order,List<Long>
@@ -110,10 +110,10 @@ public class OrderService {
 //			} else {
 				OrderDetails orderItem = new OrderDetails(cartItem.getProduct(), order, cartItem.getQuantity(), variant,
 						null, price);
-				orderAllItem.add(orderItem);
+			orderDetailsRepository.save(orderItem);
 //			}
 		});
-		orderDetailsRepository.saveAll(orderAllItem);
+
 //		log.info("Sending Mail To Admin for order received --Start");
 //		sendMailToAdminForOrder(order);
 ////                mailSender.send(mailAdmin);
