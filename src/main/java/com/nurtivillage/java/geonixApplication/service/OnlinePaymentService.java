@@ -1,5 +1,6 @@
 package com.nurtivillage.java.geonixApplication.service;
 import com.nurtivillage.java.geonixApplication.RazorPayClientConfig;
+import com.nurtivillage.java.geonixApplication.controller.OrderController;
 import com.nurtivillage.java.geonixApplication.dao.OrderRepository;
 import com.nurtivillage.java.geonixApplication.dao.PaymentRepository;
 import com.nurtivillage.java.geonixApplication.model.Payment;
@@ -15,6 +16,8 @@ import java.math.RoundingMode;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OnlinePaymentService {
+	private final static Logger log= LogManager.getLogger(OrderController.class);
+	@Autowired
+	public OrderService orderService;
 	private RazorpayClient razorPayClient;
 	public OnlinePaymentService(RazorPayClientConfig razorpayClientConfig)throws RazorpayException{
 		this.razorPayClient=new RazorpayClient(razorpayClientConfig.getKey(),razorpayClientConfig.getSecret());
@@ -74,6 +80,13 @@ public class OnlinePaymentService {
 	        	orderRepository.save(userOrder);
 	        	
 	        	paymentRepo.save(payment);
+				log.info("Sending Mail To Admin for order received --Start");
+				orderService.sendMailToAdminForOrder(userOrder);
+//               mailSender.send(mail);
+				log.info("Sending Mail To Admin for order received --End");
+
+				log.info("Sending Mail To buyer for order received --Start");
+				orderService.sendMailToBuyerForOrder(userOrder);
 	        }
 	        else {
 	        	error="Payment validation failed..Signature Doesn't match.";

@@ -114,13 +114,13 @@ public class OrderService {
 //			}
 		});
 		orderDetailsRepository.saveAll(orderAllItem);
-		log.info("Sending Mail To Admin for order received --Start");
-		sendMailToAdminForOrder(order);
-//                mailSender.send(mailAdmin);
-		log.info("Sending Mail To Admin for order received --End");
-
-		log.info("Sending Mail To buyer for order received --Start");
-		sendMailToBuyerForOrder(order);
+//		log.info("Sending Mail To Admin for order received --Start");
+//		sendMailToAdminForOrder(order);
+////                mailSender.send(mailAdmin);
+//		log.info("Sending Mail To Admin for order received --End");
+//
+//		log.info("Sending Mail To buyer for order received --Start");
+//		sendMailToBuyerForOrder(order);
 		cartService.cartClear();
 	}
 
@@ -142,13 +142,13 @@ public class OrderService {
 
 //		}
 		orderDetailsRepository.save(orderItem);
-		log.info("Sending Mail To Admin for order received --Start");
-		sendMailToAdminForOrder(order);
-//               mailSender.send(mail);
-		log.info("Sending Mail To Admin for order received --End");
-
-		log.info("Sending Mail To buyer for order received --Start");
-		sendMailToBuyerForOrder(order);
+//		log.info("Sending Mail To Admin for order received --Start");
+//		sendMailToAdminForOrder(order);
+////               mailSender.send(mail);
+//		log.info("Sending Mail To Admin for order received --End");
+//
+//		log.info("Sending Mail To buyer for order received --Start");
+//		sendMailToBuyerForOrder(order);
 
 //		return orderItem;
 	}
@@ -484,7 +484,7 @@ public class OrderService {
 			
 			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
 			final String subject = "Order placed";
-			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/logo_nutri_update.png\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 					+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 					+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 					+ "<tbody>\r\n"
