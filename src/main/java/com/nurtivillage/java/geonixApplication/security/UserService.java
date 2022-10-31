@@ -390,7 +390,7 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 	public SimpleMailMessage createMailForForgotPassword(String email,String token) {
 		try {
 			String subject="Reset Password";
-			String message="Please click on the below link to reset the password for your nutri village account \r\n \r\n";
+			String message="Please click on the below link to reset the password for your GEONIX account \r\n \r\n";
 		    String resetLink=forgotPasswordUrl+"?key="+token;
 		    SimpleMailMessage mail=new SimpleMailMessage();
 		    mail.setFrom(fromMail);
