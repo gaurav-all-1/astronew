@@ -56,7 +56,16 @@ public class OnlinePaymentService {
 	  try {  Payment p=new Payment();
 	    p.setRazorpayOrderId(razorpayOrderId);
 	    p.setOrder(userOrder);
-	    return paymentRepo.save(p);}
+	    Payment returnPayment =  paymentRepo.save(p);
+		  log.info("Sending Mail To Admin for order received --Start");
+		  orderService.sendMailToAdminForOrder(userOrder);
+//               mailSender.send(mail);
+		  log.info("Sending Mail To Admin for order received --End");
+
+		  log.info("Sending Mail To buyer for order received --Start");
+		  orderService.sendMailToBuyerForOrder(userOrder);
+		  return returnPayment;
+	  }
 	  catch(Exception e) {
 		  throw e;
 	  }
