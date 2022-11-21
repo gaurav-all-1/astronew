@@ -57,13 +57,13 @@ public class OnlinePaymentService {
 	    p.setRazorpayOrderId(razorpayOrderId);
 	    p.setOrder(userOrder);
 	    Payment returnPayment =  paymentRepo.save(p);
-		  log.info("Sending Mail To Admin for order received --Start");
-		  orderService.sendMailToAdminForOrder(userOrder);
-//               mailSender.send(mail);
-		  log.info("Sending Mail To Admin for order received --End");
-
-		  log.info("Sending Mail To buyer for order received --Start");
-		  orderService.sendMailToBuyerForOrder(userOrder);
+//		  log.info("Sending Mail To Admin for order received --Start");
+//		  orderService.sendMailToAdminForOrder(userOrder);
+////               mailSender.send(mail);
+//		  log.info("Sending Mail To Admin for order received --End");
+//
+//		  log.info("Sending Mail To buyer for order received --Start");
+//		  orderService.sendMailToBuyerForOrder(userOrder);
 		  return returnPayment;
 	  }
 	  catch(Exception e) {

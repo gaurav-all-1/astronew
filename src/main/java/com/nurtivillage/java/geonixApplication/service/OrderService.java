@@ -114,17 +114,39 @@ public class OrderService {
 //			}
 		});
 
-//		log.info("Sending Mail To Admin for order received --Start");
-//		sendMailToAdminForOrder(order);
-////                mailSender.send(mailAdmin);
-//		log.info("Sending Mail To Admin for order received --End");
-//
-//		log.info("Sending Mail To buyer for order received --Start");
-//		sendMailToBuyerForOrder(order);
+		log.info("Sending Mail To Admin for order received --Start");
+		sendMailToAdminForOrder(order);
+//                mailSender.send(mailAdmin);
+		log.info("Sending Mail To Admin for order received --End");
+
+		log.info("Sending Mail To buyer for order received --Start");
+		sendMailToBuyerForOrder(order);
 		cartService.cartClear();
 	}
 
-	@Async
+	public void createOrderDetailsForRZP(List<Cart> cartItems, UserOrder order) {// (List<Product>
+		// product,UserOrder
+		// order,List<Long>
+		// quantity){
+		List<OrderDetails> orderAllItem = new ArrayList<>();
+		cartItems.forEach((var) -> {
+			Cart cartItem = cartService.cartItemById(var.getId());
+			Variant variant = cartItem.getInventory().getVariant();
+			int price = cartItem.getInventory().getPrice();
+//			List<Offer> offer = offerService.getOffersByProduct(cartItem.getProduct().getId());
+//			if (offer.size() != 0) {
+//				OrderDetails orderItem = new OrderDetails(cartItem.getProduct(), order, cartItem.getQuantity(), variant,
+//						offer.get(0), price);
+//				orderAllItem.add(orderItem);
+//			} else {
+			OrderDetails orderItem = new OrderDetails(cartItem.getProduct(), order, cartItem.getQuantity(), variant,
+					null, price);
+			orderDetailsRepository.save(orderItem);
+//			}
+		});
+		cartService.cartClear();
+	}
+
 	public void createSingleOrderDetails(Long productId, int variantId, int quantity, UserOrder order) {// (List<Product>
 																												// product,UserOrder
 																												// order,List<Long>
@@ -142,15 +164,46 @@ public class OrderService {
 
 //		}
 		orderDetailsRepository.save(orderItem);
-//		log.info("Sending Mail To Admin for order received --Start");
-//		sendMailToAdminForOrder(order);
-////               mailSender.send(mail);
-//		log.info("Sending Mail To Admin for order received --End");
-//
-//		log.info("Sending Mail To buyer for order received --Start");
-//		sendMailToBuyerForOrder(order);
+		log.info("Sending Mail To Admin for order received --Start");
+		sendMailToAdminForOrder(order);
+//               mailSender.send(mail);
+		log.info("Sending Mail To Admin for order received --End");
+
+		log.info("Sending Mail To buyer for order received --Start");
+		sendMailToBuyerForOrder(order);
 
 //		return orderItem;
+	}
+
+	public void createSingleOrderDetailsForRzp(Long productId, int variantId, int quantity, UserOrder order) {// (List<Product>
+		// product,UserOrder
+		// order,List<Long>
+		// quantity){
+		OrderDetails orderItem = null;
+		Inventory inventory = inventoryService.getProductVariantInventory(productId, variantId);
+//		List<Offer> offer = offerService.getOffersByProduct(inventory.getProduct().getId());
+//		if (offer.size() != 0) {
+//			orderItem = new OrderDetails(inventory.getProduct(), order, quantity, inventory.getVariant(), offer.get(0),
+//					inventory.getPrice());
+//
+//		} else {
+		orderItem = new OrderDetails(inventory.getProduct(), order, quantity, inventory.getVariant(), null,
+				inventory.getPrice());
+
+//		}
+		orderDetailsRepository.save(orderItem);
+
+//		return orderItem;
+	}
+
+	public void sendEmailsforOrders(UserOrder order){
+				log.info("Sending Mail To Admin for order received --Start");
+		sendMailToAdminForOrder(order);
+//               mailSender.send(mail);
+		log.info("Sending Mail To Admin for order received --End");
+
+		log.info("Sending Mail To buyer for order received --Start");
+		sendMailToBuyerForOrder(order);
 	}
 
 	public OrderDetails getOrderDetail(Long id) throws Exception {
