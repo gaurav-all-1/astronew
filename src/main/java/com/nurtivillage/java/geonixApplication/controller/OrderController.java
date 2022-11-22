@@ -109,15 +109,18 @@ public class OrderController {
 //                    throw new Exception("amount not varify");
 //                }
                 UserOrder orderCreate = orderService.createOrder(order);
-                orderService.createOrderDetails(orderRequest.getCartItem(),orderCreate);
+
 
 //                mailSender.send(mailBuyer);
                 log.info("Sending Mail To buyer for order received --End");
                 if(!orderRequest.getPaymentMethod().equals("COD")){
+                    orderService.createOrderDetailsForRZP(orderRequest.getCartItem(),orderCreate);
                     Order orderRes = onlinePaymentService.createOrderOnRazorpay(orderCreate,this.razorpayClient);
                     onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
                     ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")));
                     return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+                }else{
+                    orderService.createOrderDetails(orderRequest.getCartItem(),orderCreate);
                 }
 
                 ApiResponseService res = new ApiResponseService("order placed",true,null);
@@ -146,17 +149,21 @@ public class OrderController {
 //                }
                 UserOrder orderCreate = orderService.createOrder(order);
 //               OrderDetails data =
-                       orderService.createSingleOrderDetails(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
+
 
 //               mailSender.send(mailBuyer);
                log.info("Sending Mail To buyer for order received --End");
                
                 if(!orderRequest.getPaymentMethod().equals("COD")){
+                    orderService.createSingleOrderDetailsForRzp(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
                     Order orderRes = onlinePaymentService.createOrderOnRazorpay(orderCreate,this.razorpayClient);
                     onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
                     ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")));
                     return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+                }else{
+                    orderService.createSingleOrderDetails(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
                 }
+
                 ApiResponseService res = new ApiResponseService("order placed",true,null);
                 return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
             }catch(Exception e){
@@ -206,15 +213,6 @@ public class OrderController {
 //                    throw new Exception("Incorrect amount");
 //                }
                 UserOrder orderCreate = orderService.createOrder(order);
-//               OrderDetails data =
-                       orderService.createSingleOrderDetails(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
-               log.info("Sending Mail To Admin for order received --Start");
-               orderService.sendMailToAdminForOrder(orderCreate);
-//               mailSender.send(mail);
-               log.info("Sending Mail To Admin for order received --End");
-               
-               log.info("Sending Mail To buyer for order received --Start");
-               orderService.sendMailToBuyerForOrder(orderCreate);
 //               mailSender.send(mailBuyer);
                log.info("Sending Mail To buyer for order received --End");
                
@@ -224,6 +222,8 @@ public class OrderController {
                     onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
                     ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")),guestInfo);
                     return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+                }else{
+                    orderService.createSingleOrderDetails(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
                 }
 //                System.out.print(data);
                 ApiResponseService res = new ApiResponseService("order placed",true,null,guestInfo);
