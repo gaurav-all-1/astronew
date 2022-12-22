@@ -147,10 +147,26 @@ public class ProductController {
 		}
 	}
 
+
+
+
 	@PutMapping("/edit")
 	public ResponseEntity<ApiResponseService> editProduct(@RequestBody Product product) {
 		try {
 			Product data = productService.insertProduct(product);
+			ApiResponseService res = new ApiResponseService("update product", true, Arrays.asList(data));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/updateproduct")
+	public ResponseEntity<ApiResponseService> updateProduct(@RequestBody Product product) {
+		try {
+			Product data = productService.updateProduct(product);
 			ApiResponseService res = new ApiResponseService("update product", true, Arrays.asList(data));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
 		} catch (Exception e) {

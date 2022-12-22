@@ -114,6 +114,23 @@ public class ProductService {
         }
     }
 
+    public Product updateProduct(Product product){
+        try {
+            List<Variant> savedVariants = new ArrayList<>();
+            Variant variant = product.getVariants().get(0);
+            Inventory inventory = inventoryRepository.findByProductIdAndVariantId(product.getId(),variant.getId());
+            inventory.setPrice(product.getVariants().get(0).getPrice());
+            inventoryRepository.save(inventory);
+
+//            product.setVariants(savedVariants);
+//            Product save = productRepository.save(product);
+
+            return product;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public String DeleteProduct(Long id) throws Exception{
         try {
             if(!productRepository.existsById(id)){
