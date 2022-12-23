@@ -200,7 +200,7 @@ public class AWSS3ServiceImpl implements AWSS3Service {
 	}
 
 	public URL uploadinvoicetos3(final String bucketName, final File file, UserOrder order){
-		final String fileName = "orders"+"/"+order.getId()+"/"+"/"+file.getName();
+		final String fileName = "orders"+"/"+order.getId()+"/"+file.getName();
 		LOGGER.info("Uploading file with name= " + fileName);
 		final PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file).withCannedAcl(CannedAccessControlList.PublicRead);
 		amazonS3.putObject(putObjectRequest);
