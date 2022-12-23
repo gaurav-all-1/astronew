@@ -677,7 +677,7 @@ public class OrderService {
 					  File file = new File(order.getId()+".pdf");
 					  String invoiceUrl = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
 			     	UserOrder userOrder =	orderRepository.findById(order.getId()).get();
-					userOrder.setPaymentStatus(invoiceUrl);
+					userOrder.setInvoiceURL(invoiceUrl);
 					orderRepository.save(userOrder);
 			      } catch (MessagingException e) {
 				   e.printStackTrace();

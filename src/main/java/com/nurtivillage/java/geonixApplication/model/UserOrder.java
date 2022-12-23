@@ -49,6 +49,28 @@ public class UserOrder {
     private String comment;
     private String paymentStatus;
 
+    private String invoiceURL;
+
+    public String getInvoiceURL() {
+        return invoiceURL;
+    }
+
+    public void setInvoiceURL(String invoiceURL) {
+        this.invoiceURL = invoiceURL;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
