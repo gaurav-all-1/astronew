@@ -49,6 +49,16 @@
 			<version>0.6.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>kernel</artifactId>
+			<version>7.1.14</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>html2pdf</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		<dependency>
 			<groupId>org.passay</groupId>
 			<artifactId>passay</artifactId>
 			<version>1.0</version>

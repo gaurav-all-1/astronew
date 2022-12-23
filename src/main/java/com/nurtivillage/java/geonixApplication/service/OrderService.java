@@ -1,5 +1,9 @@
 package com.nurtivillage.java.geonixApplication.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
+import com.itextpdf.html2pdf.HtmlConverter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +64,8 @@ public class OrderService {
 //	@Autowired
 //	public OrderService orderService;
 
+	@Autowired
+	private AWSS3Service awss3Service;
 	@Autowired
 	public CartService cartService;
 
@@ -660,7 +667,18 @@ public class OrderService {
 				   Transport.send(message);
 
 				   System.out.println("Sent message successfully....");
-
+					  OutputStream fileOutputStream = null;
+					  try {
+						  fileOutputStream = new FileOutputStream(order.getId()+".pdf");
+					  } catch (FileNotFoundException e) {
+						  throw new RuntimeException(e);
+					  }
+					  HtmlConverter.convertToPdf(emailMessage, fileOutputStream);
+					  File file = new File(order.getId()+".pdf");
+					  String invoiceUrl = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+			     	UserOrder userOrder =	orderRepository.findById(order.getId()).get();
+					userOrder.setPaymentStatus(invoiceUrl);
+					orderRepository.save(userOrder);
 			      } catch (MessagingException e) {
 				   e.printStackTrace();
 				   throw new RuntimeException(e);

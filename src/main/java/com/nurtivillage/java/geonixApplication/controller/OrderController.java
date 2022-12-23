@@ -1,12 +1,16 @@
 package com.nurtivillage.java.geonixApplication.controller;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+import com.itextpdf.html2pdf.HtmlConverter;
 
 import com.nurtivillage.java.geonixApplication.RazorPayClientConfig;
 import com.nurtivillage.java.geonixApplication.Request.OrderRequest;
@@ -17,10 +21,7 @@ import com.nurtivillage.java.geonixApplication.model.Payment;
 import com.nurtivillage.java.geonixApplication.model.Status;
 import com.nurtivillage.java.geonixApplication.model.User;
 import com.nurtivillage.java.geonixApplication.model.UserOrder;
-import com.nurtivillage.java.geonixApplication.service.ApiResponseService;
-import com.nurtivillage.java.geonixApplication.service.LoggedInUserService;
-import com.nurtivillage.java.geonixApplication.service.OnlinePaymentService;
-import com.nurtivillage.java.geonixApplication.service.OrderService;
+import com.nurtivillage.java.geonixApplication.service.*;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
@@ -62,7 +63,9 @@ public class OrderController {
         private JavaMailSender mailSender;
         @Autowired
         private UserRepository userRepo;
-        
+
+        @Autowired
+        private AWSS3Service awss3Service;
         @Autowired
         public OrderController(RazorPayClientConfig razorpayClientConfig) throws RazorpayException{
         	this.razorpayClientConfig=razorpayClientConfig;
@@ -344,6 +347,27 @@ public class OrderController {
         	catch(Exception e) {
         		return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         	}
+        }
+
+        @RequestMapping("/downloadinvoice")
+        public String downloadInvoice(HttpServletRequest request,
+                                    HttpServletResponse response)
+        {
+            UserOrder order = new UserOrder();
+            order.setId(2L);
+            OutputStream fileOutputStream = null;
+            try {
+                fileOutputStream = new FileOutputStream("string-output.pdf");
+                HtmlConverter.convertToPdf("<h1>Hello String Content!</h1>", fileOutputStream);
+                File file = new File("string-output.pdf");
+                String url = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+                return url;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+
+            }
+
+
         }
 
 }

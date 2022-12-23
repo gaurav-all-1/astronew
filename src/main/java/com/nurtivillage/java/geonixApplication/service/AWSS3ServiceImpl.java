@@ -9,6 +9,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import com.nurtivillage.java.geonixApplication.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,6 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.nurtivillage.java.geonixApplication.dao.UserRepository;
 import com.nurtivillage.java.geonixApplication.error.GenericException;
-import com.nurtivillage.java.geonixApplication.model.Category;
-import com.nurtivillage.java.geonixApplication.model.Product;
-import com.nurtivillage.java.geonixApplication.model.User;
-import com.nurtivillage.java.geonixApplication.model.UserProfile;
 
 
 @Service
@@ -200,5 +197,14 @@ public class AWSS3ServiceImpl implements AWSS3Service {
         }
 		
 		return null;
+	}
+
+	public URL uploadinvoicetos3(final String bucketName, final File file, UserOrder order){
+		final String fileName = "orders"+"/"+order.getId()+"/"+"/"+file.getName();
+		LOGGER.info("Uploading file with name= " + fileName);
+		final PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file).withCannedAcl(CannedAccessControlList.PublicRead);
+		amazonS3.putObject(putObjectRequest);
+		URL imageUrl = amazonS3.getUrl(bucketName, fileName);
+		return imageUrl;
 	}
 }
