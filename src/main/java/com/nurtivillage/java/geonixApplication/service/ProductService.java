@@ -160,6 +160,7 @@ public class ProductService {
                 variantList.forEach((var)->{
                    Inventory variantInventory = inventoryRepository.findByProductIdAndVariantId(id,var.getId());
                    var.setPrice(variantInventory.getPrice());
+                   var.setMrp(variantInventory.getMrp());
                    var.setQuantity( variantInventory.getQuantity());
                 });
             return productInfo;            
