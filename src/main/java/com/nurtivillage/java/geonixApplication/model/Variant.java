@@ -23,7 +23,13 @@ public class Variant implements Serializable {
 	private int id;
 	private String name;
 	@Transient
-	private int price; 
+	private int price;
+
+	@Transient
+	private int mrp;
+
+
+
 	@Transient
 	private int quantity;
 
@@ -68,6 +74,14 @@ public class Variant implements Serializable {
 	// public void setProducts(List<Product> products) {
 	// 	this.products = products;
 	// }
+
+	public int getMrp() {
+		return mrp;
+	}
+
+	public void setMrp(int mrp) {
+		this.mrp = mrp;
+	}
 
 	@Override
 	public String toString() {
