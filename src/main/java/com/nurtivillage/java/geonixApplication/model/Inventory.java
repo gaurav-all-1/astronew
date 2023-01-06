@@ -37,6 +37,16 @@ public class Inventory {
 
 	private int price;
 
+	private int mrp;
+
+	public int getMrp() {
+		return mrp;
+	}
+
+	public void setMrp(int mrp) {
+		this.mrp = mrp;
+	}
+
 	@OneToOne
 	@JoinColumn(name="variant_id")
 	private Variant variant;

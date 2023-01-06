@@ -120,6 +120,7 @@ public class ProductService {
             Variant variant = product.getVariants().get(0);
             Inventory inventory = inventoryRepository.findByProductIdAndVariantId(product.getId(),variant.getId());
             inventory.setPrice(product.getVariants().get(0).getPrice());
+            inventory.setMrp(product.getVariants().get(0).getMrp());
             inventoryRepository.save(inventory);
 
 //            product.setVariants(savedVariants);
