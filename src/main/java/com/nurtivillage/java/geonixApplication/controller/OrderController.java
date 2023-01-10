@@ -141,7 +141,7 @@ public class OrderController {
     public ResponseEntity<?> getOrder(@PathVariable Long id){
         try{
             UserOrder order = orderService.getOrder(id);
-           
+
 
 //            ApiResponseService res = new ApiResponseService("order detail",true,order);
             return  new ResponseEntity<Object>(order,HttpStatus.OK);
@@ -282,6 +282,19 @@ public class OrderController {
                 return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
+
+    @PutMapping("trackingstatus")
+    public ResponseEntity<ApiResponseService> trackingstatus(@RequestBody StatusRequest statusRequest){
+        try{
+            UserOrder orderCreate = orderService.trackingStatus(statusRequest);
+            ApiResponseService res = new ApiResponseService("orderStatus",true,Arrays.asList(orderCreate));
+            return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
         @GetMapping("/user/list")
         public ResponseEntity<ApiResponseService> userOrderList(){

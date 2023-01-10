@@ -258,6 +258,23 @@ public class OrderService {
 
 	}
 
+
+	public UserOrder trackingStatus(StatusRequest statusRequest) throws Exception {
+		try {
+			UserOrder orderInfo = getOrder(statusRequest.getId());
+
+			String trackingurl = statusRequest.getTrackingUrl();
+			String trackingNo = statusRequest.getTrackingUrl();
+			orderInfo.setTrackingURL(trackingurl);
+			orderInfo.setTrackingNo(trackingNo);
+			UserOrder updatedOrder = orderRepository.save(orderInfo);
+			return updatedOrder;
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
 	private Status getStatus(String status) {
 		return Status.valueOf(status);
 	}
