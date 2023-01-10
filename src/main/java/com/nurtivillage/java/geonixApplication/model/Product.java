@@ -72,6 +72,11 @@ public class Product implements Serializable {
 	private String defaultPrice;
 
 	@Transient
+	private String mrp;
+
+
+
+	@Transient
 	private int rating;
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -204,7 +209,13 @@ public class Product implements Serializable {
 		this.discription = discription;
 	}
 
+	public String getMrp() {
+		return mrp;
+	}
 
+	public void setMrp(String mrp) {
+		this.mrp = mrp;
+	}
 
 
 

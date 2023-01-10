@@ -55,6 +55,7 @@ public class ProductService {
                 if(var.getVariants().size() > 0){
                     Inventory variantInventory = inventoryRepository.findByProductIdAndVariantId(var.getId(),var.getVariants().get(0).getId());
                     var.setDefaultPrice(String.valueOf(variantInventory.getPrice()));
+                    var.setMrp(String.valueOf(variantInventory.getMrp()));
                 }
             });
             return allProduct;
