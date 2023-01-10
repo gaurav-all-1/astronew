@@ -51,6 +51,25 @@ public class UserOrder {
 
     private String invoiceURL;
 
+    private String trackingURL;
+
+    public String getTrackingURL() {
+        return trackingURL;
+    }
+
+    public void setTrackingURL(String trackingURL) {
+        this.trackingURL = trackingURL;
+    }
+
+    public String getTrackingStatus() {
+        return trackingStatus;
+    }
+
+    public void setTrackingStatus(String trackingStatus) {
+        this.trackingStatus = trackingStatus;
+    }
+
+    private String trackingStatus;
     public String getInvoiceURL() {
         return invoiceURL;
     }
