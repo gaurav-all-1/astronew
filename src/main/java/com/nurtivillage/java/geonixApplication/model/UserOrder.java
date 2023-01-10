@@ -53,6 +53,16 @@ public class UserOrder {
 
     private String trackingURL;
 
+    public String getTrackingNo() {
+        return trackingNo;
+    }
+
+    public void setTrackingNo(String trackingNo) {
+        this.trackingNo = trackingNo;
+    }
+
+    private String trackingNo;
+
     public String getTrackingURL() {
         return trackingURL;
     }
