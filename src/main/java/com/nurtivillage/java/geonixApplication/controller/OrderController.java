@@ -137,7 +137,7 @@ public class OrderController {
             }
         }
 
-    @GetMapping("/{id}")
+    @GetMapping("/orderdetail/{id}")
     public ResponseEntity<?> getOrder(@PathVariable Long id){
         try{
             UserOrder order = orderService.getOrder(id);
