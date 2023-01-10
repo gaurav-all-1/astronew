@@ -264,7 +264,7 @@ public class OrderService {
 			UserOrder orderInfo = getOrder(statusRequest.getId());
 
 			String trackingurl = statusRequest.getTrackingUrl();
-			String trackingNo = statusRequest.getTrackingUrl();
+			String trackingNo = statusRequest.getTrackingno();
 			orderInfo.setTrackingURL(trackingurl);
 			orderInfo.setTrackingNo(trackingNo);
 			UserOrder updatedOrder = orderRepository.save(orderInfo);
