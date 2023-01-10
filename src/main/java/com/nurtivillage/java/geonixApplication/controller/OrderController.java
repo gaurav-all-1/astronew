@@ -99,6 +99,8 @@ public class OrderController {
             }
         }
 
+
+
         @PostMapping("/create")
         public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest){
             try{
@@ -133,7 +135,22 @@ public class OrderController {
                 ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList(e));
                 return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } 
+        }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable Long id){
+        try{
+            UserOrder order = orderService.getOrder(id);
+           
+
+//            ApiResponseService res = new ApiResponseService("order detail",true,order);
+            return  new ResponseEntity<Object>(order,HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
         @PostMapping("/product")
         public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest){
             try{
