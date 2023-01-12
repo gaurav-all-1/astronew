@@ -200,7 +200,7 @@ public class ProductService {
             throw e;
         }
     }
- @Cacheable(value="categoryCache",key="#catPage")
+// @Cacheable(value="categoryCache",key="#catPage")
     public Page<Product> getCategoryProducts(int categoryId,Pageable pageable,String catPage)throws Exception{
     	try {
     		 if(!categoryRepository.existsById(categoryId)){
@@ -289,7 +289,7 @@ public class ProductService {
 			throw e;
 		}
 	}
-	@Cacheable(value = "productCache")
+//	@Cacheable(value = "productCache")
     public Map<String, List<?>> getProductListByCategory() {
         List<Category> c = categoryService.getCategories();
         Map<String,List<?>> products = new HashMap<>();
