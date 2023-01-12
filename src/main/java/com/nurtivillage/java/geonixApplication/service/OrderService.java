@@ -120,14 +120,18 @@ public class OrderService {
 			orderDetailsRepository.save(orderItem);
 //			}
 		});
-
-		log.info("Sending Mail To Admin for order received --Start");
-		sendMailToAdminForOrder(order);
+		try {
+			log.info("Sending Mail To Admin for order received --Start");
+			sendMailToAdminForOrder(order);
 //                mailSender.send(mailAdmin);
-		log.info("Sending Mail To Admin for order received --End");
+			log.info("Sending Mail To Admin for order received --End");
 
-		log.info("Sending Mail To buyer for order received --Start");
-		sendMailToBuyerForOrder(order);
+			log.info("Sending Mail To buyer for order received --Start");
+			sendMailToBuyerForOrder(order);
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 		cartService.cartClear();
 	}
 
@@ -172,12 +176,16 @@ public class OrderService {
 //		}
 		orderDetailsRepository.save(orderItem);
 		log.info("Sending Mail To Admin for order received --Start");
-		sendMailToAdminForOrder(order);
+		try {
+			sendMailToAdminForOrder(order);
 //               mailSender.send(mail);
-		log.info("Sending Mail To Admin for order received --End");
+			log.info("Sending Mail To Admin for order received --End");
 
-		log.info("Sending Mail To buyer for order received --Start");
-		sendMailToBuyerForOrder(order);
+			log.info("Sending Mail To buyer for order received --Start");
+			sendMailToBuyerForOrder(order);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 
 //		return orderItem;
 	}
@@ -205,12 +213,17 @@ public class OrderService {
 
 	public void sendEmailsforOrders(UserOrder order){
 				log.info("Sending Mail To Admin for order received --Start");
-		sendMailToAdminForOrder(order);
+				try {
+					sendMailToAdminForOrder(order);
 //               mailSender.send(mail);
-		log.info("Sending Mail To Admin for order received --End");
+					log.info("Sending Mail To Admin for order received --End");
 
-		log.info("Sending Mail To buyer for order received --Start");
-		sendMailToBuyerForOrder(order);
+					log.info("Sending Mail To buyer for order received --Start");
+					sendMailToBuyerForOrder(order);
+				}catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 	}
 
 	public OrderDetails getOrderDetail(Long id) throws Exception {

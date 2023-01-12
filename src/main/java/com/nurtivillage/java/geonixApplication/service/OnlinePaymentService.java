@@ -90,12 +90,17 @@ public class OnlinePaymentService {
 	        	
 	        	paymentRepo.save(payment);
 				log.info("Sending Mail To Admin for order received --Start");
-				orderService.sendMailToAdminForOrder(userOrder);
+				try {
+					orderService.sendMailToAdminForOrder(userOrder);
 //               mailSender.send(mail);
-				log.info("Sending Mail To Admin for order received --End");
+					log.info("Sending Mail To Admin for order received --End");
 
-				log.info("Sending Mail To buyer for order received --Start");
-				orderService.sendMailToBuyerForOrder(userOrder);
+					log.info("Sending Mail To buyer for order received --Start");
+					orderService.sendMailToBuyerForOrder(userOrder);
+				}catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 	        }
 	        else {
 	        	error="Payment validation failed..Signature Doesn't match.";
