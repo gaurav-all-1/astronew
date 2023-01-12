@@ -43,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 
 @RestController
@@ -398,6 +399,26 @@ public class OrderController {
             }
 
 
+
         }
 
+
+
+    @GetMapping("/send")
+    public String sendemail() {
+        Map<String,Object> emailMap = new HashMap<>();
+        emailMap.put("service_id","service_8zp4yhp");
+        emailMap.put("template_id","template_j9f3f2c");
+        emailMap.put("user_id","user_mTjMBBP092bpZsnZTyLfp");
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("emailcontent","Hi");
+        map.put("to_email","anuragpundir631@gmail.com");
+
+        emailMap.put("template_params",map);
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity result = template.postForEntity("https://api.emailjs.com/api/v1.0/email/send",emailMap,Map.class);
+        return result.getStatusCode().toString();
+    }
 }

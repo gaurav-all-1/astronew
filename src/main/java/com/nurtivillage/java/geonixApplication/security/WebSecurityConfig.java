@@ -78,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers(HttpMethod.GET,"/validateOtp").permitAll()
         .antMatchers("/product/deleteimage/**").permitAll()
         .antMatchers("/badUser").permitAll()
+				.antMatchers("/order/send").permitAll()
         
         .anyRequest().authenticated()
         .and().
