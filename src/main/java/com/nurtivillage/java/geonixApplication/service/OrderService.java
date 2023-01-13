@@ -519,9 +519,9 @@ public class OrderService {
 			   
 
 			      // Sender's email ID needs to be mentioned
-			String from = "shopppingeonix@gmail.com";
-			final String username = "shopppingeonix@gmail.com";//change accordingly
-			final String password = "deienvdtzplbgbkb";//change accordingly
+			String from = "geonixshopping@gmail.com";
+			final String username = "geonixshopping@gmail.com";//change accordingly
+			final String password = "wkswuopoippgifks";//change accordingly
 
 			      // Assuming you are sending email through relay.jangosmtp.net
 			      String host = "smtp.gmail.com";
@@ -664,9 +664,9 @@ public class OrderService {
 			   
 
 			      // Sender's email ID needs to be mentioned
-			String from = "shopppingeonix@gmail.com";
-			final String username = "shopppingeonix@gmail.com";//change accordingly
-			final String password = "deienvdtzplbgbkb";//change accordingly
+			String from = "geonixshopping@gmail.com";
+			final String username = "geonixshopping@gmail.com";//change accordingly
+			final String password = "wkswuopoippgifks";//change accordingly
 
 			      // Assuming you are sending email through relay.jangosmtp.net
 			      String host = "smtp.gmail.com";
@@ -786,9 +786,9 @@ public class OrderService {
 		      String to = "anuragpundir631@gmail.com";
 
 		      // Sender's email ID needs to be mentioned
-		      String from = "shopppingeonix@gmail.com";
-		      final String username = "shopppingeonix@gmail.com";//change accordingly
-		      final String password = "deienvdtzplbgbkb";//change accordingly
+		      String from = "geonixshopping@gmail.com";
+		      final String username = "geonixshopping@gmail.com";//change accordingly
+		      final String password = "wkswuopoippgifks";//change accordingly
 
 		      // Assuming you are sending email through relay.jangosmtp.net
 		      String host = "smtp.gmail.com";
