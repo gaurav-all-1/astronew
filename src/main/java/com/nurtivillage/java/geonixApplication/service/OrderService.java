@@ -94,6 +94,17 @@ public class OrderService {
 		return userOrder;
 	}
 
+	public List<UserOrder> getAllUserOrder(User user) {
+		List<UserOrder> userOrder = orderRepository.findByUser(user);
+		List<UserOrder> orders = new ArrayList<>();
+//		for(UserOrder u : userOrder){
+//			if(u.getStatus()!=Status.canceled){
+//
+//			}
+//		}
+		return userOrder;
+	}
+
 	public UserOrder createOrder(UserOrder order) {
 		UserOrder orderCreate = orderRepository.save(order);
 		return orderCreate;

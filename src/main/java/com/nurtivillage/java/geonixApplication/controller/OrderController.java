@@ -77,7 +77,8 @@ public class OrderController {
         @GetMapping("/list")
         public ResponseEntity<ApiResponseService> allOrder(){
             try{
-                List<UserOrder> orderList = orderService.getAllOrder();
+                User user = userService.userDetails();
+                List<UserOrder> orderList = orderService.getAllUserOrder(user);
                 ApiResponseService res = new ApiResponseService("order List",true,orderList);
                 return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
             }catch(Exception e){
