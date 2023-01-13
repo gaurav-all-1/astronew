@@ -240,6 +240,7 @@ public class OrderController {
                
                Map<String,String> guestInfo=orderService.guestInfo(user);
                 if(!orderRequest.getPaymentMethod().equals("COD")){
+                    orderService.createSingleOrderDetailsForRzp(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
                     Order orderRes = onlinePaymentService.createOrderOnRazorpay(orderCreate,this.razorpayClient);
                     onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
                     ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")),guestInfo);
