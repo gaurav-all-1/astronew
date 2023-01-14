@@ -519,9 +519,9 @@ public class OrderService {
 			   
 
 			      // Sender's email ID needs to be mentioned
-			String from = "geonixshopping@gmail.com";
-			final String username = "geonixshopping@gmail.com";//change accordingly
-			final String password = "wkswuopoippgifks";//change accordingly
+			String from = "shop.geonix@gmail.com";
+			final String username = "shop.geonix@gmail.com";//change accordingly
+			final String password = "rbdskxjivtlwnzzk";//change accordingly
 
 			      // Assuming you are sending email through relay.jangosmtp.net
 			      String host = "smtp.gmail.com";
@@ -549,7 +549,7 @@ public class OrderService {
 
 				   // Set To: header field of the header.
 				   message.setRecipients(Message.RecipientType.TO,
-			              InternetAddress.parse("geonixshopping@gmail.com"));
+			              InternetAddress.parse("geonixshopping@gmail.com,praveen@geonix.in"));
 
 				   // Set Subject: header field
 				   message.setSubject("Order Recieved");
@@ -664,9 +664,9 @@ public class OrderService {
 			   
 
 			      // Sender's email ID needs to be mentioned
-			String from = "geonixshopping@gmail.com";
-			final String username = "geonixshopping@gmail.com";//change accordingly
-			final String password = "wkswuopoippgifks";//change accordingly
+			String from = "shop.geonix@gmail.com";
+			final String username = "shop.geonix@gmail.com";//change accordingly
+			final String password = "rbdskxjivtlwnzzk";//change accordingly
 
 			      // Assuming you are sending email through relay.jangosmtp.net
 			      String host = "smtp.gmail.com";
@@ -783,12 +783,12 @@ public class OrderService {
 	}
 		public static void main(String[] args) {
 		      // Recipient's email ID needs to be mentioned.
-		      String to = "anuragpundir631@gmail.com";
+		      String to = "anuragpundir631@gmail.com,geonixshopping@gmail.com";
 
 		      // Sender's email ID needs to be mentioned
-		      String from = "geonixshopping@gmail.com";
-		      final String username = "geonixshopping@gmail.com";//change accordingly
-		      final String password = "wkswuopoippgifks";//change accordingly
+		      String from = "shop.geonix@gmail.com";
+		      final String username = "shop.geonix@gmail.com";//change accordingly
+		      final String password = "rbdskxjivtlwnzzk";//change accordingly
 
 		      // Assuming you are sending email through relay.jangosmtp.net
 		      String host = "smtp.gmail.com";
