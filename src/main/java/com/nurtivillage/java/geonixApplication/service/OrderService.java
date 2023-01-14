@@ -94,6 +94,11 @@ public class OrderService {
 		return userOrder;
 	}
 
+	public List<UserOrder> getAllOrders() {
+		List<UserOrder> userOrder = orderRepository.findAll();
+		return userOrder;
+	}
+
 	public List<UserOrder> getAllUserOrder(User user) {
 		List<UserOrder> userOrder = orderRepository.findByUser(user);
 		List<UserOrder> orders = new ArrayList<>();

@@ -88,6 +88,20 @@ public class OrderController {
             }
         }
 
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponseService> allOrders(){
+        try{
+
+            List<UserOrder> orderList = orderService.getAllOrders();
+            ApiResponseService res = new ApiResponseService("order List",true,orderList);
+            return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
         @GetMapping("/cancel")
         public ResponseEntity<ApiResponseService> cancelOrder(){
             try{
