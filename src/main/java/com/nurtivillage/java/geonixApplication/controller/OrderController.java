@@ -92,7 +92,7 @@ public class OrderController {
     public ResponseEntity<ApiResponseService> allOrders(){
         try{
 
-            List<UserOrder> orderList = orderService.getAllOrders();
+            List<UserOrder> orderList = orderService.getAllOrder();
             ApiResponseService res = new ApiResponseService("order List",true,orderList);
             return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
         }catch(Exception e){
