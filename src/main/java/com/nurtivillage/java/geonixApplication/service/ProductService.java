@@ -170,6 +170,32 @@ public class ProductService {
         }
     }
 
+
+    public Optional<Product> ProductInfoByName(String name) throws Exception {
+        try {
+//            if(!productRepository.find(id)){
+//                throw new ExceptionService("product is not exists");
+//            }
+            Optional<Product> productInfo = productRepository.findByName(name);
+            if(!productInfo.isPresent()){
+                throw new ExceptionService("product is not exists");
+            }
+            if(productInfo.get().getDeletedAt() != null){
+                throw new ExceptionService("product is deleted");
+            }
+            List<Variant> variantList = productInfo.get().getVariants();
+            variantList.forEach((var)->{
+                Inventory variantInventory = inventoryRepository.findByProductIdAndVariantId(productInfo.get().getId(),var.getId());
+                var.setPrice(variantInventory.getPrice());
+                var.setMrp(variantInventory.getMrp());
+                var.setQuantity( variantInventory.getQuantity());
+            });
+            return productInfo;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public List<Product> highlighterProduct() {
         List<Product> productList = productRepository.findByStatusAndDeletedAtIsNull(1);
         return productList;

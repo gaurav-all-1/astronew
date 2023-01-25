@@ -1,6 +1,7 @@
 package com.nurtivillage.java.geonixApplication.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.nurtivillage.java.geonixApplication.model.Category;
 import com.nurtivillage.java.geonixApplication.model.Product;
@@ -30,4 +31,6 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
     Product findByProductImage(ProductImage productImage);
     Page<Product> findByVariantsAndDeletedAtIsNull(Variant variantId, Pageable firstPage);
     List<Product> findBynameContainsAndDeletedAtIsNull(String str);
+
+    Optional<Product> findByName(String name);
 }
