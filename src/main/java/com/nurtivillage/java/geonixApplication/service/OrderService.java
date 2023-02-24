@@ -497,12 +497,13 @@ public class OrderService {
 					
 				
 				for(OrderDetails detail : orderDetails) {
+					int price = detail.getQuantity()* detail.getPrice();
 					emailMessage += ""
 							+ "<tr style=\"height: 18px;\">\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNo()+"</td>\r\n"
-							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getPrice()+"</td>\r\n"
+							+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
 							+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
 							+ "</tr>\r\n";
@@ -642,12 +643,13 @@ public class OrderService {
 					
 				
 				for(OrderDetails detail : orderDetails) {
+					int price = detail.getQuantity()* detail.getPrice();
 					emailMessage += ""
 							+ "<tr style=\"height: 18px;\">\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNo()+"</td>\r\n"
-							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getPrice()+"</td>\r\n"
+							+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
 							+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
 							+ "</tr>\r\n";
