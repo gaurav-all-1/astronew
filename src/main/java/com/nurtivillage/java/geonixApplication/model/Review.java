@@ -43,6 +43,16 @@ public class Review {
 	private String comment;
 	private String rating;
 
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Review() {
 
 	}

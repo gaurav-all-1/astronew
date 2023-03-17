@@ -4,12 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.mail.Message;
@@ -272,6 +267,18 @@ public class OrderService {
 		}
 	}
 
+	public List<UserOrder> getOrders(Map<String, Date> searchParams) throws Exception {
+		try {
+			List<UserOrder> orders = orderRepository.getAllBetweenDates(searchParams.get("fromDate"),searchParams.get("toDate"));
+			if (orders.size()>0) {
+				return orders;
+			}
+			throw new Exception("User order empty");
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
 	public UserOrder orderStatus(StatusRequest statusRequest) throws Exception {
 		try {
 			UserOrder orderInfo = getOrder(statusRequest.getId());
@@ -497,12 +504,13 @@ public class OrderService {
 					
 				
 				for(OrderDetails detail : orderDetails) {
+					int price = detail.getQuantity()* detail.getPrice();
 					emailMessage += ""
 							+ "<tr style=\"height: 18px;\">\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNo()+"</td>\r\n"
-							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getPrice()+"</td>\r\n"
+							+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
 							+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
 							+ "</tr>\r\n";
@@ -642,12 +650,13 @@ public class OrderService {
 					
 				
 				for(OrderDetails detail : orderDetails) {
+					int price = detail.getQuantity()* detail.getPrice();
 					emailMessage += ""
 							+ "<tr style=\"height: 18px;\">\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNo()+"</td>\r\n"
-							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getPrice()+"</td>\r\n"
+							+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
 							+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
 							+ "</tr>\r\n";

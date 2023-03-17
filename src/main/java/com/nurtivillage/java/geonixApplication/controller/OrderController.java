@@ -1,11 +1,7 @@
 package com.nurtivillage.java.geonixApplication.controller;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -396,6 +392,18 @@ public class OrderController {
         	}
         }
 
+    @PostMapping("/getRange")
+    public ResponseEntity<?> getUserOrderByRange(@RequestBody Map<String, Date> rangeMap){
+       try{
+            List<UserOrder> order=orderService.getOrders(rangeMap);
+
+            return new ResponseEntity<>(order,HttpStatus.OK);
+        }
+        catch(Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
         @RequestMapping("/downloadinvoice")
         public String downloadInvoice(HttpServletRequest request,
                                     HttpServletResponse response)
@@ -413,10 +421,9 @@ public class OrderController {
                 throw new RuntimeException(e);
 
             }
-
-
-
         }
+
+
 
 
 
