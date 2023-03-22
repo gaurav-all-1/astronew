@@ -509,7 +509,7 @@ public class OrderService {
 							+ "<tr style=\"height: 18px;\">\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
-							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNo()+"</td>\r\n"
+							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNumber()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
 							+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
@@ -521,13 +521,13 @@ public class OrderService {
 					
 				
 			final String message1 = "************ ORDER PLACED ************ \r\n \r\n Thank you for"
-					+ " ordering from Geonix. \r\n Your order "+order.getOrderNo()+" has been placed.\r\n"
+					+ " ordering from Geonix. \r\n Your order "+order.getOrderNumber()+" has been placed.\r\n"
 							+ " # SHIPPING DETAILS # \r\n" + "Name : "
 					+ address.getName() + "\r\n Country : " + address.getCountry() + "\r\n Street : "
 					+ address.getStreet() + "\r\n State : " + address.getState() + "\r\n City : " + address.getCity()
 					+ "\r\n Pincode : " + address.getPincode() + "\r\n Mobile : " + address.getMobile()
 					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
-					+ "\r\n Order ID : " + order.getOrderNo() + "\r\n Order Amount : " + order.getAmount()
+					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
 					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
 			   
 
@@ -655,7 +655,7 @@ public class OrderService {
 							+ "<tr style=\"height: 18px;\">\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
-							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNo()+"</td>\r\n"
+							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNumber()+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
 							+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
 							+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
@@ -667,13 +667,13 @@ public class OrderService {
 					
 				
 			final String message1 = "************ ORDER PLACED ************ \r\n \r\n Thank you for"
-					+ " ordering from Geonix. \r\n Your order "+order.getOrderNo()+" has been placed.\r\n"
+					+ " ordering from Geonix. \r\n Your order "+order.getOrderNumber()+" has been placed.\r\n"
 							+ " # SHIPPING DETAILS # \r\n" + "Name : "
 					+ address.getName() + "\r\n Country : " + address.getCountry() + "\r\n Street : "
 					+ address.getStreet() + "\r\n State : " + address.getState() + "\r\n City : " + address.getCity()
 					+ "\r\n Pincode : " + address.getPincode() + "\r\n Mobile : " + address.getMobile()
 					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
-					+ "\r\n Order ID : " + order.getOrderNo() + "\r\n Order Amount : " + order.getAmount()
+					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
 					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
 			   
 
