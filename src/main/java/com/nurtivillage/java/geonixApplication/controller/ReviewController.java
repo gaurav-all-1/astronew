@@ -46,13 +46,16 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/testsms/{id}")
-    public void testsms(@PathVariable Long id){
+    @GetMapping("/testsms")
+    public String testsms(@PathVariable Long id){
+        String s = "sent";
         try {
             smsService.sendSms(123,"9953700301");
         } catch (Exception e) {
+            s=e.getMessage();
 //            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return s;
     }
 
     @RequestMapping("/addReview")
