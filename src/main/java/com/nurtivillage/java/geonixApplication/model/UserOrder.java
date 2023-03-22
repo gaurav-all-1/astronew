@@ -1,5 +1,6 @@
 package com.nurtivillage.java.geonixApplication.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -37,6 +38,12 @@ public class UserOrder {
 
     @Column(nullable = false)
     private Long orderNo;
+
+    @Column(nullable = false)
+    private String orderNumber;
+
+
+
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(nullable = false)
@@ -114,8 +121,11 @@ public class UserOrder {
         this.amount = amount;
         long leftLimit = 1L;
         long rightLimit = 10000L;
+        LocalDate currentdate = LocalDate.now();
         long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+        String s = currentdate.getMonth().toString()+currentdate.getDayOfMonth()+currentdate.getYear()+'/'+generatedLong;
         this.orderNo = generatedLong;
+        this.orderNumber = s;
         this.user = user;
         this.itemNO = itemNO;
         this.status = status;
@@ -199,6 +209,29 @@ public class UserOrder {
 
     public Date getCreatedAt(){
         return createdAt;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+    public static void main(String[] args) {
+        long leftLimit = 1L;
+        long rightLimit = 10000L;
+
+
+        long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+        LocalDate currentdate = LocalDate.now();
+        String s = currentdate.getMonth().toString()+currentdate.getDayOfMonth()+currentdate.getYear()+'/'+generatedLong;
+        System.out.println(currentdate.getDayOfMonth());
+        System.out.println(currentdate.getYear());
+
+        System.out.println(s);
+
+
     }
 }
 
