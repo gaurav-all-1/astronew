@@ -53,6 +53,7 @@ public class ReviewController {
             smsService.sendSms(123,"9953700301");
         } catch (Exception e) {
             s=e.getMessage();
+            e.printStackTrace();
 //            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return s;
