@@ -47,7 +47,7 @@ public class ReviewController {
     }
 
     @GetMapping("/testsms")
-    public String testsms(@PathVariable Long id){
+    public String testsms(){
         String s = "sent";
         try {
             smsService.sendSms(123,"9953700301");
