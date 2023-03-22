@@ -30,10 +30,10 @@ public class SMSService {
 
     public void sendSms(int otp,String phonenumber)
     {
-        Twilio.init("AC3e5e994d15adc30371436da827cbfa05", "eaade5f91ecf8877d99af844c8bce1aa");
+        Twilio.init("AC9952354b327bd57ae537e9886c303820", "e6b9735d14e3664a6c64f8bc3f468425");
         Message message = Message.creator(
                         new PhoneNumber("+91"+phonenumber),
-                        new PhoneNumber("+16814994469"),
+                        new PhoneNumber("+15155828562"),
                         "Otp is "+otp)
                 .create();
     }
@@ -56,6 +56,11 @@ public class SMSService {
     //This method is used to clear the OTP catched already
     public void clearOTP(String key) {
         otpCache.invalidate(key);
+    }
+
+    public static void main(String[] args) {
+        SMSService service = new SMSService();
+        service.sendSms(123,"9953700301");
     }
 
 }
