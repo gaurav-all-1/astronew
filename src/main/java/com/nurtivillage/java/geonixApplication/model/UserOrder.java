@@ -123,7 +123,7 @@ public class UserOrder {
         long rightLimit = 10000L;
         LocalDate currentdate = LocalDate.now();
         long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
-        String s = currentdate.getMonth().toString()+currentdate.getDayOfMonth()+currentdate.getYear()+'/'+generatedLong;
+        String s = currentdate.getMonth().toString().substring(0,3)+currentdate.getDayOfMonth()+currentdate.getYear()+'/'+generatedLong;
         this.orderNo = generatedLong;
         this.orderNumber = s;
         this.user = user;
