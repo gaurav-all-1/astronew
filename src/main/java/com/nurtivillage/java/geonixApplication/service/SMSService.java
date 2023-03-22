@@ -28,13 +28,13 @@ public class SMSService {
                 });
     }
 
-    public void sendSms(int otp,String phonenumber)
+    public void sendSms(String orderId,String phonenumber)
     {
         Twilio.init("AC9952354b327bd57ae537e9886c303820", "1f47a1c96dbd90caceccda369addab6b");
         Message message = Message.creator(
                         new PhoneNumber("+91"+phonenumber),
                         new PhoneNumber("+15155828562"),
-                        "Otp is "+otp)
+                        "Thank you for your order! Your purchase has been confirmed. Your order id is ="+orderId+"."+'\n'+"If you have any concerns please reach out to Geonix customer support at https://geonix.in")
                 .create();
     }
 
@@ -56,11 +56,6 @@ public class SMSService {
     //This method is used to clear the OTP catched already
     public void clearOTP(String key) {
         otpCache.invalidate(key);
-    }
-
-    public static void main(String[] args) {
-        SMSService service = new SMSService();
-        service.sendSms(123,"9953700301");
     }
 
 }
