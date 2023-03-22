@@ -19,7 +19,7 @@ public class EmailService {
 	
 	public void sendOtpMessage(int otp, String number) throws MessagingException {
 	
-		smsService.sendSms(otp,number);
+		smsService.sendSms("otp",number);
    }
 	
 }
