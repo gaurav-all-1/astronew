@@ -852,6 +852,102 @@ public class OrderService {
 		   }
 
 
+	public void downloadfileobject(UserOrder order) {
+		try {
+			ShippingAddress address = order.getShippingAddress();
+
+			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
+			final String subject = "Order placed";
+			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+					+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
+					+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
+					+ "<tbody>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Name</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getName()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Country</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getCountry()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Street</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getStreet()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">State</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getState()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">City</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getCity()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Pincode</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getPincode()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Mobile</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getMobile()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "<tr>\r\n"
+					+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Email</span></td>\r\n"
+					+ "<td style=\"width: 49.375%;\">"+address.getEmail()+"</td>\r\n"
+					+ "</tr>\r\n"
+					+ "</tbody>\r\n"
+					+ "</table>\r\n"
+					+ "<p>Order Details</p>\r\n"
+					+ "<table style=\"border-collapse: collapse; width: 100%; height: 36px;\" border=\"1\">\r\n"
+					+ "<tbody>\r\n"
+					+ "<tr style=\"height: 18px;\">\r\n"
+					+ "<td style=\"width: 16.0993%; height: 18px;\"><span style=\"font-size: 10pt;\">Product Name</span></td>\r\n"
+					+ "<td style=\"width: 16.0993%; height: 18px;\"><span style=\"font-size: 10pt;\">Quantity</span></td>\r\n"
+					+ "<td style=\"width: 16.0993%; height: 18px;\"><span style=\"font-size: 10pt;\">OrderId</span></td>\r\n"
+					+ "<td style=\"width: 16.0993%; height: 18px;\"><span style=\"font-size: 10pt;\">Order Amount</span></td>\r\n"
+					+ "<td style=\"width: 16.0993%; height: 18px;\"><span style=\"font-size: 10pt;\">Order Status</span></td>\r\n"
+					+ "<td style=\"width: 16.1105%; height: 18px;\"><span style=\"font-size: 10pt;\">Payment Method</span></td>\r\n"
+					+ "</tr>\r\n";
+
+
+			for(OrderDetails detail : orderDetails) {
+				int price = detail.getQuantity()* detail.getPrice();
+				emailMessage += ""
+						+ "<tr style=\"height: 18px;\">\r\n"
+						+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getProduct().getName()+"</td>\r\n"
+						+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getQuantity()+"</td>\r\n"
+						+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getOrderNumber()+"</td>\r\n"
+						+ "<td style=\"width: 16.0993%; height: 18px;\">"+price+"</td>\r\n"
+						+ "<td style=\"width: 16.0993%; height: 18px;\">"+detail.getUesrOrder().getStatus()+"</td>\r\n"
+						+ "<td style=\"width: 16.1105%; height: 18px;\">"+detail.getUesrOrder().getPaymentMethod()+"</td>\r\n"
+						+ "</tr>\r\n";
+
+			}
+			emailMessage +=  "</tbody>\r\n"
+					+ "</table>";
+
+
+
+
+
+				OutputStream fileOutputStream = null;
+				try {
+					fileOutputStream = new FileOutputStream(order.getId()+".pdf");
+				} catch (FileNotFoundException e) {
+					throw new RuntimeException(e);
+				}
+				HtmlConverter.convertToPdf(emailMessage, fileOutputStream);
+				File file = new File(order.getId()+".pdf");
+				String invoiceUrl = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+				UserOrder userOrder =	orderRepository.findById(order.getId()).get();
+				userOrder.setInvoiceURL(invoiceUrl);
+				orderRepository.save(userOrder);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+	}
+
+
 	
 
 }

@@ -163,6 +163,21 @@ public class OrderController {
             return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/generateinvoice/{id}")
+    public ResponseEntity<?> generateinvoice(@PathVariable Long id){
+        try{
+            UserOrder order = orderService.getOrder(id);
+            orderService.downloadfileobject(order);
+
+//            ApiResponseService res = new ApiResponseService("order detail",true,order);
+            return  new ResponseEntity<Object>("generated",HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
         @PostMapping("/product")
         public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest){
             try{
