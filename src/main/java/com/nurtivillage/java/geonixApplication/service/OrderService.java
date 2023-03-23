@@ -579,12 +579,12 @@ public class OrderService {
 
 			      } catch (MessagingException e) {
 				   e.printStackTrace();
-				   throw new RuntimeException(e);
+//				   throw new RuntimeException(e);
 			      }
 			
 		} catch (Exception e) {
 			log.error("Error occured while sending mail to admin for order: " + e.getMessage());
-			throw e;
+//			throw e;
 		}
 
 	}
@@ -675,8 +675,8 @@ public class OrderService {
 					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
 					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
 					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
-			   
 
+			try {
 			      // Sender's email ID needs to be mentioned
 			String from = "shop.geonix@gmail.com";
 			final String username = "shop.geonix@gmail.com";//change accordingly
@@ -699,7 +699,7 @@ public class OrderService {
 			            }
 				});
 
-			      try {
+
 			            // Create a default MimeMessage object.
 			            Message message = new MimeMessage(session);
 
@@ -722,6 +722,9 @@ public class OrderService {
 				   Transport.send(message);
 
 				   System.out.println("Sent message successfully....");
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 					  OutputStream fileOutputStream = null;
 					  try {
 						  fileOutputStream = new FileOutputStream(order.getId()+".pdf");
@@ -734,14 +737,12 @@ public class OrderService {
 			     	UserOrder userOrder =	orderRepository.findById(order.getId()).get();
 					userOrder.setInvoiceURL(invoiceUrl);
 					orderRepository.save(userOrder);
-			      } catch (MessagingException e) {
-				   e.printStackTrace();
-				   throw new RuntimeException(e);
-			      }
+
 			
 		} catch (Exception e) {
 			log.error("Error occured while sending mail to admin for order: " + e.getMessage());
-			throw e;
+//			throw e;
+			e.printStackTrace();
 		}
 	}
 
