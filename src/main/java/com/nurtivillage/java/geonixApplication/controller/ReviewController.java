@@ -50,7 +50,7 @@ public class ReviewController {
     public String testsms(){
         String s = "sent";
         try {
-            smsService.sendSms("MAR03222023/3331","9953700301");
+            smsService.sendSms("MAR03222023/3331","9873567279");
         } catch (Exception e) {
             s=e.getMessage();
             e.printStackTrace();
