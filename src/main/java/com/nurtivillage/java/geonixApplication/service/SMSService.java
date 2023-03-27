@@ -30,12 +30,17 @@ public class SMSService {
 
     public void sendSms(String orderId,String phonenumber)
     {
-        Twilio.init("AC9952354b327bd57ae537e9886c303820", "1f47a1c96dbd90caceccda369addab6b");
-        Message message = Message.creator(
-                        new PhoneNumber("+91"+phonenumber),
-                        new PhoneNumber("+15155828562"),
-                        "Thank you for your order! Your purchase has been confirmed. Your order id is ="+orderId+"."+'\n'+"If you have any concerns please reach out to Geonix customer support at https://geonix.in")
-                .create();
+        try {
+            Twilio.init("AC9952354b327bd57ae537e9886c303820", "1f47a1c96dbd90caceccda369addab6b");
+            Message message = Message.creator(
+                            new PhoneNumber("+91" + phonenumber),
+                            new PhoneNumber("+15155828562"),
+                            "Thank you for your order! Your purchase has been confirmed. Your order id is =" + orderId + "." + '\n' + "If you have any concerns please reach out to Geonix customer support at https://geonix.in")
+                    .create();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public int generateOTP(String key) {
@@ -57,5 +62,7 @@ public class SMSService {
     public void clearOTP(String key) {
         otpCache.invalidate(key);
     }
+
+
 
 }

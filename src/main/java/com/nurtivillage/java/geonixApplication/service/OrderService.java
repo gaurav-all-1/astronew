@@ -84,6 +84,9 @@ public class OrderService {
 
 	double totalAmount = 0;
 
+	@Autowired
+	private SMSService smsService;
+
 	public List<UserOrder> getAllOrder() {
 		List<UserOrder> userOrder = orderRepository.findByStatusNotOrderByCreatedAtAsc(Status.canceled);
 		return userOrder;
@@ -581,6 +584,7 @@ public class OrderService {
 				   e.printStackTrace();
 //				   throw new RuntimeException(e);
 			      }
+
 			
 		} catch (Exception e) {
 			log.error("Error occured while sending mail to admin for order: " + e.getMessage());
@@ -725,6 +729,7 @@ public class OrderService {
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
+			smsService.sendSms(order.getOrderNumber(),order.getShippingAddress().getMobile());
 					  OutputStream fileOutputStream = null;
 					  try {
 						  fileOutputStream = new FileOutputStream(order.getId()+".pdf");
