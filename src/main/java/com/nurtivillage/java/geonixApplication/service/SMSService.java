@@ -31,7 +31,7 @@ public class SMSService {
     public void sendSms(String orderId,String phonenumber)
     {
         try {
-            Twilio.init("AC9952354b327bd57ae537e9886c303820", "1f47a1c96dbd90caceccda369addab6b");
+            Twilio.init("AC9952354b327bd57ae537e9886c303820", "aff4cb476a3f5457883bad5c6b23661e");
             Message message = Message.creator(
                             new PhoneNumber("+91" + phonenumber),
                             new PhoneNumber("+15155828562"),
