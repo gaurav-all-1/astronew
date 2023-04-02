@@ -1,9 +1,6 @@
 package com.nurtivillage.java.geonixApplication.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -532,15 +529,15 @@ public class OrderService {
 					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
 					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
 					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
-			   
 
-			      // Sender's email ID needs to be mentioned
-			String from = "shop.geonix@gmail.com";
-			final String username = "shop.geonix@gmail.com";//change accordingly
-			final String password = "rbdskxjivtlwnzzk";//change accordingly
 
-			      // Assuming you are sending email through relay.jangosmtp.net
-			      String host = "smtp.gmail.com";
+			// Sender's email ID needs to be mentioned
+			String from = "geonixshopping@gmail.com";
+			final String username = "AKIAR6ST375ZKWOPNZDF";//change accordingly
+			final String password = "BA3G+RZjBmmDBh4i8QRDqu+rIiqFnOBLbQBgu9vly9SZ";//change accordingly
+
+			// Assuming you are sending email through relay.jangosmtp.net
+			String host = "email-smtp.us-east-2.amazonaws.com";
 
 			      Properties props = new Properties();
 			      props.put("mail.smtp.auth", "true");
@@ -681,13 +678,13 @@ public class OrderService {
 					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
 
 			try {
-			      // Sender's email ID needs to be mentioned
-			String from = "shop.geonix@gmail.com";
-			final String username = "shop.geonix@gmail.com";//change accordingly
-			final String password = "rbdskxjivtlwnzzk";//change accordingly
+				// Sender's email ID needs to be mentioned
+				String from = "geonixshopping@gmail.com";
+				final String username = "AKIAR6ST375ZKWOPNZDF";//change accordingly
+				final String password = "BA3G+RZjBmmDBh4i8QRDqu+rIiqFnOBLbQBgu9vly9SZ";//change accordingly
 
-			      // Assuming you are sending email through relay.jangosmtp.net
-			      String host = "smtp.gmail.com";
+				// Assuming you are sending email through relay.jangosmtp.net
+				String host = "email-smtp.us-east-2.amazonaws.com";
 
 			      Properties props = new Properties();
 			      props.put("mail.smtp.auth", "true");
@@ -803,15 +800,15 @@ public class OrderService {
 	}
 		public static void main(String[] args) {
 		      // Recipient's email ID needs to be mentioned.
-		      String to = "anuragpundir631@gmail.com,geonixshopping@gmail.com";
+		      String to = "anuragpundir641@gmail.com";
 
 		      // Sender's email ID needs to be mentioned
-		      String from = "shop.geonix@gmail.com";
-		      final String username = "shop.geonix@gmail.com";//change accordingly
-		      final String password = "rbdskxjivtlwnzzk";//change accordingly
+		      String from = "geonixshopping@gmail.com";
+		      final String username = "AKIAR6ST375ZKWOPNZDF";//change accordingly
+		      final String password = "BA3G+RZjBmmDBh4i8QRDqu+rIiqFnOBLbQBgu9vly9SZ";//change accordingly
 
 		      // Assuming you are sending email through relay.jangosmtp.net
-		      String host = "smtp.gmail.com";
+		      String host = "email-smtp.us-east-2.amazonaws.com";
 
 		      Properties props = new Properties();
 		      props.put("mail.smtp.auth", "true");
@@ -855,7 +852,7 @@ public class OrderService {
 			   e.printStackTrace();
 			   throw new RuntimeException(e);
 		      }
-		   }
+		}
 
 
 	public void downloadfileobject(UserOrder order) {
