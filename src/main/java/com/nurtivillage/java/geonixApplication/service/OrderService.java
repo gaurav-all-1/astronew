@@ -222,20 +222,20 @@ public class OrderService {
 //		return orderItem;
 	}
 
-	public void sendEmailsforOrders(UserOrder order){
-				log.info("Sending Mail To Admin for order received --Start");
-				try {
-					sendMailToAdminForOrder(order);
-//               mailSender.send(mail);
-					log.info("Sending Mail To Admin for order received --End");
-
-					log.info("Sending Mail To buyer for order received --Start");
-					sendMailToBuyerForOrder(order);
-				}catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-	}
+//	public void sendEmailsforOrders(UserOrder order){
+//				log.info("Sending Mail To Admin for order received --Start");
+//				try {
+//					sendMailToAdminForOrder(order);
+////               mailSender.send(mail);
+//					log.info("Sending Mail To Admin for order received --End");
+//
+//					log.info("Sending Mail To buyer for order received --Start");
+//					sendMailToBuyerForOrder(order);
+//				}catch (Exception e)
+//				{
+//					e.printStackTrace();
+//				}
+//	}
 
 	public OrderDetails getOrderDetail(Long id) throws Exception {
 		try {
@@ -519,16 +519,16 @@ public class OrderService {
 				emailMessage +=  "</tbody>\r\n"
 						+ "</table>";
 					
-				
-			final String message1 = "************ ORDER PLACED ************ \r\n \r\n Thank you for"
-					+ " ordering from Geonix. \r\n Your order "+order.getOrderNumber()+" has been placed.\r\n"
-							+ " # SHIPPING DETAILS # \r\n" + "Name : "
-					+ address.getName() + "\r\n Country : " + address.getCountry() + "\r\n Street : "
-					+ address.getStreet() + "\r\n State : " + address.getState() + "\r\n City : " + address.getCity()
-					+ "\r\n Pincode : " + address.getPincode() + "\r\n Mobile : " + address.getMobile()
-					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
-					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
-					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
+//
+//			final String message1 = "************ ORDER PLACED ************ \r\n \r\n Thank you for"
+//					+ " ordering from Geonix. \r\n Your order "+order.getOrderNumber()+" has been placed.\r\n"
+//							+ " # SHIPPING DETAILS # \r\n" + "Name : "
+//					+ address.getName() + "\r\n Country : " + address.getCountry() + "\r\n Street : "
+//					+ address.getStreet() + "\r\n State : " + address.getState() + "\r\n City : " + address.getCity()
+//					+ "\r\n Pincode : " + address.getPincode() + "\r\n Mobile : " + address.getMobile()
+//					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
+//					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
+//					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
 
 
 			// Sender's email ID needs to be mentioned
