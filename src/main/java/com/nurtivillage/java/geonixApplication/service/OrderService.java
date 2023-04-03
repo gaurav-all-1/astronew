@@ -531,14 +531,12 @@ public class OrderService {
 //					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
 
 
-			// Sender's email ID needs to be mentioned
-			String from = "geonixshopping@gmail.com";
-			final String username = "AKIAR6ST375ZKWOPNZDF";//change accordingly
-			final String password = "BA3G+RZjBmmDBh4i8QRDqu+rIiqFnOBLbQBgu9vly9SZ";//change accordingly
+			String from = "geonixindiaonline@gmail.com";
+			final String username = "geonixindiaonline@gmail.com";//change accordingly
+			final String password = "nlkrcusfhsqmqkxr";//change accordingly
 
 			// Assuming you are sending email through relay.jangosmtp.net
-			String host = "email-smtp.us-east-2.amazonaws.com";
-
+			String host = "smtp.gmail.com";
 			      Properties props = new Properties();
 			      props.put("mail.smtp.auth", "true");
 			      props.put("mail.smtp.starttls.enable", "true");
@@ -679,13 +677,12 @@ public class OrderService {
 
 			try {
 				// Sender's email ID needs to be mentioned
-				String from = "geonixshopping@gmail.com";
-				final String username = "AKIAR6ST375ZKWOPNZDF";//change accordingly
-				final String password = "BA3G+RZjBmmDBh4i8QRDqu+rIiqFnOBLbQBgu9vly9SZ";//change accordingly
+				String from = "geonixindiaonline@gmail.com";
+				final String username = "geonixindiaonline@gmail.com";//change accordingly
+				final String password = "nlkrcusfhsqmqkxr";//change accordingly
 
 				// Assuming you are sending email through relay.jangosmtp.net
-				String host = "email-smtp.us-east-2.amazonaws.com";
-
+				String host = "smtp.gmail.com";
 			      Properties props = new Properties();
 			      props.put("mail.smtp.auth", "true");
 			      props.put("mail.smtp.starttls.enable", "true");
@@ -803,12 +800,12 @@ public class OrderService {
 		      String to = "anuragpundir641@gmail.com";
 
 		      // Sender's email ID needs to be mentioned
-		      String from = "geonixshopping@gmail.com";
-		      final String username = "AKIAR6ST375ZKWOPNZDF";//change accordingly
-		      final String password = "BA3G+RZjBmmDBh4i8QRDqu+rIiqFnOBLbQBgu9vly9SZ";//change accordingly
+		      String from = "geonixindiaonline@gmail.com";
+		      final String username = "geonixindiaonline@gmail.com";//change accordingly
+		      final String password = "nlkrcusfhsqmqkxr";//change accordingly
 
 		      // Assuming you are sending email through relay.jangosmtp.net
-		      String host = "email-smtp.us-east-2.amazonaws.com";
+		      String host = "smtp.gmail.com";
 
 		      Properties props = new Properties();
 		      props.put("mail.smtp.auth", "true");
