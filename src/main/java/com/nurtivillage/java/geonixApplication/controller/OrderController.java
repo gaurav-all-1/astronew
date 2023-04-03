@@ -171,7 +171,7 @@ public class OrderController {
             orderService.downloadfileobject(order);
 
 //            ApiResponseService res = new ApiResponseService("order detail",true,order);
-            return  new ResponseEntity<Object>("generated",HttpStatus.OK);
+            return  new ResponseEntity<Object>(HttpStatus.OK);
         }catch(Exception e){
             System.out.println(e);
             ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
