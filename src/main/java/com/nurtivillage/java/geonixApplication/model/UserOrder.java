@@ -107,6 +107,8 @@ public class UserOrder {
         this.createdAt = createdAt;
     }
 
+    public String couponCode;
+
     @UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
@@ -131,6 +133,23 @@ public class UserOrder {
         this.status = status;
         this.shippingAddress = shippingAddress;
         this.paymentMethod = paymentMethod;
+    }
+
+    public UserOrder(double amount,User user,int itemNO,Status status,ShippingAddress shippingAddress,String paymentMethod,String couponCode){
+        this.amount = amount;
+        long leftLimit = 1L;
+        long rightLimit = 10000L;
+        LocalDate currentdate = LocalDate.now();
+        long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+        String s = currentdate.getMonth().toString().substring(0,3)+currentdate.getDayOfMonth()+currentdate.getYear()+'/'+generatedLong;
+        this.orderNo = generatedLong;
+        this.orderNumber = s;
+        this.user = user;
+        this.itemNO = itemNO;
+        this.status = status;
+        this.shippingAddress = shippingAddress;
+        this.paymentMethod = paymentMethod;
+        this.couponCode=couponCode;
     }
 
     public ShippingAddress getShippingAddress() {
@@ -217,6 +236,14 @@ public class UserOrder {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
     }
     public static void main(String[] args) {
         long leftLimit = 1L;
