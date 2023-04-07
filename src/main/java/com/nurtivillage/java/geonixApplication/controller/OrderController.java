@@ -116,10 +116,14 @@ public class OrderController {
         @PostMapping("/create")
         public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest){
             try{
-//                Long orderNO = orderService.getLastOrderNO();
+                UserOrder order=null;
                 double amount = orderRequest.getAmount();
                 User user = userService.userDetails();
-                UserOrder order = new UserOrder(amount,user,orderRequest.getCartItem().size(),Status.ordered,orderRequest.getShippingAddress(),orderRequest.getPaymentMethod());
+                if(orderRequest.getCouponcode()!=null){
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode());
+                }else {
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod());
+                }
                 //varify amount
 //                boolean checker = orderService.amountVarify(amount,orderRequest.getCartItem());
 //                if(!checker){
@@ -181,19 +185,18 @@ public class OrderController {
         @PostMapping("/product")
         public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest){
             try{
-//                Long orderNO = orderService.getLastOrderNO();
+                UserOrder order=null;
                 double amount = orderRequest.getAmount();
                 User user = userService.userDetails();
 //               boolean inStock=orderService.checkQuantity(orderRequest.getProductId(), orderRequest.getVariantId(), orderRequest.getQuantity());
 //               if(!inStock) {
 //            	   throw new Exception("Not in Stock");
 //               }
-               UserOrder order = new UserOrder(amount,user,1,Status.ordered,orderRequest.getShippingAddress(),orderRequest.getPaymentMethod());
-                //verify amount
-//                boolean checker = orderService.checkAmount(orderRequest);
-//                if(!checker){
-//                    throw new Exception("Incorrect amount");
-//                }
+                if(orderRequest.getCouponcode()!=null){
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode());
+                }else {
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod());
+                }
                 UserOrder orderCreate = orderService.createOrder(order);
 //               OrderDetails data =
 
