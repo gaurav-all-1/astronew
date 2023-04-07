@@ -245,6 +245,7 @@ public class OrderController {
         public ResponseEntity<ApiResponseService> createGuestOrder(@RequestBody OrderRequest orderRequest){
             try{
 //                Long orderNO = orderService.getLastOrderNO();
+                UserOrder order=null;
                 double amount = orderRequest.getAmount();
                 User user=userRepo.findByEmail(orderRequest.getShippingAddress().getEmail());
                   if(user==null) {
@@ -253,7 +254,15 @@ public class OrderController {
 //               if(!inStock) {
 //            	   throw new Exception("Not in Stock");
 //               }
-               UserOrder order = new UserOrder(amount,user,1,Status.ordered,orderRequest.getShippingAddress(),orderRequest.getPaymentMethod());
+
+
+                if(orderRequest.getCouponcode()!=null){
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode());
+                }else {
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod());
+                }
+
+
                 //verify amount
 //                boolean checker = orderService.checkAmount(orderRequest);
 //                if(!checker){
