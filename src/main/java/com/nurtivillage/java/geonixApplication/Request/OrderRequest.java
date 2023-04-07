@@ -20,6 +20,10 @@ public class OrderRequest {
     private int variantId;
     private int quantity;
 
+
+
+    private String couponcode;
+
     public OrderRequest(){}
 
     public OrderRequest(List<Cart> cartItem,double amount,ShippingAddress shippingAddress,String paymentMethod){
@@ -71,5 +75,13 @@ public class OrderRequest {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
+    public String getCouponcode() {
+        return couponcode;
+    }
+
+    public void setCouponcode(String couponcode) {
+        this.couponcode = couponcode;
+    }
     
 }
