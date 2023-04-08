@@ -53,6 +53,8 @@ public class ProductService {
             allProduct.forEach((var)->{
                 var.setDiscription(null);
                 var.setAdditional(null);
+                var.setVariants(null);
+                var.setProductImage(null);
                 // List<Variant> variants = ;
                 if(var.getVariants().size() > 0){
                     Inventory variantInventory = inventoryRepository.findByProductIdAndVariantId(var.getId(),var.getVariants().get(0).getId());
