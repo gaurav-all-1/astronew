@@ -51,6 +51,8 @@ public class ProductService {
             Page<Product> allProduct = productRepository.
             findByDeletedAtIsNull(pageable);
             allProduct.forEach((var)->{
+                var.setDiscription(null);
+                var.setAdditional(null);
                 // List<Variant> variants = ;
                 if(var.getVariants().size() > 0){
                     Inventory variantInventory = inventoryRepository.findByProductIdAndVariantId(var.getId(),var.getVariants().get(0).getId());
