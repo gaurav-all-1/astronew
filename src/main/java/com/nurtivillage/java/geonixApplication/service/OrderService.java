@@ -271,10 +271,10 @@ public class OrderService {
 	public List<UserOrder> getOrders(Map<String, String> searchParams) throws Exception {
 		try {
 			String fromDateString = searchParams.get("fromDate");
-			Date fromDate=new SimpleDateFormat("dd-MM-yyyy").parse(fromDateString);
+			Date fromDate=new SimpleDateFormat("yyyy-MM-dd").parse(fromDateString);
 
 			String toDateString = searchParams.get("toDate");
-			Date toDate=new SimpleDateFormat("dd-MM-yyyy").parse(toDateString);
+			Date toDate=new SimpleDateFormat("yyyy-MM-dd").parse(toDateString);
 			List<UserOrder> orders = orderRepository.findByCreatedAtBetween(fromDate,toDate);
 			if (orders.size()>0) {
 				return orders;
