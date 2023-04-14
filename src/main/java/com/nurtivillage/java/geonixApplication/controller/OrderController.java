@@ -420,8 +420,8 @@ public class OrderController {
         }
 
 
-    @GetMapping("/ordernum/{orderId}")
-    public ResponseEntity<?> getUserOrdernumber(@PathVariable String orderId){
+    @GetMapping("/ordernum")
+    public ResponseEntity<?> getUserOrdernumber(@RequestParam String orderId){
         try {log.info("Fetching user order with id: "+orderId+"--Start");
             UserOrder order=orderService.getOrdernumber(orderId);
             log.info("Fetching user order with id: "+orderId+"--End");
