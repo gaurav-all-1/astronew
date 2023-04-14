@@ -26,4 +26,6 @@ public interface OrderRepository extends JpaRepository<UserOrder,Long>{
 
 
     List<UserOrder> findByCreatedAtBetween(Date startDate, Date endDate);
+
+    UserOrder findByOrderNumber(String orderNumber);
 }

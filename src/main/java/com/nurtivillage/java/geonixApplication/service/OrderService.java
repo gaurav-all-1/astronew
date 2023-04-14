@@ -268,6 +268,18 @@ public class OrderService {
 		}
 	}
 
+	public UserOrder getOrdernumber(String number) throws Exception {
+		try {
+			UserOrder order = orderRepository.findByOrderNumber(number);
+			if (order!=null) {
+				return order;
+			}
+			throw new Exception("User order not present with this id: " + number);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
 	public List<UserOrder> getOrders(Map<String, String> searchParams) throws Exception {
 		try {
 			String fromDateString = searchParams.get("fromDate");

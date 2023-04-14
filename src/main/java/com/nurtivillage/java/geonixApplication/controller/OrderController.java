@@ -419,6 +419,19 @@ public class OrderController {
         	}
         }
 
+
+    @GetMapping("/ordernum/{orderId}")
+    public ResponseEntity<?> getUserOrdernumber(@PathVariable String orderId){
+        try {log.info("Fetching user order with id: "+orderId+"--Start");
+            UserOrder order=orderService.getOrdernumber(orderId);
+            log.info("Fetching user order with id: "+orderId+"--End");
+            return new ResponseEntity<UserOrder>(order,HttpStatus.OK);
+        }
+        catch(Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/getRange")
     public ResponseEntity<?> getUserOrderByRange(@RequestBody Map<String, String> rangeMap){
        try{
