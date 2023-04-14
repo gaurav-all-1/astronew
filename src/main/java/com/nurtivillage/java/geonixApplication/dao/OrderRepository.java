@@ -21,7 +21,9 @@ public interface OrderRepository extends JpaRepository<UserOrder,Long>{
 
     List<UserOrder> findByStatusAndUserIdOrderByCreatedAtAsc(Status canceled, Long userId);
 
-    @Query(value = "from UserOrder t where createdAt BETWEEN :startDate AND :endDate")
+    @Query(value = "SELECT * FROM user_order where created_at between \"2023-03-01\" and \"2023-04-01\"",nativeQuery = true)
     public List<UserOrder> getAllBetweenDates(@Param("startDate") Date startDate, @Param("endDate")Date endDate);
 
+
+    List<UserOrder> findByCreatedAtBetween(Date startDate, Date endDate);
 }

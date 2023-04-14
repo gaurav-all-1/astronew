@@ -420,7 +420,7 @@ public class OrderController {
         }
 
     @PostMapping("/getRange")
-    public ResponseEntity<?> getUserOrderByRange(@RequestBody Map<String, Date> rangeMap){
+    public ResponseEntity<?> getUserOrderByRange(@RequestBody Map<String, String> rangeMap){
        try{
             List<UserOrder> order=orderService.getOrders(rangeMap);
 

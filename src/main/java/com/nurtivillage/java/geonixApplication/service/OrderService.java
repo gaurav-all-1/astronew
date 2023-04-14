@@ -1,6 +1,7 @@
 package com.nurtivillage.java.geonixApplication.service;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -267,9 +268,14 @@ public class OrderService {
 		}
 	}
 
-	public List<UserOrder> getOrders(Map<String, Date> searchParams) throws Exception {
+	public List<UserOrder> getOrders(Map<String, String> searchParams) throws Exception {
 		try {
-			List<UserOrder> orders = orderRepository.getAllBetweenDates(searchParams.get("fromDate"),searchParams.get("toDate"));
+			String fromDateString = searchParams.get("fromDate");
+			Date fromDate=new SimpleDateFormat("dd-MM-yyyy").parse(fromDateString);
+
+			String toDateString = searchParams.get("toDate");
+			Date toDate=new SimpleDateFormat("dd-MM-yyyy").parse(toDateString);
+			List<UserOrder> orders = orderRepository.findByCreatedAtBetween(fromDate,toDate);
 			if (orders.size()>0) {
 				return orders;
 			}
