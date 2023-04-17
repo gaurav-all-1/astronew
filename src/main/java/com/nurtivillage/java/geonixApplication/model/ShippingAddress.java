@@ -19,6 +19,9 @@ public class ShippingAddress {
 	private String pincode;
 	private String mobile;
 	private String email;
+
+	private String gst;
+
 	@OneToOne
 	private User user;
 	
@@ -92,7 +95,14 @@ public class ShippingAddress {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
+
+	public String getGst() {
+		return gst;
+	}
+
+	public void setGst(String gst) {
+		this.gst = gst;
+	}
+
+
 }
