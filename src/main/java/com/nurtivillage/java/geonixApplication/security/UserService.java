@@ -67,8 +67,8 @@ private static final Logger log=LogManager.getLogger(UserService.class);
      @Value("${spring.mail.forgotPasswordUrl}")
      private String forgotPasswordUrl;
      
-     @Value("${spring.mail.username}")
-     private String fromMail;
+//     @Value("${spring.mail.username}")
+//     private String fromMail;
 //    @Autowired
 //    private SessionRegistry sessionRegistry;
 
@@ -393,7 +393,7 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 			String message="Please click on the below link to reset the password for your GEONIX account \r\n \r\n";
 		    String resetLink=forgotPasswordUrl+"?key="+token;
 		    SimpleMailMessage mail=new SimpleMailMessage();
-		    mail.setFrom(fromMail);
+		    mail.setFrom("geonixindiaonline@gmail.com");
 		    mail.setTo(email);
 		    mail.setSubject(subject);
 		    mail.setText(message+resetLink);

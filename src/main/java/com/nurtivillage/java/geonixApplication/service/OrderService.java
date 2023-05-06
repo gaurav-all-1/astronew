@@ -77,8 +77,8 @@ public class OrderService {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
-	@Value("${spring.mail.username}")
-	private String fromMail;
+//	@Value("${spring.mail.username}")
+//	private String fromMail;
 
 	double totalAmount = 0;
 
