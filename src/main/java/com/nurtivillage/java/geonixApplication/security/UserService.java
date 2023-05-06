@@ -2,14 +2,11 @@ package com.nurtivillage.java.geonixApplication.security;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -375,8 +372,7 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 		if(user!=null) {
 			String token=generateRandomAlphaNumeric(9);
 			user.setForgotPasswordKey(token);
-			SimpleMailMessage mail=createMailForForgotPassword(user.getEmail(),token);
-			mailSender.send(mail);
+			createMailForForgotPassword(user.getEmail(),token);
 		}
 		else {
 			throw new Exception("User doesn't exists with this email address or forgot request already made");
@@ -387,17 +383,67 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 		}
 	}
 	
-	public SimpleMailMessage createMailForForgotPassword(String email,String token) {
+	public void createMailForForgotPassword(String email,String token) {
 		try {
 			String subject="Reset Password";
-			String message="Please click on the below link to reset the password for your GEONIX account \r\n \r\n";
+			String message1="Please click on the below link to reset the password for your GEONIX account \r\n \r\n";
 		    String resetLink=forgotPasswordUrl+"?key="+token;
-		    SimpleMailMessage mail=new SimpleMailMessage();
-		    mail.setFrom("geonixindiaonline@gmail.com");
-		    mail.setTo(email);
-		    mail.setSubject(subject);
-		    mail.setText(message+resetLink);
-		    return mail;
+//		    SimpleMailMessage mail=new SimpleMailMessage();
+//		    mail.setFrom("geonixindiaonline@gmail.com");
+//		    mail.setTo(email);
+//		    mail.setSubject(subject);
+//		    mail.setText(message1+resetLink);
+
+            String from = "geonixindiaonline@gmail.com";
+            final String username = "geonixindiaonline@gmail.com";//change accordingly
+            final String password = "nlkrcusfhsqmqkxr";//change accordingly
+
+            // Assuming you are sending email through relay.jangosmtp.net
+            String host = "smtp.gmail.com";
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", host);
+            props.put("mail.smtp.port", "587");
+
+            String emailMessage = message1+resetLink;
+
+            // Get the Session object.
+            Session session = Session.getInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
+
+            try {
+                // Create a default MimeMessage object.
+                Message message = new MimeMessage(session);
+
+                // Set From: header field of the header.
+                message.setFrom(new InternetAddress(from));
+
+                // Set To: header field of the header.
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse("geonixshopping@gmail.com,praveen@geonix.in"));
+
+                // Set Subject: header field
+                message.setSubject("Forgot Password");
+
+                // Send the actual HTML message, as big as you like
+                message.setContent(
+                        emailMessage,
+                        "text/html");
+
+                // Send message
+                Transport.send(message);
+
+                System.out.println("Sent message successfully....");
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+//				   throw new RuntimeException(e);
+            }
 		}
 		catch(Exception e) {
 			throw e;
