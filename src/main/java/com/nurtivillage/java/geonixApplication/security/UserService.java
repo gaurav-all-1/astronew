@@ -425,7 +425,7 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 
                 // Set To: header field of the header.
                 message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse("geonixshopping@gmail.com,praveen@geonix.in"));
+                        InternetAddress.parse(email));
 
                 // Set Subject: header field
                 message.setSubject("Forgot Password");
