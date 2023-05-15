@@ -50,6 +50,16 @@ public class Product implements Serializable {
 	private String additional;
 	@Lob
 	private String discription;
+
+	public String getOutOfStock() {
+		return outOfStock;
+	}
+
+	public void setOutOfStock(String outOfStock) {
+		this.outOfStock = outOfStock;
+	}
+
+	private String outOfStock;
 	
 	private Date deletedAt;
 	@UpdateTimestamp
