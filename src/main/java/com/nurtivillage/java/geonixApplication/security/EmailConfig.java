@@ -15,8 +15,8 @@ public class EmailConfig {
         ((JavaMailSenderImpl) mailSender).setHost("smtp.gmail.com");
         ((JavaMailSenderImpl) mailSender).setPort(25);
 
-        ((JavaMailSenderImpl) mailSender).setUsername("geonixindiaonline@gmail.com");
-        ((JavaMailSenderImpl) mailSender).setPassword("nlkrcusfhsqmqkxr");
+        ((JavaMailSenderImpl) mailSender).setUsername("geonixretailindia@gmail.com");
+        ((JavaMailSenderImpl) mailSender).setPassword("otxjgebqbxycpzsl");
 
         Properties props = ((JavaMailSenderImpl) mailSender).getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

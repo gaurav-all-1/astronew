@@ -394,9 +394,9 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 //		    mail.setSubject(subject);
 //		    mail.setText(message1+resetLink);
 
-            String from = "geonixindiaonline@gmail.com";
-            final String username = "geonixindiaonline@gmail.com";//change accordingly
-            final String password = "nlkrcusfhsqmqkxr";//change accordingly
+            String from = "geonixretailindia@gmail.com";
+            final String username = "geonixretailindia@gmail.com";//change accordingly
+            final String password = "otxjgebqbxycpzsl";//change accordingly
 
             // Assuming you are sending email through relay.jangosmtp.net
             String host = "smtp.gmail.com";
