@@ -60,6 +60,18 @@ public class UserOrder {
 
     private String trackingURL;
 
+    public String getFastDelivery() {
+        return fastDelivery;
+    }
+
+    public void setFastDelivery(String fastDelivery) {
+        this.fastDelivery = fastDelivery;
+    }
+
+    private String fastDelivery;
+
+
+
     public String getTrackingNo() {
         return trackingNo;
     }
@@ -119,7 +131,7 @@ public class UserOrder {
     
     public UserOrder(){}
 
-    public UserOrder(double amount,User user,int itemNO,Status status,ShippingAddress shippingAddress,String paymentMethod){
+    public UserOrder(double amount,User user,int itemNO,Status status,ShippingAddress shippingAddress,String paymentMethod,String fastDelivery){
         this.amount = amount;
         long leftLimit = 1L;
         long rightLimit = 10000L;
@@ -133,9 +145,10 @@ public class UserOrder {
         this.status = status;
         this.shippingAddress = shippingAddress;
         this.paymentMethod = paymentMethod;
+        this.fastDelivery = fastDelivery;
     }
 
-    public UserOrder(double amount,User user,int itemNO,Status status,ShippingAddress shippingAddress,String paymentMethod,String couponCode){
+    public UserOrder(double amount,User user,int itemNO,Status status,ShippingAddress shippingAddress,String paymentMethod,String couponCode,String fastDelivery){
         this.amount = amount;
         long leftLimit = 1L;
         long rightLimit = 10000L;
@@ -150,6 +163,7 @@ public class UserOrder {
         this.shippingAddress = shippingAddress;
         this.paymentMethod = paymentMethod;
         this.couponCode=couponCode;
+        this.fastDelivery = fastDelivery;
     }
 
     public ShippingAddress getShippingAddress() {

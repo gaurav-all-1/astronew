@@ -114,15 +114,16 @@ public class OrderController {
 
 
         @PostMapping("/create")
-        public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest){
+        public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest,@RequestParam boolean fastDelivery){
             try{
                 UserOrder order=null;
                 double amount = orderRequest.getAmount();
                 User user = userService.userDetails();
+                String fastDeliveryString = fastDelivery == true?"Yes":"No";
                 if(orderRequest.getCouponcode()!=null){
-                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode());
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode(),fastDeliveryString);
                 }else {
-                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod());
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),fastDeliveryString);
                 }
                 //varify amount
 //                boolean checker = orderService.amountVarify(amount,orderRequest.getCartItem());
@@ -183,7 +184,7 @@ public class OrderController {
         }
     }
         @PostMapping("/product")
-        public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest){
+        public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest,@RequestParam boolean fastDelivery){
             try{
                 UserOrder order=null;
                 double amount = orderRequest.getAmount();
@@ -192,10 +193,12 @@ public class OrderController {
 //               if(!inStock) {
 //            	   throw new Exception("Not in Stock");
 //               }
+
+                String fastDeliveryString = fastDelivery == true?"Yes":"No";
                 if(orderRequest.getCouponcode()!=null){
-                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode());
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode(),fastDeliveryString);
                 }else {
-                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod());
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),fastDeliveryString);
                 }
                 UserOrder orderCreate = orderService.createOrder(order);
 //               OrderDetails data =
@@ -245,7 +248,7 @@ public class OrderController {
         
         // Guest Order- without login create order
         @PostMapping("/guest")
-        public ResponseEntity<ApiResponseService> createGuestOrder(@RequestBody OrderRequest orderRequest){
+        public ResponseEntity<ApiResponseService> createGuestOrder(@RequestBody OrderRequest orderRequest,@RequestParam boolean fastDelivery){
             try{
 //                Long orderNO = orderService.getLastOrderNO();
                 UserOrder order=null;
@@ -257,12 +260,12 @@ public class OrderController {
 //               if(!inStock) {
 //            	   throw new Exception("Not in Stock");
 //               }
-
+                String fastDeliveryString = fastDelivery == true?"Yes":"No";
 
                 if(orderRequest.getCouponcode()!=null){
-                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode());
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode(),fastDeliveryString);
                 }else {
-                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod());
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),fastDeliveryString);
                 }
 
 
