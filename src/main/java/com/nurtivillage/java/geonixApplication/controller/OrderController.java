@@ -114,7 +114,7 @@ public class OrderController {
 
 
         @PostMapping("/create")
-        public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest,@RequestParam boolean fastDelivery){
+        public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest,@RequestParam(required = false) boolean fastDelivery){
             try{
                 UserOrder order=null;
                 double amount = orderRequest.getAmount();
@@ -184,7 +184,7 @@ public class OrderController {
         }
     }
         @PostMapping("/product")
-        public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest,@RequestParam boolean fastDelivery){
+        public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest,@RequestParam(required = false) boolean fastDelivery){
             try{
                 UserOrder order=null;
                 double amount = orderRequest.getAmount();
@@ -248,7 +248,7 @@ public class OrderController {
         
         // Guest Order- without login create order
         @PostMapping("/guest")
-        public ResponseEntity<ApiResponseService> createGuestOrder(@RequestBody OrderRequest orderRequest,@RequestParam boolean fastDelivery){
+        public ResponseEntity<ApiResponseService> createGuestOrder(@RequestBody OrderRequest orderRequest,@RequestParam(required = false) boolean fastDelivery){
             try{
 //                Long orderNO = orderService.getLastOrderNO();
                 UserOrder order=null;
