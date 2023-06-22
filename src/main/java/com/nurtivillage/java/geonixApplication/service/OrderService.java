@@ -522,7 +522,7 @@ public class OrderService {
 							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
 							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
 							+ "</tr>\r\n";
-				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("COD")){
 					String shippingCharge = "99";
 					emailMessage += "<tr>\r\n"
 							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
@@ -625,7 +625,7 @@ public class OrderService {
 							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
 							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
 							+ "</tr>\r\n";
-				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("COD")){
 					String shippingCharge = "99";
 					emailMessage += "<tr>\r\n"
 							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
@@ -799,7 +799,7 @@ public class OrderService {
 							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
 							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
 							+ "</tr>\r\n";
-				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("COD")){
 					String shippingCharge = "99";
 					emailMessage += "<tr>\r\n"
 							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
@@ -902,7 +902,7 @@ public class OrderService {
 									+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
 									+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
 									+ "</tr>\r\n";
-						}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+						}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("COD")){
 							String shippingCharge = "99";
 							emailMessage += "<tr>\r\n"
 									+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
