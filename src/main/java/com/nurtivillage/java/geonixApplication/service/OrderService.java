@@ -515,8 +515,28 @@ public class OrderService {
 						+ "<tr>\r\n"
 						+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Fast Delivery</span></td>\r\n"
 						+ "<td style=\"width: 49.375%;\">" + order.getFastDelivery() + "</td>\r\n"
-						+ "</tr>\r\n"
-						+ "</tbody>\r\n"
+						+ "</tr>\r\n";
+				if(order.getFastDelivery().equals("Yes")){
+					String shippingCharge = "199";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+					String shippingCharge = "99";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}else{
+					String shippingCharge = "0";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}
+				emailMessage +=
+						 "</tbody>\r\n"
 						+ "</table>\r\n"
 						+ "<p>Order Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%; height: 36px;\" border=\"1\">\r\n"
@@ -598,8 +618,28 @@ public class OrderService {
 						+ "<tr>\r\n"
 						+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Fast Delivery</span></td>\r\n"
 						+ "<td style=\"width: 49.375%;\">" + order.getFastDelivery() + "</td>\r\n"
-						+ "</tr>\r\n"
-						+ "</tbody>\r\n"
+						+ "</tr>\r\n";
+				if(order.getFastDelivery().equals("Yes")){
+					String shippingCharge = "199";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+					String shippingCharge = "99";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}else{
+					String shippingCharge = "0";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}
+				emailMessage +=
+						 "</tbody>\r\n"
 						+ "</table>\r\n"
 						+ "<p>Order Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%; height: 36px;\" border=\"1\">\r\n"
@@ -752,8 +792,28 @@ public class OrderService {
 						+ "<tr>\r\n"
 						+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Fast Delivery</span></td>\r\n"
 						+ "<td style=\"width: 49.375%;\">" + order.getFastDelivery() + "</td>\r\n"
-						+ "</tr>\r\n"
-						+ "</tbody>\r\n"
+						+ "</tr>\r\n";
+				if(order.getFastDelivery().equals("Yes")){
+					String shippingCharge = "199";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+					String shippingCharge = "99";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}else{
+					String shippingCharge = "0";
+					emailMessage += "<tr>\r\n"
+							+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+							+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+							+ "</tr>\r\n";
+				}
+				emailMessage +=
+						 "</tbody>\r\n"
 						+ "</table>\r\n"
 						+ "<p>Order Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%; height: 36px;\" border=\"1\">\r\n"
@@ -835,8 +895,28 @@ public class OrderService {
 						+ "<tr>\r\n"
 						+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Fast Delivery</span></td>\r\n"
 						+ "<td style=\"width: 49.375%;\">" + order.getFastDelivery() + "</td>\r\n"
-						+ "</tr>\r\n"
-						+ "</tbody>\r\n"
+						+ "</tr>\r\n";
+						if(order.getFastDelivery().equals("Yes")){
+							String shippingCharge = "199";
+							emailMessage += "<tr>\r\n"
+									+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+									+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+									+ "</tr>\r\n";
+						}else if(order.getFastDelivery().equals("No") && order.getPaymentMethod().equals("cod")){
+							String shippingCharge = "99";
+							emailMessage += "<tr>\r\n"
+									+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+									+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+									+ "</tr>\r\n";
+						}else{
+							String shippingCharge = "0";
+							emailMessage += "<tr>\r\n"
+									+ "<td style=\"width: 49.375%;\"><span style=\"font-size: 10pt;\">Shipping Charge</span></td>\r\n"
+									+ "<td style=\"width: 49.375%;\">" + shippingCharge + "</td>\r\n"
+									+ "</tr>\r\n";
+						}
+				emailMessage +=
+						 "</tbody>\r\n"
 						+ "</table>\r\n"
 						+ "<p>Order Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%; height: 36px;\" border=\"1\">\r\n"
