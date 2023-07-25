@@ -24,6 +24,15 @@ public class OrderDetails {
     @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Product product;
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "order_id")
     private UserOrder uesrOrder;
