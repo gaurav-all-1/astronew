@@ -33,4 +33,6 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
     List<Product> findBynameContainsAndDeletedAtIsNull(String str);
 
     Optional<Product> findByName(String name);
+
+    Optional<Product> findByProductUrl(String productUrl);
 }

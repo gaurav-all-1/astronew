@@ -36,6 +36,11 @@ public class Product implements Serializable {
     @Column(nullable = false)
 	@NotBlank
     private String name;
+
+	private String productUrl;
+
+
+
 	@NotBlank
     private String brand;
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
@@ -227,7 +232,13 @@ public class Product implements Serializable {
 		this.mrp = mrp;
 	}
 
+	public String getProductUrl() {
+		return productUrl;
+	}
 
+	public void setProductUrl(String productUrl) {
+		this.productUrl = productUrl;
+	}
 
 	
 	// public Inventory getInventory() {

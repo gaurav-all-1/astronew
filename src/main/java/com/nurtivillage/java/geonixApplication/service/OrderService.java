@@ -14,11 +14,17 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.html2pdf.HtmlConverter;
+import com.nurtivillage.java.geonixApplication.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -33,16 +39,9 @@ import com.nurtivillage.java.geonixApplication.dao.UserProfileRepository;
 import com.nurtivillage.java.geonixApplication.dao.UserRepository;
 import com.nurtivillage.java.geonixApplication.dto.StatusRequest;
 import com.nurtivillage.java.geonixApplication.jwt.JwtTokenUtil;
-import com.nurtivillage.java.geonixApplication.model.Cart;
-import com.nurtivillage.java.geonixApplication.model.Inventory;
-import com.nurtivillage.java.geonixApplication.model.Offer;
-import com.nurtivillage.java.geonixApplication.model.OrderDetails;
-import com.nurtivillage.java.geonixApplication.model.ShippingAddress;
-import com.nurtivillage.java.geonixApplication.model.Status;
-import com.nurtivillage.java.geonixApplication.model.User;
-import com.nurtivillage.java.geonixApplication.model.UserOrder;
-import com.nurtivillage.java.geonixApplication.model.UserProfile;
-import com.nurtivillage.java.geonixApplication.model.Variant;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Transactional
@@ -135,11 +134,14 @@ public class OrderService {
 		try {
 			log.info("Sending Mail To Admin for order received --Start");
 			sendMailToAdminForOrder(order);
+		//	String accessToken = getAccessToken();
+		//	createASalesOrder(accessToken,order,order.getUser());
 //                mailSender.send(mailAdmin);
 			log.info("Sending Mail To Admin for order received --End");
 
 			log.info("Sending Mail To buyer for order received --Start");
 			sendMailToBuyerForOrder(order);
+
 		}catch (Exception e)
 		{
 			e.printStackTrace();
@@ -1222,6 +1224,154 @@ public class OrderService {
 	}
 
 
+	public static String getAccessToken()
+	{
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+
+// Set request headers
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Cookie", "6e73717622=4440853cd702ab2a51402c119608ee85; _zcsr_tmp=df86bb39-698f-4779-a3fb-850987568322; iamcsr=df86bb39-698f-4779-a3fb-850987568322");
+
+// Create the request body
+			MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+			requestBody.add("refresh_token", "1000.878a89e83fd60f0fd60a83c2ab6d2943.b4a4b7a2731710be48055f154066e54f");
+			requestBody.add("client_id", "1000.88TYUXI5MICURBTN4ECZT670HMTSZA");
+			requestBody.add("client_secret", "adfbb20dd2baa2efbb8c1d9528ec4997e8bd6bbc6a");
+			requestBody.add("grant_type", "refresh_token");
+
+// Set the URL
+			String url = "https://accounts.zoho.in/oauth/v2/token";
+
+// Set the request entity with headers and body
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(requestBody, headers);
+
+// Send the POST request
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+// Get the response body and status code
+			String responseBody = response.getBody();
+			HttpStatus statusCode = response.getStatusCode();
+
+
+				// Create ObjectMapper instance
+				ObjectMapper objectMapper = new ObjectMapper();
+
+				// Parse the JSON string
+				JsonNode jsonNode = objectMapper.readTree(responseBody);
+
+				// Access the key-value pairs
+				String name = jsonNode.get("access_token").asText();
+
+
+
+			return name;
+		} catch (JsonMappingException e) {
+			throw new RuntimeException(e);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	public static void main(String[] args) {
+
+
+		String accessTokenData = getAccessToken();
+		System.out.println(accessTokenData);
+		UserOrder userOrder = new UserOrder();
+		userOrder.setOrderNumber("10123_12072023");
+
+		User user = new User();
+		user.setId(23L);
+		Product product = new Product();
+		product.setName("MOUSE");
+
+		OrderDetails orderDetails = new OrderDetails();
+		orderDetails.setPrice(5000);
+		orderDetails.setProduct(product);
+		orderDetails.setQuantity(2);
+		System.out.println(createASalesOrder(accessTokenData,userOrder,user,orderDetails));
+	}
+
+public static String createASalesOrder(String token,UserOrder order,User user,OrderDetails orderDetails)
+{
+	RestTemplate restTemplate = new RestTemplate();
+
+// Set request headers
+	HttpHeaders headers = new HttpHeaders();
+	headers.setContentType(MediaType.APPLICATION_JSON);
+	headers.set("Authorization", "Zoho-oauthtoken "+token);
+
+// Create the request body
+	String jsonBody = "{\n" +
+			"  \"data\": {\n" +
+			"    \"Order_No\": \""+order.getOrderNumber()+"\",\n" +
+			"    \"Display_Order_No\": \""+order.getOrderNumber()+"\",\n" +
+			"    \"Channel\": \"Geonix\",\n" +
+			"    \"source\": \"Geonix.in\",\n" +
+			"    \"Priority\": \"Critical\",\n" +
+			"    \"dadisplayOrderDateTimete\": \"02-FEB-2023\",\n" +
+			"    \"Status\": \""+order.getPaymentMethod()+"\",\n" +
+			"    \"GSTIN\": \""+order.getShippingAddress().getGst()+"\",\n" +
+			"    \"Payment_Method\": \""+order.getPaymentMethod()+"\",\n" +
+			"    \"Order_Amount\": \""+order.getAmount()+"\",\n" +
+			"    \"Fulfillment_TAT\": \"19-Jul-2020 12:47:41\",\n" +
+			"    \"Channel_Created\": \"02-FEB-2020\",\n" +
+			"    \"Uniware_Created\": \"19-Jul-2019 12:47:41\",\n" +
+			"    \"Updated_at\": \"Updated At\",\n" +
+			"    \"Notification_Email\": \""+order.getShippingAddress().getEmail()+"\",\n" +
+			"    \"Notification_Mobile\": \""+order.getShippingAddress().getMobile()+"\",\n" +
+			"    \"Inventory_ID\": \""+orderDetails.getProduct().getName()+"\",\n" +
+			"    \"Name\": \""+order.getShippingAddress().getName()+"\",\n" +
+			"    \"Address_Line1\": \""+order.getShippingAddress().getCity()+"\",\n" +
+			"    \"Address_Line2\": \""+order.getShippingAddress().getStreet()+"\",\n" +
+			"    \"City\": \""+order.getShippingAddress().getCity()+"\",\n" +
+			"    \"District\": \""+order.getShippingAddress().getCity()+"\",\n" +
+			"    \"State\": \""+order.getShippingAddress().getState()+"\",\n" +
+			"    \"Country\": \"INDIA\",\n" +
+			"    \"Pincode\": \""+order.getShippingAddress().getPincode()+"\",\n" +
+			"    \"Customer_Phone\": \""+order.getShippingAddress().getMobile()+"\",\n" +
+			"    \"Email\": \""+order.getShippingAddress().getEmail()+"\",\n" +
+			"    \"Type_field\": \"Customer Type\",\n" +
+			"    \"ORDER_DETAILS\": [\n" +
+			"      {\n" +
+			"        \"Order_Item_Code\": \""+orderDetails.getId()+"\",\n" +
+			"        \"Item_Sku\": \""+orderDetails.getProduct().getCategory().getName()+"\",\n" +
+			"        \"Status_Code\": \"StatusCode121\",\n" +
+			"        \"On_Hold\": \"OnHold\",\n" +
+			"        \"Quantiry\": \"126\",\n" +
+			"        \"totalPrice\": \"550\",\n" +
+			"        \"Selling_Price\": \"300.00\",\n" +
+			"        \"ShippingCharges\": \"50.00\",\n" +
+			"        \"Discount1\": \"10\",\n" +
+			"        \"ShippingPackageStatus\": \"ShippingPackageStatus\",\n" +
+			"        \"Areated_At\": \"19-Jul-2022 13:09:50\",\n" +
+			"        \"Barcode\": \"Barcode873287382\",\n" +
+			"        \"Product_Description\": \"One\"\n" +
+			"      }\n" +
+			"    ],\n" +
+			"    \"Sub_Total\": \"1000.00\",\n" +
+			"    \"Shipping_Charges\": \"100\",\n" +
+			"    \"Total\": \"2000\"\n" +
+			"  }\n" +
+			"}\n";
+
+// Set the URL
+	String url = "https://www.zohoapis.com/inventory/v1/salesorders?organization_id=10234695";
+
+// Create the request entity
+	HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
+
+// Send the POST request
+	ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+// Get the response body and status code
+	String responseBody = response.getBody();
+	HttpStatus statusCode = response.getStatusCode();
+
+return responseBody;
+}
 	
 
 }

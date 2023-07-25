@@ -154,6 +154,26 @@ public class ProductController {
 		}
 	}
 
+	@GetMapping("/producturl/{name}")
+	public ResponseEntity<ApiResponseService> ProductInfoByUrl(@PathVariable String name) {
+		try {
+			Optional<Product> product = productService.productInfoByUrl(name);
+			// List<Review> reviews = reviewService.getReview(product.get());
+			List<Inventory> inventory = inventoryService.getProductInventory(product.get());
+			// product.get().setReview(reviews);
+
+			// product.get().setVariant(inventory);
+
+			ApiResponseService res = new ApiResponseService("product info", true, Arrays.asList(product.get()));
+
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@PostMapping("/insert")
 	public ResponseEntity<ApiResponseService> insertProduct(@Valid @RequestBody Product product) {
 		try {
