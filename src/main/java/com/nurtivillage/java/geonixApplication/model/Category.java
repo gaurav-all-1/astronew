@@ -24,6 +24,10 @@ public class Category implements Serializable {
 	private String code;
 	private String coverImage;
 	private String image;
+
+
+
+	private String categoryUrl;
 	
 
 	public Category() {
@@ -65,7 +69,13 @@ public class Category implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	public String getCategoryUrl() {
+		return categoryUrl;
+	}
 
+	public void setCategoryUrl(String categoryUrl) {
+		this.categoryUrl = categoryUrl;
+	}
 
 
 	
