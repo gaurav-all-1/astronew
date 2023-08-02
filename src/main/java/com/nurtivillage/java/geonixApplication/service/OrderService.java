@@ -1342,7 +1342,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"    \"Updated_at\": \"Updated At\",\n" +
 			"    \"Notification_Email\": \""+order.getShippingAddress().getEmail()+"\",\n" +
 			"    \"Notification_Mobile\": \""+order.getShippingAddress().getMobile()+"\",\n" +
-			"    \"Inventory_ID\": \""+orderDetails.getProduct().getName()+"\",\n" +
+			"    \"Product_Name\": \""+orderDetails.getProduct().getName()+"\",\n" +
 			"    \"Name\": \""+order.getShippingAddress().getName()+"\",\n" +
 			"    \"Address_Line1\": \""+order.getShippingAddress().getCity()+"\",\n" +
 			"    \"Address_Line2\": \""+order.getShippingAddress().getStreet()+"\",\n" +
