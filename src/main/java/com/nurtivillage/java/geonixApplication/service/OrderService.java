@@ -1368,7 +1368,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"        \"ShippingPackageStatus\": \"ShippingPackageStatus\",\n" +
 			"        \"Areated_At\": \"02-Aug-2023 13:09:50\",\n" +
 			"        \"Barcode\": \"Barcode873287382\",\n" +
-			"        \"Product_Description\": \"One\"\n" +
+			"        \"Product_Description\": \"One\",\n" +
 			"    	\"Product_Name\": \""+orderDetails.getProduct().getName()+"\",\n" +
 			"      }\n" +
 			"    ],\n" +
