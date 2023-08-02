@@ -1342,7 +1342,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"    \"Updated_at\": \"Updated At\",\n" +
 			"    \"Notification_Email\": \""+order.getShippingAddress().getEmail()+"\",\n" +
 			"    \"Notification_Mobile\": \""+order.getShippingAddress().getMobile()+"\",\n" +
-			"    \"Product_Name\": \""+orderDetails.getProduct().getName()+"\",\n" +
+
 			"    \"Name\": \""+order.getShippingAddress().getName()+"\",\n" +
 			"    \"Address_Line1\": \""+order.getShippingAddress().getCity()+"\",\n" +
 			"    \"Address_Line2\": \""+order.getShippingAddress().getStreet()+"\",\n" +
@@ -1360,7 +1360,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"        \"Item_Sku\": \""+orderDetails.getProduct().getCategory().getName()+"\",\n" +
 			"        \"Status_Code\": \""+orderDetails.getUesrOrder().getStatus()+"\",\n" +
 			"        \"On_Hold\": \"OnHold\",\n" +
-			"        \"Quantiry\": \"1\",\n" +
+			"        \"Quantity\": \"1\",\n" +
 			"        \"totalPrice\": \""+order.getAmount()+"\",\n" +
 			"        \"Selling_Price\": \""+order.getAmount()+"\",\n" +
 			"        \"ShippingCharges\": \"100\",\n" +
@@ -1369,6 +1369,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"        \"Areated_At\": \"02-Aug-2023 13:09:50\",\n" +
 			"        \"Barcode\": \"Barcode873287382\",\n" +
 			"        \"Product_Description\": \"One\"\n" +
+			"    	\"Product_Name\": \""+orderDetails.getProduct().getName()+"\",\n" +
 			"      }\n" +
 			"    ],\n" +
 			"    \"Sub_Total\": \""+order.getAmount()+"\",\n" +
