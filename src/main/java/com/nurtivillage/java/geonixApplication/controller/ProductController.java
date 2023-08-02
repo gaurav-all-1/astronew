@@ -96,6 +96,7 @@ public class ProductController {
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
+			e.printStackTrace();
 			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -109,6 +110,7 @@ public class ProductController {
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
+			e.printStackTrace();
 			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

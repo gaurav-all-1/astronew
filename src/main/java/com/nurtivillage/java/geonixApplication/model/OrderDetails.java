@@ -20,6 +20,11 @@ public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -36,6 +41,11 @@ public class OrderDetails {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "order_id")
     private UserOrder uesrOrder;
+
+    public void setUesrOrder(UserOrder uesrOrder) {
+        this.uesrOrder = uesrOrder;
+    }
+
     private int quantity;
     private int price;
     @ManyToOne(cascade = CascadeType.MERGE)

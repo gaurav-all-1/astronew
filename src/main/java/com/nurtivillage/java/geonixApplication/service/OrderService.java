@@ -134,8 +134,6 @@ public class OrderService {
 		try {
 			log.info("Sending Mail To Admin for order received --Start");
 			sendMailToAdminForOrder(order);
-		//	String accessToken = getAccessToken();
-		//	createASalesOrder(accessToken,order,order.getUser());
 //                mailSender.send(mailAdmin);
 			log.info("Sending Mail To Admin for order received --End");
 
@@ -472,7 +470,8 @@ public class OrderService {
 			String emailMessage;
 			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
 			final String subject = "Order placed";
-
+			String accessToken = getAccessToken();
+			createASalesOrder(accessToken,order,order.getUser(),orderDetails.get(0));
 			if(order.getCouponCode()==null) {
 				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 						+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
@@ -1275,22 +1274,43 @@ public class OrderService {
 	}
 
 	public static void main(String[] args) {
-
+		Category category = new Category();
+		category.setName("Monitor");
 
 		String accessTokenData = getAccessToken();
 		System.out.println(accessTokenData);
 		UserOrder userOrder = new UserOrder();
 		userOrder.setOrderNumber("10123_12072023");
+		userOrder.setAmount(2099);
+		userOrder.setStatus(Status.ordered);
+		userOrder.setCreatedAt(new Date());
 
+		ShippingAddress address = new ShippingAddress();
+		address.setCity("Gurgaon");
+		address.setCountry("INDIA");
+		address.setEmail("anuragpundir631@gmail.com");
+		address.setId(121);
+		address.setName("Anurag");
+		address.setGst("511ERTHASFL7823KHKSF");
+		address.setMobile("9873567279");
+		address.setPincode("122001");
+		address.setState("Haryana");
+		address.setStreet("Sector 10A grugaon");
+
+		userOrder.setShippingAddress(address);
 		User user = new User();
 		user.setId(23L);
 		Product product = new Product();
 		product.setName("MOUSE");
+		product.setCategory(category);
+		product.setMrp("5999");
 
 		OrderDetails orderDetails = new OrderDetails();
 		orderDetails.setPrice(5000);
 		orderDetails.setProduct(product);
 		orderDetails.setQuantity(2);
+		orderDetails.setId(111L);
+		orderDetails.setUesrOrder(userOrder);
 		System.out.println(createASalesOrder(accessTokenData,userOrder,user,orderDetails));
 	}
 
@@ -1333,32 +1353,34 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"    \"Pincode\": \""+order.getShippingAddress().getPincode()+"\",\n" +
 			"    \"Customer_Phone\": \""+order.getShippingAddress().getMobile()+"\",\n" +
 			"    \"Email\": \""+order.getShippingAddress().getEmail()+"\",\n" +
-			"    \"Type_field\": \"Customer Type\",\n" +
+			"    \"Type_field\": \"RETAIL\",\n" +
 			"    \"ORDER_DETAILS\": [\n" +
-			"      {\n" +
+			"  {\n" +
 			"        \"Order_Item_Code\": \""+orderDetails.getId()+"\",\n" +
 			"        \"Item_Sku\": \""+orderDetails.getProduct().getCategory().getName()+"\",\n" +
-			"        \"Status_Code\": \"StatusCode121\",\n" +
+			"        \"Status_Code\": \""+orderDetails.getUesrOrder().getStatus()+"\",\n" +
 			"        \"On_Hold\": \"OnHold\",\n" +
-			"        \"Quantiry\": \"126\",\n" +
-			"        \"totalPrice\": \"550\",\n" +
-			"        \"Selling_Price\": \"300.00\",\n" +
-			"        \"ShippingCharges\": \"50.00\",\n" +
+			"        \"Quantiry\": \"1\",\n" +
+			"        \"totalPrice\": \""+orderDetails.getUesrOrder().getAmount()+"\",\n" +
+			"        \"Selling_Price\": \""+orderDetails.getProduct().getMrp()+"\",\n" +
+			"        \"ShippingCharges\": \"100\",\n" +
 			"        \"Discount1\": \"10\",\n" +
 			"        \"ShippingPackageStatus\": \"ShippingPackageStatus\",\n" +
-			"        \"Areated_At\": \"19-Jul-2022 13:09:50\",\n" +
+			"        \"Areated_At\": \"02-Aug-2023 13:09:50\",\n" +
 			"        \"Barcode\": \"Barcode873287382\",\n" +
 			"        \"Product_Description\": \"One\"\n" +
 			"      }\n" +
 			"    ],\n" +
-			"    \"Sub_Total\": \"1000.00\",\n" +
+			"    \"Sub_Total\": \""+order.getAmount()+"\",\n" +
 			"    \"Shipping_Charges\": \"100\",\n" +
-			"    \"Total\": \"2000\"\n" +
+			"    \"Total\": \""+order.getAmount()+"\"\n" +
 			"  }\n" +
 			"}\n";
 
+	System.out.println(jsonBody);
+
 // Set the URL
-	String url = "https://www.zohoapis.com/inventory/v1/salesorders?organization_id=10234695";
+	String url = "https://creator.zoho.in/api/v2/accountsmanager_dcrpl2/middle-ware/form/Sales_Orders";
 
 // Create the request entity
 	HttpEntity<String> entity = new HttpEntity<>(jsonBody, headers);
@@ -1369,6 +1391,8 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 // Get the response body and status code
 	String responseBody = response.getBody();
 	HttpStatus statusCode = response.getStatusCode();
+
+	System.out.println("responsebody = "+responseBody);
 
 return responseBody;
 }

@@ -65,7 +65,9 @@ public class Product implements Serializable {
 	}
 
 	private String outOfStock;
-	
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false)
 	private Date deletedAt;
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
