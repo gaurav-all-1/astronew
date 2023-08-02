@@ -1361,8 +1361,8 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"        \"Status_Code\": \""+orderDetails.getUesrOrder().getStatus()+"\",\n" +
 			"        \"On_Hold\": \"OnHold\",\n" +
 			"        \"Quantiry\": \"1\",\n" +
-			"        \"totalPrice\": \""+orderDetails.getUesrOrder().getAmount()+"\",\n" +
-			"        \"Selling_Price\": \""+orderDetails.getProduct().getMrp()+"\",\n" +
+			"        \"totalPrice\": \""+order.getAmount()+"\",\n" +
+			"        \"Selling_Price\": \""+order.getAmount()+"\",\n" +
 			"        \"ShippingCharges\": \"100\",\n" +
 			"        \"Discount1\": \"10\",\n" +
 			"        \"ShippingPackageStatus\": \"ShippingPackageStatus\",\n" +
