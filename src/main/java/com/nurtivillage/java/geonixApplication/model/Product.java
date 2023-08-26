@@ -65,6 +65,17 @@ public class Product implements Serializable {
 	}
 
 	private String outOfStock;
+
+	private String asin;
+
+	public String getAsin() {
+		return asin;
+	}
+
+	public void setAsin(String asin) {
+		this.asin = asin;
+	}
+
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
