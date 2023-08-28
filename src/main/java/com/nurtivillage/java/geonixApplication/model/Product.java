@@ -68,6 +68,16 @@ public class Product implements Serializable {
 
 	private String asin;
 
+	private String sku;
+
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
+
 	public String getAsin() {
 		return asin;
 	}
