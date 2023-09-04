@@ -1322,7 +1322,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 	HttpHeaders headers = new HttpHeaders();
 	headers.setContentType(MediaType.APPLICATION_JSON);
 	headers.set("Authorization", "Zoho-oauthtoken "+token);
-
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 // Create the request body
 	String jsonBody = "{\n" +
 			"  \"data\": {\n" +
@@ -1357,7 +1357,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"    \"ORDER_DETAILS\": [\n" +
 			"  {\n" +
 			"        \"Order_Item_Code\": \""+orderDetails.getId()+"\",\n" +
-			"        \"Item_Sku\": \""+orderDetails.getProduct().getCategory().getName()+"\",\n" +
+			"        \"Item_Sku\": \""+orderDetails.getProduct().getSku()+"\",\n" +
 			"        \"Status_Code\": \""+orderDetails.getUesrOrder().getStatus()+"\",\n" +
 			"        \"On_Hold\": \"OnHold\",\n" +
 			"        \"Quantity\": \"1\",\n" +
@@ -1366,7 +1366,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"        \"ShippingCharges\": \"100\",\n" +
 			"        \"Discount1\": \"10\",\n" +
 			"        \"ShippingPackageStatus\": \"ShippingPackageStatus\",\n" +
-			"        \"Areated_At\": \"02-Aug-2023 13:09:50\",\n" +
+			"        \"Areated_At\": \""+dateFormat.format(order.getCreatedAt())+"\",\n" +
 			"        \"Barcode\": \"Barcode873287382\",\n" +
 			"        \"Product_Description\": \"One\",\n" +
 			"    	\"Product_Name\": \""+orderDetails.getProduct().getName()+"\",\n" +
