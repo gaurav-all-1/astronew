@@ -1331,7 +1331,7 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"    \"Channel\": \"Geonix\",\n" +
 			"    \"source\": \"Geonix.in\",\n" +
 			"    \"Priority\": \"Critical\",\n" +
-			"    \"dadisplayOrderDateTimete\": \"02-FEB-2023\",\n" +
+			"    \"displayOrderDateTimete\": \""+dateFormat.format(order.getCreatedAt())+"\",\n" +
 			"    \"Status\": \""+order.getPaymentMethod()+"\",\n" +
 			"    \"GSTIN\": \""+order.getShippingAddress().getGst()+"\",\n" +
 			"    \"Payment_Method\": \""+order.getPaymentMethod()+"\",\n" +
@@ -1379,7 +1379,6 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"}\n";
 
 	System.out.println(jsonBody);
-
 // Set the URL
 	String url = "https://creator.zoho.in/api/v2/accountsmanager_dcrpl2/middle-ware/form/Sales_Orders";
 
