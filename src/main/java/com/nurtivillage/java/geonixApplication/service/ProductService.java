@@ -10,15 +10,9 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.amazonaws.services.simplesystemsmanagement.model.GetInventoryRequest;
-import com.nurtivillage.java.geonixApplication.dao.CategoryRepository;
-import com.nurtivillage.java.geonixApplication.dao.InventoryRepository;
-import com.nurtivillage.java.geonixApplication.dao.ProductRepository;
-import com.nurtivillage.java.geonixApplication.dao.VariantRepository;
+import com.nurtivillage.java.geonixApplication.dao.*;
 import com.nurtivillage.java.geonixApplication.dto.ProductUpdateDto;
-import com.nurtivillage.java.geonixApplication.model.Category;
-import com.nurtivillage.java.geonixApplication.model.Inventory;
-import com.nurtivillage.java.geonixApplication.model.Product;
-import com.nurtivillage.java.geonixApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.model.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,6 +40,8 @@ public class ProductService {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private InvoiceDataRepository invoiceDataRepository;
     public Page<Product> getAllProduct(Pageable pageable){
         try {
             Page<Product> allProduct = productRepository.
@@ -64,6 +60,15 @@ public class ProductService {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public InvoiceData insertInvoice(InvoiceData invoiceData){
+        try {
+            invoiceDataRepository.save(invoiceData);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Product insertProduct(Product product){

@@ -12,11 +12,7 @@ import javax.websocket.server.PathParam;
 import com.nurtivillage.java.geonixApplication.dto.ProductInsert;
 import com.nurtivillage.java.geonixApplication.dto.ProductUpdateDto;
 import com.nurtivillage.java.geonixApplication.events.TestedEventPublisher;
-import com.nurtivillage.java.geonixApplication.model.Inventory;
-import com.nurtivillage.java.geonixApplication.model.Product;
-import com.nurtivillage.java.geonixApplication.model.ProductImage;
-import com.nurtivillage.java.geonixApplication.model.Review;
-import com.nurtivillage.java.geonixApplication.model.Variant;
+import com.nurtivillage.java.geonixApplication.model.*;
 import com.nurtivillage.java.geonixApplication.service.AWSS3Service;
 import com.nurtivillage.java.geonixApplication.service.ApiResponseService;
 import com.nurtivillage.java.geonixApplication.service.InventoryService;
@@ -180,6 +176,18 @@ public class ProductController {
 	public ResponseEntity<ApiResponseService> insertProduct(@Valid @RequestBody Product product) {
 		try {
 			Product insetProduct = productService.insertProduct(product);
+			ApiResponseService res = new ApiResponseService("product create", true, Arrays.asList(insetProduct));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@PostMapping("/insert_invoice")
+	public ResponseEntity<ApiResponseService> insertProduct(@Valid @RequestBody InvoiceData invoiceData) {
+		try {
+			InvoiceData insetProduct = productService.insertInvoice(invoiceData);
 			ApiResponseService res = new ApiResponseService("product create", true, Arrays.asList(insetProduct));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
 		} catch (Exception e) {
