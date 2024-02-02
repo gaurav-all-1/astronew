@@ -71,6 +71,15 @@ public class ProductService {
         return null;
     }
 
+    public List<InvoiceData> getInvoices(){
+        try {
+            return invoiceDataRepository.findAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Product insertProduct(Product product){
         try {            
             Category c = product.getCategory();

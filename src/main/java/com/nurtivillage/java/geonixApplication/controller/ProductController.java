@@ -222,6 +222,8 @@ public class ProductController {
 
 
 
+
+
 	@PutMapping("/edit")
 	public ResponseEntity<ApiResponseService> editProduct(@RequestBody Product product) {
 		try {
@@ -240,6 +242,19 @@ public class ProductController {
 		try {
 			Product data = productService.updateProduct(product);
 			ApiResponseService res = new ApiResponseService("update product", true, Arrays.asList(data));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
+			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/getinvoices")
+	public ResponseEntity<ApiResponseService> getInvoices() {
+		try {
+			List<InvoiceData> data = productService.getInvoices();
+			ApiResponseService res = new ApiResponseService("Invoices", true, Arrays.asList(data));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
