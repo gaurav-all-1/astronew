@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nurtivillage.java.geonixApplication.dto.ProductInsert;
 import com.nurtivillage.java.geonixApplication.dto.ProductUpdateDto;
 import com.nurtivillage.java.geonixApplication.events.TestedEventPublisher;
@@ -185,14 +187,34 @@ public class ProductController {
 		}
 	}
 	@PostMapping("/insert_invoice")
-	public ResponseEntity<ApiResponseService> insertProduct(@Valid @RequestBody InvoiceData invoiceData) {
+	public ResponseEntity<ApiResponseService> insertProduct(@RequestPart(value = "file", required = true) final MultipartFile multipartFile, @RequestParam String name
+	,@RequestParam String mobile,@RequestParam String email
+	,@RequestParam String state,@RequestParam String marketName
+	,@RequestParam String serialNumber,@RequestParam String productName
+	,@RequestParam String note) {
+		Optional<Product> product = null;
+		File file = null;
+		InvoiceData savedInvoiceData;
 		try {
-			InvoiceData insetProduct = productService.insertInvoice(invoiceData);
-			ApiResponseService res = new ApiResponseService("product create", true, Arrays.asList(insetProduct));
+			InvoiceData invoiceData = new InvoiceData();
+			invoiceData.setName(name);
+			invoiceData.setMobile(mobile);
+			invoiceData.setNote(note);
+			invoiceData.setProductName(productName);
+			invoiceData.setEmail(email);
+			invoiceData.setState(state);
+			invoiceData.setMarketName(marketName);
+			invoiceData.setSerialNumber(serialNumber);
+			savedInvoiceData = productService.insertInvoice(invoiceData);
+			String url = awsService.uploadinvoicetos3("geonix",multipartFile, savedInvoiceData).toString();
+			savedInvoiceData.setUrl(url);
+			productService.insertInvoice(savedInvoiceData);
+			ApiResponseService res = new ApiResponseService("file upload successfully", true, Arrays.asList(url));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
-			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
+			ApiResponseService res = new ApiResponseService("file not uploaded. something went worng", true,
+					Arrays.asList("error"));
 			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -376,5 +398,19 @@ public class ProductController {
 	catch(Exception e) {
 		return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	}
+
+	public static void main(String[] args) throws JsonProcessingException {
+		InvoiceData data = new InvoiceData();
+		data.setEmail("anuragpundir631@gmail.com");
+		data.setMobile("9873567279");
+		data.setName("Anurag");
+		data.setNote("Hii");
+		data.setProductName("WIFI");
+		data.setState("Haryana");
+		data.setMarketName("Delhi");
+		data.setSerialNumber("ABC1234");
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.println(mapper.writeValueAsString(data));
 	}
 }

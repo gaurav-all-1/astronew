@@ -64,7 +64,7 @@ public class ProductService {
 
     public InvoiceData insertInvoice(InvoiceData invoiceData){
         try {
-            invoiceDataRepository.save(invoiceData);
+           return invoiceDataRepository.save(invoiceData);
         }catch (Exception e){
             e.printStackTrace();
         }

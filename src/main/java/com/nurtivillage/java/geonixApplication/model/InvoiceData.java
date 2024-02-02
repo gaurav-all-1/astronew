@@ -20,6 +20,10 @@ public class InvoiceData {
     private String productName;
     private String note;
 
+    private String url;
+
+
+
     public String getName() {
         return name;
     }
@@ -82,5 +86,21 @@ public class InvoiceData {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

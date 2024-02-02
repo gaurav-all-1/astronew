@@ -207,4 +207,14 @@ public class AWSS3ServiceImpl implements AWSS3Service {
 		URL imageUrl = amazonS3.getUrl(bucketName, fileName);
 		return imageUrl;
 	}
+
+	public URL uploadinvoicetos3(final String bucketName, final MultipartFile multipartFile, InvoiceData data){
+		final File file = convertMultiPartFileToFile(multipartFile);
+		final String fileName = "invoice"+"/"+data.getId()+"/"+file.getName();
+		LOGGER.info("Uploading file with name= " + fileName);
+		final PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file).withCannedAcl(CannedAccessControlList.PublicRead);
+		amazonS3.putObject(putObjectRequest);
+		URL imageUrl = amazonS3.getUrl(bucketName, fileName);
+		return imageUrl;
+	}
 }
