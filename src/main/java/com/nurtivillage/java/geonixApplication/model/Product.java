@@ -39,7 +39,15 @@ public class Product implements Serializable {
 
 	private String productUrl;
 
+	private String productLink;
 
+	public String getProductLink() {
+		return productLink;
+	}
+
+	public void setProductLink(String productLink) {
+		this.productLink = productLink;
+	}
 
 	@NotBlank
     private String brand;
