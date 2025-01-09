@@ -276,6 +276,13 @@ public class ProductController {
 //		}
 //	}
 
+
+	@GetMapping("/reset-deleted-at")
+	public String resetDeletedAt() {
+		productService.resetDeletedAtForProducts();
+		return "Deleted_at field set to null for products with id > 1";
+	}
+
 	@GetMapping(value = "/highlighter")
 	public ResponseEntity<ApiResponseService> highlighterProduct() {
 		try {

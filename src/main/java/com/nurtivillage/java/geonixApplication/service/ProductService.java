@@ -313,6 +313,18 @@ public class ProductService {
         }
     }
 
+
+    public void resetDeletedAtForProducts() {
+        List<Product> products = productRepository.findAll();
+
+        for (Product product : products) {
+            if (product.getId() > 1) {
+                product.setDeletedAt(null);
+                productRepository.save(product);
+            }
+        }
+    }
+
     public Page<Product> getAllProductWithFilter(Variant i,Pageable firstPage) {
         try {
             Page<Product> allProduct = productRepository.
