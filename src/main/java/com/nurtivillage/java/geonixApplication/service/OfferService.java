@@ -68,16 +68,16 @@ public List<Offer> getOffersByCategory(int categoryId){
 		throw e;
 	}
 }
-public Offer deleteOffer(Long offerId) {
-	try {
-		Offer offer=offerRepository.findByIdAndDeletedAtIsNull(offerId);
-	   offer.setDeletedAt(new Date());
-	   return offerRepository.save(offer);
-	}
-	catch(Exception e) {
-		throw e;
-	}
-}
+//public Offer deleteOffer(Long offerId) {
+//	try {
+//		Offer offer=offerRepository.findByIdAndDeletedAtIsNull(offerId);
+//	   offer.setDeletedAt(new Date());
+//	   return offerRepository.save(offer);
+//	}
+//	catch(Exception e) {
+//		throw e;
+//	}
+//}
 public Offer updateOffer(Offer offer) {
 	try {
 		return offerRepository.save(offer);

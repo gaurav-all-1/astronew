@@ -149,20 +149,20 @@ public class ProductService {
         }
     }
 
-    public String DeleteProduct(Long id) throws Exception{
-        try {
-            if(!productRepository.existsById(id)){
-                throw new ExceptionService("product is deleted or not exists");
-            }
-            System.out.println(id);
-            Optional<Product> product = productRepository.findById(id);
-            product.get().setDeletedAt(new Date());
-            productRepository.save(product.get());
-            return "delete product";
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+//    public String DeleteProduct(Long id) throws Exception{
+//        try {
+//            if(!productRepository.existsById(id)){
+//                throw new ExceptionService("product is deleted or not exists");
+//            }
+//            System.out.println(id);
+//            Optional<Product> product = productRepository.findById(id);
+//            product.get().setDeletedAt(new Date());
+//            productRepository.save(product.get());
+//            return "delete product";
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 
     public Optional<Product> ProductInfo(Long id) throws Exception {
         try {

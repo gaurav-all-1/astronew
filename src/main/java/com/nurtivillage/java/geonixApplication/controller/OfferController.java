@@ -77,16 +77,16 @@ public ResponseEntity<?> getOffersByCategory(@PathVariable int categoryId) {
 		throw e;
 	}
 }
-@GetMapping("/delete/{offerId}")
-public ResponseEntity<?> deleteOffer(@PathVariable Long offerId) throws Exception{
-	try {
-		Offer savedOffer=offerService.deleteOffer(offerId);
-		return new ResponseEntity<>(savedOffer,HttpStatus.OK);
-	}
-	catch(Exception e) {
-		throw e;
-	}
-}
+//@GetMapping("/delete/{offerId}")
+//public ResponseEntity<?> deleteOffer(@PathVariable Long offerId) throws Exception{
+//	try {
+//		Offer savedOffer=offerService.deleteOffer(offerId);
+//		return new ResponseEntity<>(savedOffer,HttpStatus.OK);
+//	}
+//	catch(Exception e) {
+//		throw e;
+//	}
+//}
 	@PutMapping("/update")
 	public ResponseEntity<?> updateOffer(@RequestBody Offer offer) throws Exception{
 		try {

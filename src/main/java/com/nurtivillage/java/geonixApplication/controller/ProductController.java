@@ -263,18 +263,18 @@ public class ProductController {
 		}
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<ApiResponseService> deleteProduct(@PathVariable Long id) {
-		try {
-			String msg = productService.DeleteProduct(id);
-			ApiResponseService res = new ApiResponseService(msg, true, Arrays.asList(id));
-			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
-		} catch (Exception e) {
-			System.out.println(e);
-			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
-			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+//	@DeleteMapping("/delete/{id}")
+//	public ResponseEntity<ApiResponseService> deleteProduct(@PathVariable Long id) {
+//		try {
+//			String msg = productService.DeleteProduct(id);
+//			ApiResponseService res = new ApiResponseService(msg, true, Arrays.asList(id));
+//			return new ResponseEntity<ApiResponseService>(res, HttpStatus.OK);
+//		} catch (Exception e) {
+//			System.out.println(e);
+//			ApiResponseService res = new ApiResponseService(e.getMessage(), false, Arrays.asList("error"));
+//			return new ResponseEntity<ApiResponseService>(res, HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//	}
 
 	@GetMapping(value = "/highlighter")
 	public ResponseEntity<ApiResponseService> highlighterProduct() {
