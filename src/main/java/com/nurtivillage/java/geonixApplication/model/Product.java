@@ -94,9 +94,7 @@ public class Product implements Serializable {
 		this.asin = asin;
 	}
 
-	@UpdateTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
+	
 	private Date deletedAt;
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
