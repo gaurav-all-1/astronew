@@ -105,6 +105,7 @@ public class ProductService {
             });
             
             product.setVariants(savedVariants);
+            product.setDeletedAt(null);
             Product save = productRepository.save(product);
             save.getVariants().forEach((var)->{
                 Optional<Variant> ov = variantRepo.findById(var.getId());
