@@ -87,7 +87,7 @@ public class ProductService {
                 Category createCat = categoryRepository.save(c);
                 product.setCategory(createCat);
             }else{
-                Category category = categoryRepository.findById(c.getId());
+                Category category = categoryRepository.findById(c.getId()).get();
                 product.setCategory(category);
             }
             List<Variant> savedVariants = new ArrayList<>();
