@@ -81,7 +81,16 @@ public class ProductService {
     }
 
     public Product insertProduct(Product product){
-        try {            
+        try {
+            if(product.getId()!=null){
+                Product p = productRepository.findById(product.getId()).get();
+                p.setAdditional(product.getAdditional());
+                p.setDiscription(product.getDiscription());
+                p.setBrand(product.getBrand());
+                p.setName(product.getName());
+                product=p;
+            }
+
             Category c = product.getCategory();
             if(!categoryRepository.existsById(c.getId())){
                 Category createCat = categoryRepository.save(c);
@@ -109,24 +118,24 @@ public class ProductService {
             product.setDeletedAt(null);
             product.setCreatedAt(new Date());
             Product save = productRepository.save(product);
-            save.getVariants().forEach((var)->{
-                Optional<Variant> ov = variantRepo.findById(var.getId());
-                Variant v = ov.get();
-                int quantity = 0;
-                int price = 0;
-                for(Variant savedVariant : variants)
-                {
-                    if(savedVariant.getId() != var.getId() && savedVariant.getName() != var.getName()){
-                        continue;
-                    }
-                    quantity = savedVariant.getQuantity();
-                    price = savedVariant.getPrice();
-                }
-                System.out.println(price);
-                Inventory inventory = new Inventory(save,v,quantity,price);
-
-                inventoryService.addInventory(inventory);
-            });
+//            save.getVariants().forEach((var)->{
+//                Optional<Variant> ov = variantRepo.findById(var.getId());
+//                Variant v = ov.get();
+//                int quantity = 0;
+//                int price = 0;
+//                for(Variant savedVariant : variants)
+//                {
+//                    if(savedVariant.getId() != var.getId() && savedVariant.getName() != var.getName()){
+//                        continue;
+//                    }
+//                    quantity = savedVariant.getQuantity();
+//                    price = savedVariant.getPrice();
+//                }
+//                System.out.println(price);
+//                Inventory inventory = new Inventory(save,v,quantity,price);
+//
+//                inventoryService.addInventory(inventory);
+//            });
 
             return save;
         } catch (Exception e) {
