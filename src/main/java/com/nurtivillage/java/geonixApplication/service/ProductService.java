@@ -88,6 +88,7 @@ public class ProductService {
                 p.setDiscription(product.getDiscription());
                 p.setBrand(product.getBrand());
                 p.setName(product.getName());
+                p.setStatus(product.getStatus());
                 product=p;
             }
 
