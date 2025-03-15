@@ -78,6 +78,26 @@ public class Product implements Serializable {
 
 	private String sku;
 
+	public String getMetaTitle() {
+		return metaTitle;
+	}
+
+	public void setMetaTitle(String metaTitle) {
+		this.metaTitle = metaTitle;
+	}
+
+	public String getMetaDescription() {
+		return metaDescription;
+	}
+
+	public void setMetaDescription(String metaDescription) {
+		this.metaDescription = metaDescription;
+	}
+
+	private String metaTitle;
+
+	private String metaDescription;
+
 	public String getSku() {
 		return sku;
 	}
@@ -94,7 +114,7 @@ public class Product implements Serializable {
 		this.asin = asin;
 	}
 
-	
+
 	private Date deletedAt;
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
