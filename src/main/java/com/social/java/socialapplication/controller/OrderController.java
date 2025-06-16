@@ -1,0 +1,488 @@
+package com.social.java.socialapplication.controller;
+
+import java.io.*;
+import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.itextpdf.html2pdf.HtmlConverter;
+
+import com.social.java.socialapplication.RazorPayClientConfig;
+import com.social.java.socialapplication.Request.OrderRequest;
+import com.social.java.socialapplication.dao.UserRepository;
+import com.social.java.socialapplication.dto.StatusRequest;
+import com.social.java.socialapplication.model.OrderDetails;
+import com.social.java.socialapplication.model.Payment;
+import com.social.java.socialapplication.model.Status;
+import com.social.java.socialapplication.model.User;
+import com.social.java.socialapplication.model.UserOrder;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
+
+import com.social.java.socialapplication.service.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+
+
+@RestController
+@RequestMapping(path = "/order")
+@Transactional
+public class OrderController {
+	private final static Logger log=LogManager.getLogger(OrderController.class);
+        @Autowired
+        public OrderService orderService;
+        @Autowired
+        public LoggedInUserService userService;
+        @Autowired 
+        public OnlinePaymentService onlinePaymentService;
+        private RazorpayClient razorpayClient;
+        private RazorPayClientConfig razorpayClientConfig;
+        
+        @Autowired
+        private JavaMailSender mailSender;
+        @Autowired
+        private UserRepository userRepo;
+
+        @Autowired
+        private AWSS3Service awss3Service;
+        @Autowired
+        public OrderController(RazorPayClientConfig razorpayClientConfig) throws RazorpayException{
+        	this.razorpayClientConfig=razorpayClientConfig;
+        	this.razorpayClient=new RazorpayClient(razorpayClientConfig.getKey(),razorpayClientConfig.getSecret());
+        }
+        
+        
+        @GetMapping("/list")
+        public ResponseEntity<ApiResponseService> allOrder(){
+            try{
+                User user = userService.userDetails();
+                List<UserOrder> orderList = orderService.getAllUserOrder(user);
+                ApiResponseService res = new ApiResponseService("order List",true,orderList);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponseService> allOrders(){
+        try{
+
+            List<UserOrder> orderList = orderService.getAllOrder();
+            ApiResponseService res = new ApiResponseService("order List",true,orderList);
+            return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+        @GetMapping("/cancel")
+        public ResponseEntity<ApiResponseService> cancelOrder(){
+            try{
+                List<UserOrder> orderList = orderService.getAllCancelOrder();
+                ApiResponseService res = new ApiResponseService("order List",true,orderList);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+
+
+        @PostMapping("/create")
+        public ResponseEntity<ApiResponseService> createOrder(@RequestBody OrderRequest orderRequest,@RequestParam(required = false) boolean fastDelivery){
+            try{
+                UserOrder order=null;
+                double amount = orderRequest.getAmount();
+                User user = userService.userDetails();
+                String fastDeliveryString = fastDelivery == true?"Yes":"No";
+                if(orderRequest.getCouponcode()!=null){
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode(),fastDeliveryString);
+                }else {
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),fastDeliveryString);
+                }
+                //varify amount
+//                boolean checker = orderService.amountVarify(amount,orderRequest.getCartItem());
+//                if(!checker){
+//                    throw new Exception("amount not varify");
+//                }
+                UserOrder orderCreate = orderService.createOrder(order);
+
+
+//                mailSender.send(mailBuyer);
+                log.info("Sending Mail To buyer for order received --End");
+                if(!orderRequest.getPaymentMethod().equals("COD")){
+                    orderService.createOrderDetailsForRZP(orderRequest.getCartItem(),orderCreate);
+                    Order orderRes = onlinePaymentService.createOrderOnRazorpay(orderCreate,this.razorpayClient);
+                    onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
+                    ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")));
+                    return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+                }else{
+                    orderService.createOrderDetails(orderRequest.getCartItem(),orderCreate);
+                }
+
+                ApiResponseService res = new ApiResponseService("order placed",true,null);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList(e));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+    @GetMapping("/orderdetail/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable Long id){
+        try{
+            UserOrder order = orderService.getOrder(id);
+
+
+//            ApiResponseService res = new ApiResponseService("order detail",true,order);
+            return  new ResponseEntity<Object>(order,HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/generateinvoice/{id}")
+    public ResponseEntity<?> generateinvoice(@PathVariable Long id){
+        try{
+            UserOrder order = orderService.getOrder(id);
+            orderService.downloadfileobject(order);
+
+//            ApiResponseService res = new ApiResponseService("order detail",true,order);
+            return  new ResponseEntity<Object>(HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+        @PostMapping("/product")
+        public ResponseEntity<ApiResponseService> createSingleProductOrder(@RequestBody OrderRequest orderRequest,@RequestParam(required = false) boolean fastDelivery){
+            try{
+                UserOrder order=null;
+                double amount = orderRequest.getAmount();
+                User user = userService.userDetails();
+//               boolean inStock=orderService.checkQuantity(orderRequest.getProductId(), orderRequest.getVariantId(), orderRequest.getQuantity());
+//               if(!inStock) {
+//            	   throw new Exception("Not in Stock");
+//               }
+
+                String fastDeliveryString = fastDelivery == true?"Yes":"No";
+                if(orderRequest.getCouponcode()!=null){
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode(),fastDeliveryString);
+                }else {
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),fastDeliveryString);
+                }
+                UserOrder orderCreate = orderService.createOrder(order);
+//               OrderDetails data =
+
+
+//               mailSender.send(mailBuyer);
+               log.info("Sending Mail To buyer for order received --End");
+               
+                if(!orderRequest.getPaymentMethod().equals("COD")){
+                    orderService.createSingleOrderDetailsForRzp(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
+                    Order orderRes = onlinePaymentService.createOrderOnRazorpay(orderCreate,this.razorpayClient);
+                    onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
+                    ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")));
+                    return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+                }else{
+                    orderService.createSingleOrderDetails(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
+                }
+
+                ApiResponseService res = new ApiResponseService("order placed",true,null);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList(e));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } 
+        
+        @PutMapping("/validatePayment")
+        public ResponseEntity<ApiResponseService> updateOrder(@RequestBody Payment payment){
+        	try {
+        		String error=onlinePaymentService.validateAndUpdateOrder(payment.getRazopayOrderId(),payment.getRazorpayPaymentId(),payment.getRazorpaySignature(),razorpayClientConfig.getSecret());
+        	     if(error!=null) {
+                    ApiResponseService res = new ApiResponseService("something went wrong",false,Arrays.asList("error"));
+        	    	return new ResponseEntity<ApiResponseService>(res,HttpStatus.BAD_REQUEST);
+        	     }
+
+                 ApiResponseService res = new ApiResponseService("ok",true,Arrays.asList());
+        	     return new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+        	}
+        	catch(Exception e) {
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+        		return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);	
+        	}
+			
+        	
+        }
+        
+        // Guest Order- without login create order
+        @PostMapping("/guest")
+        public ResponseEntity<ApiResponseService> createGuestOrder(@RequestBody OrderRequest orderRequest,@RequestParam(required = false) boolean fastDelivery){
+            try{
+//                Long orderNO = orderService.getLastOrderNO();
+                UserOrder order=null;
+                double amount = orderRequest.getAmount();
+                User user=userRepo.findByEmail(orderRequest.getShippingAddress().getEmail());
+                  if(user==null) {
+                user = orderService.createGuestUser(orderRequest.getShippingAddress());}
+//               boolean inStock=orderService.checkQuantity(orderRequest.getProductId(), orderRequest.getVariantId(), orderRequest.getQuantity());
+//               if(!inStock) {
+//            	   throw new Exception("Not in Stock");
+//               }
+                String fastDeliveryString = fastDelivery == true?"Yes":"No";
+
+                if(orderRequest.getCouponcode()!=null){
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),orderRequest.getCouponcode(),fastDeliveryString);
+                }else {
+                    order = new UserOrder(amount, user, 1, Status.ordered, orderRequest.getShippingAddress(), orderRequest.getPaymentMethod(),fastDeliveryString);
+                }
+
+
+                //verify amount
+//                boolean checker = orderService.checkAmount(orderRequest);
+//                if(!checker){
+//                    throw new Exception("Incorrect amount");
+//                }
+                UserOrder orderCreate = orderService.createOrder(order);
+//               mailSender.send(mailBuyer);
+               log.info("Sending Mail To buyer for order received --End");
+               
+               Map<String,String> guestInfo=orderService.guestInfo(user);
+                if(!orderRequest.getPaymentMethod().equals("COD")){
+                    orderService.createSingleOrderDetailsForRzp(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
+                    Order orderRes = onlinePaymentService.createOrderOnRazorpay(orderCreate,this.razorpayClient);
+                    onlinePaymentService.savePayment(orderRes.get("id"), orderCreate);
+                    ApiResponseService res = new ApiResponseService("make payment",true,Arrays.asList(orderRes.get("id"),orderRes.get("amount")),guestInfo);
+                    return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+                }else{
+                    orderService.createSingleOrderDetails(orderRequest.getProductId(),orderRequest.getVariantId(),orderRequest.getQuantity(),orderCreate);
+                }
+//                System.out.print(data);
+                ApiResponseService res = new ApiResponseService("order placed",true,null,guestInfo);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList(e));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } 
+
+        @GetMapping("/detail/{id}")
+        public ResponseEntity<ApiResponseService> orderDetail(@PathVariable Long id){
+            try{
+                UserOrder order = orderService.getOrder(id);
+                List<OrderDetails> orderDetails = orderService.findByUesrOrder(order);
+                
+                ApiResponseService res = new ApiResponseService("order detail",true,orderDetails);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        @PutMapping("status")
+        public ResponseEntity<ApiResponseService> orderStatus(@RequestBody StatusRequest statusRequest){
+            try{
+                UserOrder orderCreate = orderService.orderStatus(statusRequest);
+                ApiResponseService res = new ApiResponseService("orderStatus",true,Arrays.asList(orderCreate));
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+    @PutMapping("trackingstatus")
+    public ResponseEntity<ApiResponseService> trackingstatus(@RequestBody StatusRequest statusRequest){
+        try{
+            UserOrder orderCreate = orderService.trackingStatus(statusRequest);
+            ApiResponseService res = new ApiResponseService("orderStatus",true,Arrays.asList(orderCreate));
+            return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e);
+            ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+            return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+        @GetMapping("/user/list")
+        public ResponseEntity<ApiResponseService> userOrderList(){
+            try{
+                User user = userService.userDetails();
+                List<?> order = orderService.getUserOrder(user);
+                
+                ApiResponseService res = new ApiResponseService("User order list",true,order);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        @GetMapping(value="/usercancelorderList")
+        public ResponseEntity<ApiResponseService> getUserCancelOrder(){
+            try {
+                User user = userService.userDetails();
+                List<UserOrder> orderList = orderService.getUserCancelOrder(user.getId());
+                ApiResponseService res = new ApiResponseService("order List",true,orderList);
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            } catch (Exception e) {
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        @PutMapping("/userOrderCancel")
+        public ResponseEntity<ApiResponseService> userOrderCancel(@RequestBody StatusRequest statusRequest){
+            try{
+                statusRequest.setStatus("canceled");
+                UserOrder orderCreate = orderService.orderStatus(statusRequest);
+                ApiResponseService res = new ApiResponseService("orderStatus",true,Arrays.asList(orderCreate));
+                return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+            }catch(Exception e){
+                System.out.println(e);
+                ApiResponseService res = new ApiResponseService(e.getMessage(),false,Arrays.asList("error"));
+                return new ResponseEntity<ApiResponseService>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } 
+
+        // @GetMapping(value="/refund/{order_id}")
+        // public ResponseEntity<ApiResponseService> getMethodName(@PathVariable Long order_id) {
+        //     try {
+        //         Optional<UserOrder> order = orderService.getOrder(order_id);
+        //         if(order.isEmpty()){
+        //             new Exception("order not found");
+        //         }
+        //         onlinePaymentService.refund(order_id);
+        //         // UserOrder orderCreate = orderService.orderStatus(statusRequest);
+        //         ApiResponseService res = new ApiResponseService("orderStatus",true,Arrays.asList(orderCreate));
+        //         return  new ResponseEntity<ApiResponseService>(res,HttpStatus.OK);
+        //     } catch (Exception e) {
+        //         throw e;
+        //     }
+        // }
+
+        @GetMapping("/getOrderDetails/{orderDetailId}")
+        public ResponseEntity<?> getOrderDetails(@PathVariable Long orderDetailId){
+        	try {log.info("Fetching order details with id: "+orderDetailId+"--Start");
+        		OrderDetails orderDetails=orderService.getOrderDetail(orderDetailId);
+        		log.info("Fetching order details with id: "+orderDetailId+"--End");
+        		return new ResponseEntity<OrderDetails>(orderDetails,HttpStatus.OK);
+        	}
+        	catch(Exception e) {
+        		return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        	}
+        }
+        
+        @GetMapping("/{orderId}")
+        public ResponseEntity<?> getUserOrder(@PathVariable Long orderId){
+        	try {log.info("Fetching user order with id: "+orderId+"--Start");
+        		UserOrder order=orderService.getOrder(orderId);
+        		log.info("Fetching user order with id: "+orderId+"--End");
+        		return new ResponseEntity<UserOrder>(order,HttpStatus.OK);
+        	}
+        	catch(Exception e) {
+        		return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        	}
+        }
+
+
+    @GetMapping("/ordernum")
+    public ResponseEntity<?> getUserOrdernumber(@RequestParam String orderId){
+        try {log.info("Fetching user order with id: "+orderId+"--Start");
+            UserOrder order=orderService.getOrdernumber(orderId);
+            log.info("Fetching user order with id: "+orderId+"--End");
+            return new ResponseEntity<UserOrder>(order,HttpStatus.OK);
+        }
+        catch(Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/getRange")
+    public ResponseEntity<?> getUserOrderByRange(@RequestBody Map<String, String> rangeMap){
+       try{
+            List<UserOrder> order=orderService.getOrders(rangeMap);
+
+            return new ResponseEntity<>(order,HttpStatus.OK);
+        }
+        catch(Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+        @RequestMapping("/downloadinvoice")
+        public String downloadInvoice(HttpServletRequest request,
+                                    HttpServletResponse response)
+        {
+            UserOrder order = new UserOrder();
+            order.setId(2L);
+            OutputStream fileOutputStream = null;
+            try {
+                fileOutputStream = new FileOutputStream("string-output.pdf");
+                HtmlConverter.convertToPdf("<h1>Hello String Content!</h1>", fileOutputStream);
+                File file = new File("string-output.pdf");
+                String url = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+                return url;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+
+            }
+        }
+
+
+
+
+
+    @GetMapping("/send")
+    public String sendemail() {
+        Map<String,Object> emailMap = new HashMap<>();
+        emailMap.put("service_id","service_8zp4yhp");
+        emailMap.put("template_id","template_j9f3f2c");
+        emailMap.put("user_id","user_mTjMBBP092bpZsnZTyLfp");
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("emailcontent","Hi");
+        map.put("to_email","anuragpundir631@gmail.com");
+
+        emailMap.put("template_params",map);
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity result = template.postForEntity("https://api.emailjs.com/api/v1.0/email/send",emailMap,Map.class);
+        return result.getStatusCode().toString();
+    }
+}
