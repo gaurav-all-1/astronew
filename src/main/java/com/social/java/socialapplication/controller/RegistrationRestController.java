@@ -166,6 +166,8 @@ public class RegistrationRestController {
     		return new ResponseEntity<GenericResponse>(new GenericResponse("Error occured while changing password",e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     }
+
+
     // ============== NON-API ============
 
     private SimpleMailMessage constructResendVerificationTokenEmail(final String contextPath, final Locale locale, final VerificationToken newToken, final User user) {

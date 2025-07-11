@@ -384,7 +384,7 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 	public void createMailForForgotPassword(String email,String token) {
 		try {
 			String subject="Reset Password";
-			String message1="Please click on the below link to reset the password for your GEONIX account \r\n \r\n";
+			String message1="Please click on the below link to reset the password for your account \r\n \r\n";
 		    String resetLink=forgotPasswordUrl+"?key="+token;
 //		    SimpleMailMessage mail=new SimpleMailMessage();
 //		    mail.setFrom("geonixindiaonline@gmail.com");
@@ -392,9 +392,9 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 //		    mail.setSubject(subject);
 //		    mail.setText(message1+resetLink);
 
-            String from = "geonixretailindia@gmail.com";
-            final String username = "geonixretailindia@gmail.com";//change accordingly
-            final String password = "otxjgebqbxycpzsl";//change accordingly
+            String from = "anuragpundir631@gmail.com";
+            final String username = "anuragpundir631@gmail.com";//change accordingly
+            final String password = "qyevbadyzphjjuxf";//change accordingly
 
             // Assuming you are sending email through relay.jangosmtp.net
             String host = "smtp.gmail.com";
