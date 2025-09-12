@@ -1,6 +1,6 @@
 package com.social.java.socialapplication.service;
 
-import com.social.java.socialapplication.dao.ChartNoteRepository;
+
 import com.social.java.socialapplication.dao.EncounterRepository;
 import com.social.java.socialapplication.model.ChartNote;
 import com.social.java.socialapplication.model.Encounter;
