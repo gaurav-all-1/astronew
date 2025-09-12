@@ -456,7 +456,7 @@ public class OrderController {
                 fileOutputStream = new FileOutputStream("string-output.pdf");
                 HtmlConverter.convertToPdf("<h1>Hello String Content!</h1>", fileOutputStream);
                 File file = new File("string-output.pdf");
-                String url = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+                String url = awss3Service.uploadinvoicetos3("socialrxmedia",file,order).toString();
                 return url;
             } catch (Exception e) {
                 throw new RuntimeException(e);

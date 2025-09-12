@@ -35,7 +35,7 @@ public class SMSService {
             Message message = Message.creator(
                             new PhoneNumber("+91" + phonenumber),
                             new PhoneNumber("+15155828562"),
-                            "Thank you for your order! Your purchase has been confirmed. Your order id is =" + orderId + "." + '\n' + "If you have any concerns please reach out to Geonix customer support at https://geonix.in")
+                            "Thank you for your order! Your purchase has been confirmed. Your order id is =" + orderId + "." + '\n' + "If you have any concerns please reach out to Get Social customer support")
                     .create();
         }catch (Exception e)
         {

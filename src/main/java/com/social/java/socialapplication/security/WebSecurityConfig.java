@@ -78,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers(HttpMethod.GET,"/review/list/**").permitAll()
         .antMatchers(HttpMethod.GET,"/secured").permitAll()
         .antMatchers(HttpMethod.GET,"/offer/product/**").permitAll()
+				.antMatchers(HttpMethod.GET,"/getUsers").permitAll()
         .antMatchers(HttpMethod.POST,"/order/guest").permitAll()
 				.antMatchers(HttpMethod.POST,"/order/getRange").permitAll()
 				.antMatchers(HttpMethod.POST,"/order/list").permitAll()
@@ -88,6 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers("/product/deleteimage/**").permitAll()
         .antMatchers("/badUser").permitAll()
 				.antMatchers("/order/send").permitAll()
+				.antMatchers("/api/encounters/**").permitAll()
         
         .anyRequest().authenticated()
         .and().

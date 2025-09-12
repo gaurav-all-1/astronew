@@ -387,7 +387,6 @@ private static final Logger log=LogManager.getLogger(UserService.class);
 			String message1="Please click on the below link to reset the password for your account \r\n \r\n";
 		    String resetLink=forgotPasswordUrl+"?key="+token;
 //		    SimpleMailMessage mail=new SimpleMailMessage();
-//		    mail.setFrom("geonixindiaonline@gmail.com");
 //		    mail.setTo(email);
 //		    mail.setSubject(subject);
 //		    mail.setText(message1+resetLink);

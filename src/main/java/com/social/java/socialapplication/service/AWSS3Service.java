@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface AWSS3Service {
 
 	void uploadFile(MultipartFile multipartFile,String userId)  throws Exception;
-	
-	void uploadGenericFile(MultipartFile multipartFile)  throws Exception;
+
+	public String uploadingMediaAttachments(final MultipartFile file) throws Exception;
 
 	String uploadProductFile(MultipartFile multipartFile, Product product) throws Exception;
 	

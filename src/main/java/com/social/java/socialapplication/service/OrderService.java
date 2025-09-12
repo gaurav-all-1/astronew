@@ -467,7 +467,7 @@ public class OrderService {
 			String accessToken = getAccessToken();
 			createASalesOrder(accessToken,order,order.getUser(),orderDetails.get(0));
 			if(order.getCouponCode()==null) {
-				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://getsocialrx.in/assets/images-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 						+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 						+ "<tbody>\r\n"
@@ -562,7 +562,7 @@ public class OrderService {
 				emailMessage += "</tbody>\r\n"
 						+ "</table>";
 			}else{
-				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://getsocialrx.in/assets/images/logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 						+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 						+ "<tbody>\r\n"
@@ -666,19 +666,9 @@ public class OrderService {
 						+ "</table>";
 			}
 //
-//			final String message1 = "************ ORDER PLACED ************ \r\n \r\n Thank you for"
-//					+ " ordering from Geonix. \r\n Your order "+order.getOrderNumber()+" has been placed.\r\n"
-//							+ " # SHIPPING DETAILS # \r\n" + "Name : "
-//					+ address.getName() + "\r\n Country : " + address.getCountry() + "\r\n Street : "
-//					+ address.getStreet() + "\r\n State : " + address.getState() + "\r\n City : " + address.getCity()
-//					+ "\r\n Pincode : " + address.getPincode() + "\r\n Mobile : " + address.getMobile()
-//					+ "\r\n Email : " + order.getUser().getEmail() + "\r\n \r\n" + "# ORDER DETAILS # "
-//					+ "\r\n Order ID : " + order.getOrderNumber() + "\r\n Order Amount : " + order.getAmount()
-//					+ "\r\n Order Status : " + order.getStatus().toString() + "\r\n Payment Method : "+ order.getPaymentMethod();
-
-
-			String from = "geonixretailindia@gmail.com";
-			final String username = "geonixretailindia@gmail.com";//change accordingly
+//
+			String from = "getsocialrx@gmail.com";
+			final String username = "getsocialrx@gmail.com";//change accordingly
 			final String password = "otxjgebqbxycpzsl";//change accordingly
 
 			// Assuming you are sending email through relay.jangosmtp.net
@@ -706,7 +696,7 @@ public class OrderService {
 
 				   // Set To: header field of the header.
 				   message.setRecipients(Message.RecipientType.TO,
-			              InternetAddress.parse("geonixshopping@gmail.com,praveen@geonix.in"));
+			              InternetAddress.parse("getsocialrx@gmail.com,praveen@getsocialrx.in"));
 
 				   // Set Subject: header field
 				   message.setSubject("Order Recieved");
@@ -744,7 +734,7 @@ public class OrderService {
 			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
 			final String subject = "Order placed";
 			if(order.getCouponCode()==null) {
-				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 						+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 						+ "<tbody>\r\n"
@@ -839,7 +829,7 @@ public class OrderService {
 				emailMessage += "</tbody>\r\n"
 						+ "</table>";
 			}else{
-				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+				emailMessage = "<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\"  width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 						+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 						+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 						+ "<tbody>\r\n"
@@ -946,8 +936,8 @@ public class OrderService {
 
 			try {
 				// Sender's email ID needs to be mentioned
-				String from = "geonixretailindia@gmail.com";
-				final String username = "geonixretailindia@gmail.com";//change accordingly
+				String from = "getsocialrx@gmail.com";
+				final String username = "getsocialrx@gmail.com";//change accordingly
 				final String password = "otxjgebqbxycpzsl";//change accordingly
 
 				// Assuming you are sending email through relay.jangosmtp.net
@@ -1001,7 +991,7 @@ public class OrderService {
 					  }
 					  HtmlConverter.convertToPdf(emailMessage, fileOutputStream);
 					  File file = new File(order.getId()+".pdf");
-					  String invoiceUrl = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+					  String invoiceUrl = awss3Service.uploadinvoicetos3("socialrxmedia",file,order).toString();
 			     	UserOrder userOrder =	orderRepository.findById(order.getId()).get();
 					userOrder.setInvoiceURL(invoiceUrl);
 					orderRepository.save(userOrder);
@@ -1069,8 +1059,8 @@ public class OrderService {
 //		      String to = "anuragpundir641@gmail.com";
 //
 //		      // Sender's email ID needs to be mentioned
-//		      String from = "geonixindiaonline@gmail.com";
-//		      final String username = "geonixindiaonline@gmail.com";//change accordingly
+//		      String from = "getsocialrx@gmail.com";
+//		      final String username = "getsocialrx@gmail.com";//change accordingly
 //		      final String password = "nlkrcusfhsqmqkxr";//change accordingly
 //
 //		      // Assuming you are sending email through relay.jangosmtp.net
@@ -1127,7 +1117,7 @@ public class OrderService {
 
 			List<OrderDetails> orderDetails = orderDetailsRepository.findByUesrOrder(order);
 			final String subject = "Order placed";
-			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://geonix.in/assets/images/geonix-logo.webp\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
+			String emailMessage="<p style=\"text-align: center;\"><span style=\"font-size: 8pt;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" width=\"93\" height=\"93\"></span>**Ordered Recieved*</p>\r\n"
 					+ "<p style=\"text-align: left;\">Shipping Details</p>\r\n"
 					+ "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\r\n"
 					+ "<tbody>\r\n"
@@ -1206,7 +1196,7 @@ public class OrderService {
 				}
 				HtmlConverter.convertToPdf(emailMessage, fileOutputStream);
 				File file = new File(order.getId()+".pdf");
-				String invoiceUrl = awss3Service.uploadinvoicetos3("geonix",file,order).toString();
+				String invoiceUrl = awss3Service.uploadinvoicetos3("socialrxmedia",file,order).toString();
 				UserOrder userOrder =	orderRepository.findById(order.getId()).get();
 				userOrder.setInvoiceURL(invoiceUrl);
 				orderRepository.save(userOrder);
@@ -1322,8 +1312,8 @@ public static String createASalesOrder(String token,UserOrder order,User user,Or
 			"  \"data\": {\n" +
 			"    \"Order_No\": \""+order.getOrderNumber()+"\",\n" +
 			"    \"Display_Order_No\": \""+order.getOrderNumber()+"\",\n" +
-			"    \"Channel\": \"Geonix\",\n" +
-			"    \"source\": \"Geonix.in\",\n" +
+			"    \"Channel\": \"Getsocial\",\n" +
+			"    \"source\": \"getsocial.in\",\n" +
 			"    \"Priority\": \"Critical\",\n" +
 			"    \"displayOrderDateTimete\": \""+dateFormat.format(order.getCreatedAt())+"\",\n" +
 			"    \"Status\": \""+order.getPaymentMethod()+"\",\n" +

@@ -28,7 +28,7 @@ public class UserProfile {
 	private String city;
 	private String address;
 	private Date dob;
-	
+	private String bloodGroup;
 	private LocalDateTime timeOfBirth;
 	private String country;
 	private String gender;
@@ -132,7 +132,13 @@ public class UserProfile {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
 
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
 }

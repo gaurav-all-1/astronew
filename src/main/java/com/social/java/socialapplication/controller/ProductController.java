@@ -201,7 +201,7 @@ public class ProductController {
 			invoiceData.setMarketName(marketName);
 			invoiceData.setSerialNumber(serialNumber);
 			savedInvoiceData = productService.insertInvoice(invoiceData);
-			String url = awsService.uploadinvoicetos3("geonix",multipartFile, savedInvoiceData).toString();
+			String url = awsService.uploadinvoicetos3("socialrxmedia",multipartFile, savedInvoiceData).toString();
 			savedInvoiceData.setUrl(url);
 			productService.insertInvoice(savedInvoiceData);
 			ApiResponseService res = new ApiResponseService("file upload successfully", true, Arrays.asList(url));

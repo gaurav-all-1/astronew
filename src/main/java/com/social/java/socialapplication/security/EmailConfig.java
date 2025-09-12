@@ -15,7 +15,7 @@ public class EmailConfig {
         ((JavaMailSenderImpl) mailSender).setHost("smtp.gmail.com");
         ((JavaMailSenderImpl) mailSender).setPort(25);
 
-        ((JavaMailSenderImpl) mailSender).setUsername("geonixretailindia@gmail.com");
+        ((JavaMailSenderImpl) mailSender).setUsername("getsocialrx@gmail.com");
         ((JavaMailSenderImpl) mailSender).setPassword("otxjgebqbxycpzsl");
 
         Properties props = ((JavaMailSenderImpl) mailSender).getJavaMailProperties();
