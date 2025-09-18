@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 
+import com.social.java.socialapplication.model.DoctorProfile;
 import com.social.java.socialapplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -132,6 +134,19 @@ public class UserController {
 		}
 		return new ResponseEntity<UserProfile>(profile,HttpStatus.CREATED);
 		
+	}
+
+	@RequestMapping(value = "/saveDoctorProfile", method = RequestMethod.POST)
+	public ResponseEntity<?> saveDoctorProfile(@RequestParam String userId,@RequestBody DoctorProfile doctorProfile)
+			throws Exception {
+		DoctorProfile profile = null;
+		try {
+			profile = userProfileService.updateDoctorProfile(userId, doctorProfile);
+		} catch (Exception e) {
+			return new ResponseEntity<GenericResponse>(new GenericResponse("Exception in saving doctor profile="+e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<DoctorProfile>(profile,HttpStatus.CREATED);
+
 	}
 	
 	

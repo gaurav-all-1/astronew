@@ -1,6 +1,7 @@
 package com.social.java.socialapplication.service;
 
 import com.social.java.socialapplication.dao.EncounterRepository;
+import com.social.java.socialapplication.dto.EncounterSummaryDTO;
 import com.social.java.socialapplication.model.Encounter;
 import org.springframework.stereotype.Service;
 
@@ -77,5 +78,17 @@ public class EncounterService {
 
     public List<Encounter> getEncountersByStatuses(List<String> statuses) {
         return encounterRepository.findByStatusIn(statuses);
+    }
+
+    public List<Encounter> getEncountersByUserId(Long userId) {
+        return encounterRepository.findByUserId(userId);
+    }
+
+    public List<EncounterSummaryDTO> getEncounterSummary(){
+        return encounterRepository.findAllSummaries();
+    }
+
+    public List<EncounterSummaryDTO> getEncounterSummaryByStatus(String status){
+        return encounterRepository.findSummariesByStatus(status);
     }
 }

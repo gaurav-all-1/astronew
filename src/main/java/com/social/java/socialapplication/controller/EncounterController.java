@@ -1,6 +1,7 @@
 package com.social.java.socialapplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.social.java.socialapplication.dto.EncounterSummaryDTO;
 import com.social.java.socialapplication.model.Encounter;
 import com.social.java.socialapplication.model.MediaAttachments;
 import com.social.java.socialapplication.response.ApiResultFormat;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +41,13 @@ public class EncounterController {
     public ResponseEntity<ApiResultFormat<Encounter>> getAllEncounters() {
         List<Encounter> encounters = encounterService.getAllEncounters();
         ApiResultFormat<Encounter> result = new ApiResultFormat<>(encounters, encounters.size());
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/getEncounterSummary")
+    public ResponseEntity<ApiResultFormat<EncounterSummaryDTO>> getEncounters() {
+        List<EncounterSummaryDTO> encounterSummaryDTOS = encounterService.getEncounterSummary();
+        ApiResultFormat<EncounterSummaryDTO> result = new ApiResultFormat<>(encounterSummaryDTOS, encounterSummaryDTOS.size());
         return ResponseEntity.ok(result);
     }
 
@@ -115,13 +124,32 @@ public class EncounterController {
         return ResponseEntity.ok(new ApiResultFormat<>(encounters, encounters.size()));
     }
 
+    @GetMapping("/search/statusSummary")
+    public ResponseEntity<ApiResultFormat<EncounterSummaryDTO>> getEncountersByStatusSummary(
+            @RequestParam String status
+    ) {
+
+
+        List<EncounterSummaryDTO> encounters = encounterService.getEncounterSummaryByStatus(status);
+        return ResponseEntity.ok(new ApiResultFormat<>(encounters, encounters.size()));
+    }
+
     // 🔹 Search by Date Range
     @GetMapping("/search/dates")
     public ResponseEntity<ApiResultFormat<Encounter>> getEncountersByDateRange(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
-        List<Encounter> encounters = encounterService.getEncountersBetweenDates(startDate, endDate);
+        List<Encounter> encounters = encounterService.getEncountersBetweenDates(startDate.atStartOfDay(), endDate.atStartOfDay());
         return ResponseEntity.ok(new ApiResultFormat<>(encounters, encounters.size()));
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Encounter>> getEncountersByUserId(@PathVariable Long userId) {
+        List<Encounter> encounters = encounterService.getEncountersByUserId(userId);
+        if (encounters.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(encounters);
     }
 }

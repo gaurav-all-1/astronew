@@ -19,11 +19,18 @@ public class Encounter {
     private User user;
     private String height;
     private String weight;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<MediaAttachments> mediaAttachements;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<ChartNote> chartNotes;
+
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<PrescriptionTreatment> treatments;
+
+
+
     private String status;
     private String bloodPressure;
 
@@ -38,10 +45,10 @@ public class Encounter {
     @Column(updatable = false)
     private LocalDateTime createdDate;
     private String consultationType;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<DiagnosisHistory> diagnosisHistoryList;
 
-    @OneToMany(mappedBy = "encounter", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "encounter", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<ChatMessage> chatMessages = new ArrayList<>();
 
@@ -196,6 +203,14 @@ public class Encounter {
 
     public void setChartNotes(List<ChartNote> chartNotes) {
         this.chartNotes = chartNotes;
+    }
+
+    public List<PrescriptionTreatment> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(List<PrescriptionTreatment> treatments) {
+        this.treatments = treatments;
     }
 
 

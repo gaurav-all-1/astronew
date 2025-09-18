@@ -47,7 +47,10 @@ public class User {
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "profile_id")
 	private UserProfile userProfile;
-	
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctor_id")
+    private DoctorProfile doctorProfile;
 	
     
     @JsonIgnore
@@ -151,6 +154,14 @@ public class User {
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
 	}
+
+    public DoctorProfile getDoctorProfile() {
+        return doctorProfile;
+    }
+
+    public void setDoctorProfile(DoctorProfile doctorProfile) {
+        this.doctorProfile = doctorProfile;
+    }
 
     @Override
     public int hashCode() {

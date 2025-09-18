@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.social.java.socialapplication.dao.DoctorProfileRepository;
+import com.social.java.socialapplication.model.DoctorProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class UserProfileService {
 
 	@Autowired
 	UserProfileRepository userProfileRepository;
+
+	@Autowired
+	DoctorProfileRepository doctorProfileRepository;
 		
 
 	public UserProfile updateUserProfile(String userId, UserProfile profile) throws Exception {
@@ -49,7 +54,33 @@ public class UserProfileService {
 			throw new GenericException(e.getMessage());
 		}
 	}
-	
+
+	public DoctorProfile updateDoctorProfile(String userId, DoctorProfile profile) throws Exception {
+		try {
+			Optional<User> user = userRepository.findById(Long.parseLong(userId));
+			if (user.isPresent()) {
+
+				User profileUser = user.get();
+				if (profileUser.getDoctorProfile() == null) {
+					profileUser.setDoctorProfile(profile);
+					return userRepository.save(profileUser).getDoctorProfile();
+				} else {
+					DoctorProfile savedDoctorProfile = user.get().getDoctorProfile();
+					profile.setId(savedDoctorProfile.getId());
+
+					profile.setProfilePicName(savedDoctorProfile.getProfilePicName());
+					return doctorProfileRepository.save(profile);
+				}
+
+			} else {
+				throw new GenericException("User id is not available for this ID=" + userId);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new GenericException(e.getMessage());
+		}
+	}
 	
 	public UserProfile updateUserProfilePic(UserProfile profile) throws Exception {
 		try {
