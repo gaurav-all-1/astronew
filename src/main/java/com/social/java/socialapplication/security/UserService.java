@@ -112,7 +112,7 @@ private static final Logger log=LogManager.getLogger(UserService.class);
         	profile.setEmail(accountDto.getEmail());
         	profile.setFirstName(accountDto.getFirstName());
         	profile.setLastName(accountDto.getLastName());
-        	role = roleRepository.findByName("ROLE_USER");
+        	role = roleRepository.findByName("ROLE_DOCTOR");
         	if(role==null)
         	{
         		role = new Role();
