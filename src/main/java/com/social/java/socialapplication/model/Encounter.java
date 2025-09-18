@@ -52,6 +52,18 @@ public class Encounter {
     @JsonIgnore
     private List<ChatMessage> chatMessages = new ArrayList<>();
 
+    @OneToMany(mappedBy = "encounter", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<SupportMessage> supportMessages = new ArrayList<>();
+
+    public List<SupportMessage> getSupportMessages() {
+        return supportMessages;
+    }
+
+    public void setSupportMessages(List<SupportMessage> supportMessages) {
+        this.supportMessages = supportMessages;
+    }
+
     public List<ChatMessage> getChatMessages() {
         return chatMessages;
     }
