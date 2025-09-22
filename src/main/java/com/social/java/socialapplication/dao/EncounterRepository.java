@@ -2,6 +2,8 @@ package com.social.java.socialapplication.dao;
 
 import com.social.java.socialapplication.dto.EncounterSummaryDTO;
 import com.social.java.socialapplication.model.Encounter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +33,13 @@ public interface EncounterRepository extends JpaRepository<Encounter, Long> {
             "FROM Encounter e JOIN e.user u " +
             "WHERE e.status = :status")
     List<EncounterSummaryDTO> findSummariesByStatus(@Param("status") String status);
+
+
+    @Query("SELECT new com.social.java.socialapplication.dto.EncounterSummaryDTO(" +
+            "e.id, e.status, e.department, e.consultationType, e.createdDate, u.firstName) " +
+            "FROM Encounter e JOIN e.user u")
+    Page<EncounterSummaryDTO> findAllSummaries(Pageable pageable);
+
+    @Query("SELECT e.status, COUNT(e) FROM Encounter e GROUP BY e.status")
+    List<Object[]> countEncountersByStatus();
 }

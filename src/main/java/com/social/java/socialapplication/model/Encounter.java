@@ -56,6 +56,20 @@ public class Encounter {
     @JsonIgnore
     private List<SupportMessage> supportMessages = new ArrayList<>();
 
+    @OneToOne(mappedBy = "encounter", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EncounterQuestionnaire questionnaire;
+
+    public EncounterQuestionnaire getQuestionnaire() {
+        return questionnaire;
+    }
+
+    public void setQuestionnaire(EncounterQuestionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+        if (questionnaire != null) {
+            questionnaire.setEncounter(this); // keep bidirectional consistency
+        }
+    }
+
     public List<SupportMessage> getSupportMessages() {
         return supportMessages;
     }

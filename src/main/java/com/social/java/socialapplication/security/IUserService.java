@@ -6,12 +6,16 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.social.java.socialapplication.dto.PasswordDto;
+import com.social.java.socialapplication.dto.UserDoctorProjection;
 import com.social.java.socialapplication.dto.UserDto;
+import com.social.java.socialapplication.dto.UserSummaryDTO;
 import com.social.java.socialapplication.error.UserAlreadyExistException;
 import com.social.java.socialapplication.model.PasswordResetToken;
 import com.social.java.socialapplication.model.User;
 import com.social.java.socialapplication.model.UserProfile;
 import com.social.java.socialapplication.model.VerificationToken;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IUserService {
 
@@ -65,4 +69,6 @@ public interface IUserService {
     public User getRecruiter(String recruiterProfileId);
 
 //    void addUserLocation(User user, String ip);
+
+    public Page<UserSummaryDTO> getUsers(String roleName,Pageable pageable);
 }

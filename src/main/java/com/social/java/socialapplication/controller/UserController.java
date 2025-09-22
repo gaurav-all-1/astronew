@@ -13,9 +13,14 @@ import java.util.stream.Collectors;
 import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 
+import com.social.java.socialapplication.dto.UserDoctorProjection;
+import com.social.java.socialapplication.dto.UserSummaryDTO;
 import com.social.java.socialapplication.model.DoctorProfile;
 import com.social.java.socialapplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -301,9 +306,29 @@ public class UserController {
 		return new ResponseEntity<List<User>>(users,HttpStatus.OK);
 		
 	}
-	
-	
-	
+
+	@GetMapping("/with-doctor")
+	public Page<UserSummaryDTO> getUsersWithDoctorInfo(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy
+	) {
+		Pageable pageable = PageRequest.of(page, size, org.springframework.data.domain.Sort.by(sortBy).ascending());
+		return userService.getUsers("ROLE_DOCTOR",pageable);
+	}
+
+	@GetMapping("/with-patients")
+	public Page<UserSummaryDTO> getUsersWithPatientsInfo(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy
+	) {
+		Pageable pageable = PageRequest.of(page, size, org.springframework.data.domain.Sort.by(sortBy).ascending());
+		return userService.getUsers("ROLE_EMPLOYEE",pageable);
+	}
+
+
+
 	@PostMapping("/filterEmployeesProfiles")
 	public ResponseEntity<?> filterEmployeesProfiles(@RequestBody String job) {
 		List<UserProfile> recruiterProfiles = null;

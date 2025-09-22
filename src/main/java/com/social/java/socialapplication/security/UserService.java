@@ -9,11 +9,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
+import com.social.java.socialapplication.dto.UserDoctorProjection;
+import com.social.java.socialapplication.dto.UserSummaryDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -478,6 +482,10 @@ private static final Logger log=LogManager.getLogger(UserService.class);
     	catch(Exception e) {
     		throw e;
     	}
+    }
+
+    public Page<UserSummaryDTO> getUsers(String roleName, Pageable pageable) {
+        return userRepository.findUsersByRoleName(roleName,pageable);
     }
 
 }

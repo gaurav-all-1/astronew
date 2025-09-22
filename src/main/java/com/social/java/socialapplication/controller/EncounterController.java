@@ -1,6 +1,7 @@
 package com.social.java.socialapplication.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.social.java.socialapplication.dto.EncounterStatusCountDTO;
 import com.social.java.socialapplication.dto.EncounterSummaryDTO;
 import com.social.java.socialapplication.model.Encounter;
 import com.social.java.socialapplication.model.MediaAttachments;
@@ -8,6 +9,10 @@ import com.social.java.socialapplication.response.ApiResultFormat;
 import com.social.java.socialapplication.service.AWSS3Service;
 import com.social.java.socialapplication.service.EncounterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -70,25 +75,35 @@ public class EncounterController {
             @RequestPart(value = "files", required = false) List<MultipartFile> files
     ) throws Exception {
 
+        // Step 1: Parse encounter JSON
         Encounter encounterObj = objectMapper.readValue(encounter, Encounter.class);
 
-        List<MediaAttachments> attachments = new ArrayList<>();
-
-        if (files != null && !files.isEmpty()) {
-            for (MultipartFile file : files) {
-                String url = awss3Service.uploadingMediaAttachments(file);
-                MediaAttachments attachment = new MediaAttachments();
-                attachment.setName(file.getOriginalFilename());
-                attachment.setUrl(url);
-                attachment.setFileType(file.getContentType());
-                attachments.add(attachment);
-            }
-        }
-
-        encounterObj.setMediaAttachements(attachments);
+        // Save encounter first (without attachments)
         Encounter savedEncounter = encounterService.createEncounter(encounterObj);
 
+//        // Step 2: Handle files asynchronously
+//        if (files != null && !files.isEmpty()) {
+//            encounterService.uploadFilesAndAttachAsync(savedEncounter.getId(), files);
+//        }
+
+        // Return immediately (fast response, no waiting for uploads)
         return ResponseEntity.ok(savedEncounter);
+    }
+
+    @PostMapping(path = "/uploadFile",consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<String> uploadEncounterAttachments(
+            @RequestParam("id") String encounterId,
+            @RequestPart(value = "files", required = false) List<MultipartFile> files
+    ) throws Exception {
+
+
+        // Step 2: Handle files asynchronously
+        if (files != null && !files.isEmpty()) {
+            encounterService.uploadFilesAndAttachAsync(Long.parseLong(encounterId), files);
+        }
+
+        // Return immediately (fast response, no waiting for uploads)
+        return ResponseEntity.ok("Success");
     }
 
     @PutMapping("/{id}")
@@ -144,6 +159,19 @@ public class EncounterController {
         return ResponseEntity.ok(new ApiResultFormat<>(encounters, encounters.size()));
     }
 
+    @GetMapping("/data")
+    public Page<EncounterSummaryDTO> getEncounters(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "createdDate,desc") String[] sort) {
+
+        // sort param: e.g. ?sort=createdDate,desc OR ?sort=status,asc
+        Sort.Direction direction = Sort.Direction.fromString(sort[1]);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort[0]));
+
+        return encounterService.getEncounterSummaries(pageable);
+    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Encounter>> getEncountersByUserId(@PathVariable Long userId) {
         List<Encounter> encounters = encounterService.getEncountersByUserId(userId);
@@ -151,5 +179,10 @@ public class EncounterController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(encounters);
+    }
+
+    @GetMapping("/status-counts")
+    public ResponseEntity<List<EncounterStatusCountDTO>> getEncounterStatusCounts() {
+        return ResponseEntity.ok(encounterService.getEncounterCountsByStatus());
     }
 }
